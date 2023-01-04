@@ -1,23 +1,28 @@
 import { task, types } from "hardhat/config"
 
 task("deploy", "Deploy a Reward contract")
-    .addOptionalParam("reward", "Reward Contract address", undefined, types.string)
-    .setAction(async ({ reward: rewardAddress }, { ethers, run }) => {
-        if (!rewardAddress) {
+  .addOptionalParam(
+    "reward",
+    "Reward Contract address",
+    undefined,
+    types.string
+  )
+  .setAction(async ({ reward: rewardAddress }, { ethers, run }) => {
+    if (!rewardAddress) {
+      const { address } = await run("deploy:reward", {})
 
-            const { address } = await run("deploy:reward", {
-            })
+      rewardAddress = address
+    }
 
-            rewardAddress = address
-        }
+    const RewardFactory = await ethers.getContractFactory("Reward")
 
-        const RewardFactory = await ethers.getContractFactory("Reward")
+    const RewardContract = await RewardFactory.deploy(rewardAddress)
 
-        const RewardContract = await RewardFactory.deploy(rewardAddress)
+    await RewardContract.deployed()
 
-        await RewardContract.deployed()
+    console.info(
+      `Reward contract has been deployed to: ${RewardContract.address}`
+    )
 
-        console.info(`Reward contract has been deployed to: ${RewardContract.address}`)
-
-        return RewardContract
-    })
+    return RewardContract
+  })

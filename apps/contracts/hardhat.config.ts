@@ -14,44 +14,35 @@ import "./tasks/deploy"
 dotenvConfig({ path: resolve(__dirname, "../../.env") })
 
 function getNetworks(): NetworksUserConfig {
-    if (process.env.ETHEREUM_URL && process.env.ETHEREUM_PRIVATE_KEY) {
-        const accounts = [`0x${process.env.ETHEREUM_PRIVATE_KEY}`]
+  if (process.env.ETHEREUM_URL && process.env.ETHEREUM_PRIVATE_KEY) {
+    const accounts = [`0x${process.env.ETHEREUM_PRIVATE_KEY}`]
 
-        return {
-            goerli: {
-                url: process.env.ETHEREUM_URL,
-                chainId: 5,
-                accounts
-            }
-        }
+    return {
+      goerli: {
+        url: process.env.ETHEREUM_URL,
+        chainId: 5,
+        accounts
+      }
     }
+  }
 
-    return {}
+  return {}
 }
 
 const hardhatConfig: HardhatUserConfig = {
-    solidity: config.solidity,
-    paths: {
-        sources: config.paths.contracts,
-        tests: config.paths.tests,
-        cache: config.paths.cache,
-        artifacts: config.paths.build.contracts
+  solidity: config.solidity,
+  paths: {
+    sources: config.paths.contracts,
+    tests: config.paths.tests,
+    cache: config.paths.cache,
+    artifacts: config.paths.build.contracts
+  },
+  networks: {
+    hardhat: {
+      chainId: 1337
     },
-    networks: {
-        hardhat: {
-            chainId: 1337
-        },
-        ...getNetworks()
-    },
-    gasReporter: {
-        currency: "USD",
-        enabled: process.env.REPORT_GAS === "true",
-        coinmarketcap: process.env.COINMARKETCAP_API_KEY
-    },
-    typechain: {
-        outDir: config.paths.build.typechain,
-        target: "ethers-v5"
-    }
+    ...getNetworks()
+  }
 }
 
 export default hardhatConfig
