@@ -1,9 +1,9 @@
 {
-    "name": "zk-conditioner",
-    "description": "One dimentional zk voting dapp.",
+    "name": "DappChef-MonoRepo",
+    "description": "DappChef is a Ethereum Smart Contract Development Learning platform.",
     "license": "MIT",
-    "repository": "git@github.com:ChiHaoLu/ZK-Conditioner.git",
-    "homepage": "https://github.com/ChiHaoLu/ZK-Conditioner",
+    "repository": "https://github.com/SWF-Lab/DappChef-MonoRepo.git",
+    "homepage": "https://github.com/SWF-Lab/DappChef-MonoRepo.git",
     "scripts": {
         "start": "yarn workspace web-app dev",
         "lint": "eslint . --ext .js,.ts",
