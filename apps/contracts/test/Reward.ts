@@ -4,34 +4,23 @@ import { run } from "hardhat"
 import { config } from "../package.json"
 
 describe("Reward", () => {
-    let rewardContract: any
+  let rewardContract: any
 
-    const users: any = []
+  const users: any = []
 
-    before(async () => {
-        rewardContract = await run("deploy", { ... })
+  before(async () => {
+    rewardContract = await run("deploy", {})
+  })
 
-    })
+  describe("", () => {
+    it("", async () => {})
 
-    describe("", () => {
+    it("", async () => {})
+  })
 
-        it("", async () => {
-            
-        })
+  describe("", () => {
+    it("", async () => {})
 
-        it("", async () => {
-
-        })
-    })
-
-    describe("", () => {
-
-        it("", async () => {
-
-        })
-
-        it("", async () => {
-
-        })
-    })
+    it("", async () => {})
+  })
 })

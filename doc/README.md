@@ -7,6 +7,10 @@
 | The folder is divided into three components: System Design(this repo), [web app](./web-app.md) and [contracts](./contracts.md). These documentations are internal used, and help members know how to construct the whole application. |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
+## System Design
+
+![](https://i.imgur.com/0B4kA15.png)
+
 > This Documentation is not the README document!!!
 >
 > This is Internal Lab Doc., which means the Development Doc.

@@ -13,13 +13,14 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@web3-react/core": "^6.1.9",
     "dotenv": "^10.0.0",
     "dotenv-webpack": "^7.0.3",
+    "ethers": "^5.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.1",
-    "styled-components": "^5.3.1",
-    "ethers": "^5.7.2"
+    "styled-components": "^5.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
