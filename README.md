@@ -4,19 +4,19 @@
     </h1>
 </p>
 
-| The repository is divided into two components: [web app](./web-app) and [contracts](./contracts). The app allows users to do some coding problems, which is similar to Leetcode & Codility, for Smart Contract Construction. |
+| The repository is divided into two components: [web app](./apps/web-app) and [contracts](./apps/contracts). The app allows users to do some coding problems, which is similar to Leetcode & Codility, for Smart Contract Construction. |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ## 📜 Usage
 
 ### Repo Tree
-- [`web app`](./web-app) folder holds the whole front-end client, including:
-    - [**Main Website**](./web-app):
-    - [**User Profile**](./web-app):
-    - [**Answer Interface**](./web-app):
-    - [**Online-Compiler & Problem Solver**](./web-app):
-- [`contracts`](./contracts)
-    - [**Reward Contract**](./contracts): As a users' answer status DB, this contract constructs the users' NFT at the same time.
+- [`web app`](./apps/web-app) folder holds the whole front-end client, including:
+    - [**Main Website**](./apps/web-app):
+    - [**User Profile**](./apps/web-app):
+    - [**Answer Interface**](./apps/web-app):
+    - [**Online-Compiler & Problem Solver**](./apps/web-app):
+- [`contracts`](./apps/contracts)
+    - [**Reward Contract**](./apps/contracts): As a users' answer status DB, this contract constructs the users' NFT at the same time.
 
 ### Project Link
 
