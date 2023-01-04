@@ -9,16 +9,16 @@
 
 ## 📜 Usage
 
-### Repo Tree
+### Core Functionality
 - [`web app`](./apps/web-app) folder holds the whole front-end client, including:
-    - [**Main Website**](./apps/web-app):
-    - [**User Profile**](./apps/web-app):
-    - [**Answer Interface**](./apps/web-app):
-    - [**Online-Compiler & Problem Solver**](./apps/web-app):
+    - [**Main Website**](./apps/web-app/src/):
+    - [**User Profile**](./apps/web-app/src/):
+    - [**Answer Interface**](./apps/web-app/src/):
+    - [**Online-Compiler & Problem Solver**](./apps/web-app/src/):
 - [`contracts`](./apps/contracts)
-    - [**Reward Contract**](./apps/contracts): As a users' answer status DB, this contract constructs the users' NFT at the same time.
+    - [**Reward Contract**](./apps/contracts/contracts/Reward.sol): As a users' answer status DB, this contract constructs the users' NFT at the same time.
 
-### Project Link
+### Project Link Tree
 
 - [Project Plan](https://docs.google.com/spreadsheets/d/1JHpkHeemQ1i-WCXACzaRqulWoGvU9uJ2xneoW05S42A/edit?usp=sharing)
 - [Problems Database](https://github.com/SWF-Lab/DappChef-ProblemsDB)
