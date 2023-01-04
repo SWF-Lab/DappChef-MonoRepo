@@ -66,7 +66,6 @@ out/
 next-env.d.ts
 
 # dotenv environment variable files
-.env
 .env.development.local
 .env.test.local
 .env.production.local
