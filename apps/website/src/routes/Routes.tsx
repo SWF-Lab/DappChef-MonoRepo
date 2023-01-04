@@ -1,10 +1,10 @@
-import { Suspense } from 'react'
+import { Suspense } from "react"
 import {
   Navigate,
   Route,
-  Routes as RoutesReactRouterDom,
-} from 'react-router-dom'
-import { Example, GenericNotFound } from './paths'
+  Routes as RoutesReactRouterDom
+} from "react-router-dom"
+import { Example, GenericNotFound } from "./paths"
 
 export const Routes = () => {
   return (

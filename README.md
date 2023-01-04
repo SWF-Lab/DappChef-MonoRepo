@@ -50,7 +50,7 @@ $ yarn start
 
 > Make sure the `.env` arguments are same as your image.
 
-### Start the App-Development
+### Start the Development
 
 1. Create new branch, reference with [SWF-Lab/github_practice](https://github.com/SWF-Lab/github_practice):
 

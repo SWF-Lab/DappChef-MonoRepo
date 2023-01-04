@@ -27,7 +27,7 @@
     "prettier/prettier": ["error", { "semi": false }],
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": "off",
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "no-underscore-dangle": "off",
     "react/jsx-one-expression-per-line": "off",
     "react-hooks/rules-of-hooks": "error",

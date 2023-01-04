@@ -86,18 +86,18 @@ Example of a private route:
   <summary>Route.tsx</summary>
 
 ```ts
-import React from 'react';
+import React from "react"
 import {
   Route as ReactDOMRoute,
   RouteProps as ReactDOMRouteProps,
-  Redirect,
-} from 'react-router-dom';
+  Redirect
+} from "react-router-dom"
 
-import { useAuth } from '../hooks/auth';
+import { useAuth } from "../hooks/auth"
 
 interface RouteProps extends ReactDOMRouteProps {
-  isPrivate?: boolean;
-  component: React.ComponentType;
+  isPrivate?: boolean
+  component: React.ComponentType
 }
 
 const Route: React.FC<RouteProps> = ({
@@ -105,7 +105,7 @@ const Route: React.FC<RouteProps> = ({
   component: Component,
   ...rest
 }) => {
-  const { user } = useAuth();
+  const { user } = useAuth()
   // You can store user data in another way and only retrieve it here
 
   return (
@@ -117,17 +117,17 @@ const Route: React.FC<RouteProps> = ({
         ) : (
           <Redirect
             to={{
-              pathname: isPrivate ? '/' : '/dashboard',
-              state: { from: location },
+              pathname: isPrivate ? "/" : "/dashboard",
+              state: { from: location }
             }}
           />
-        );
+        )
       }}
     />
-  );
-};
+  )
+}
 
-export default Route;
+export default Route
 ```
 
 </details>
