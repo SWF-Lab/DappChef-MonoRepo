@@ -9,7 +9,7 @@
 
 ## System Design
 
-![](https://i.imgur.com/0B4kA15.png)
+![](https://i.imgur.com/uoOE5Ur.png)
 
 > This Documentation is not the README document!!!
 >
