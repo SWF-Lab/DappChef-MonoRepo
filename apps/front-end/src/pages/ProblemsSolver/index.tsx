@@ -5,11 +5,11 @@ import { Signer, ContractFactory, ethers } from "ethers"
 const ProblemJudgingSys: React.FC = () => {
   /**Provider and Fetch the user wallet in browser(e.g. Metamask)*/
   const [signer, setSigner] = useState<Signer>()
-  const [contract, setContract] = useState<string>(SimpleStorageContact)
   const provider = new ethers.providers.Web3Provider(window.ethereum)
   setSigner(provider.getSigner())
 
   /**Contract Information */
+  const [contract, setContract] = useState<string>(SimpleStorageContact)
   const [contractFileName, setContractFileName] = useState<string>("storage.sol")
   const [compileResult_abi, setCompileResult_abi] = useState<string>("")
   const [compileResult_bytecode, setCompileResult_bytecode] =
@@ -51,6 +51,7 @@ const ProblemJudgingSys: React.FC = () => {
     setCompileResult_bytecode(bytecode)
     let result: any
     result = await compileWithWorker({
+      fileName: contractFileName,
       content: contract
     })
 

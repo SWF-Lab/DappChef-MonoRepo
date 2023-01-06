@@ -1,23 +1,24 @@
 <p align="center">
     <h1 align="center">
-        DappChef
+        DappChef Website
     </h1>
 </p>
 
-| The repository is divided into two components: [web app](./apps/website) and [contracts](./apps/contracts). The app allows users to do some coding problems, which is similar to Leetcode & Codility, for Smart Contract Construction. |
+| The repository is divided into two components: [front-end](./apps/front-end) and [back-end](./apps/back-end). The app allows users to do some coding problems, which is similar to Leetcode & Codility, for Smart Contract Construction. |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
 
 ## 📜 Usage
 
 ### Core Functionality
 
-- [`web app`](./apps/website) folder holds the whole front-end client, including:
-  - [**Main Website**](./apps/website/src):
-  - [**User Profile**](./apps/website/src/components/UserProfile/):
-  - [**Answer Interface**](./apps/website/src/components/ProblemsInterface/):
-  - [**Online-Compiler & Problem Solver**](./apps/website/src/components/ProblemsSolver/):
-- [`contracts`](./apps/contracts)
-  - [**Reward Contract**](./apps/contracts/contracts/Reward.sol): As a users' answer status DB, this contract constructs the users' NFT at the same time.
+- [`Front-End`](./apps/front-end) folder holds the whole front-end client, including:
+  - [**Main Website**](./apps/front-end/src):
+  - [**User Profile**](./apps/front-end/src/components/UserProfile/):
+  - [**Answer Interface**](./apps/front-end/src/components/ProblemsInterface/):
+  - [**Online-Compiler & Problem Solver**](./apps/front-end/src/components/ProblemsSolver/):
+- [`Back-End`](./apps/back-end)
+  - [**Signing Server**](./apps/back-end/): Listen to the client, and sign the msg for the solver NFT mint.
 
 ### Project Link Tree
 
