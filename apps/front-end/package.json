@@ -6,13 +6,13 @@
   "scripts": {
     "start": "webpack serve --mode development --open --config webpack.ts",
     "build": "webpack --mode production --config webpack.ts",
-    "build:server": "docker-compose build & docker run --name $npm_package_name -p 80:80 -d $npm_package_name\\_nginx",
     "test": "jest",
     "test:coverage": "jest --coverage --watchAll=false",
     "test:watch": "jest --watch",
     "prepare": "husky install apps/front-end/.husky"
   },
   "dependencies": {
+    "@agnostico/browser-solidity-compiler": "^0.1.1",
     "@replit/codemirror-lang-solidity": "^6.0.1",
     "@web3-react/core": "^6.1.9",
     "dotenv": "^10.0.0",
@@ -21,7 +21,10 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.1",
-    "styled-components": "^5.3.1"
+    "solc": "^0.8.17",
+    "solc-wrapper": "^0.6.3",
+    "styled-components": "^5.3.1",
+    "tslib": "^2.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
