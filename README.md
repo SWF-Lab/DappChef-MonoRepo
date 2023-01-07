@@ -5,8 +5,7 @@
 </p>
 
 | The repository is divided into two components: [front-end](./apps/front-end) and [back-end](./apps/back-end). The app allows users to do some coding problems, which is similar to Leetcode & Codility, for Smart Contract Construction. |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ## 📜 Usage
 
@@ -37,9 +36,13 @@
 $ git clone https://github.com/SWF-Lab/DappChef-MonoRepo.git
 ```
 
-2. Install the dependencies:
+2. Install the dependencies, make sure your node version is `>= v16.0.0`:
 
 ```bash
+$ node -v
+>
+v18.13.0
+
 $ cd DappChef-MonoRepo && yarn
 ```
 

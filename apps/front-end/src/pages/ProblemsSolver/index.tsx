@@ -10,7 +10,8 @@ const ProblemJudgingSys: React.FC = () => {
 
   /**Contract Information */
   const [contract, setContract] = useState<string>(SimpleStorageContact)
-  const [contractFileName, setContractFileName] = useState<string>("storage.sol")
+  const [contractFileName, setContractFileName] =
+    useState<string>("storage.sol")
   const [compileResult_abi, setCompileResult_abi] = useState<string>("")
   const [compileResult_bytecode, setCompileResult_bytecode] =
     useState<string>("")
@@ -124,9 +125,7 @@ const ProblemJudgingSys: React.FC = () => {
       console.log(contract.address)
       console.log(contract.deployTransaction)
 
-      setMessage(
-        "https://goerli.etherscan.io/tx/" + contract.deployTransaction
-      )
+      setMessage("https://goerli.etherscan.io/tx/" + contract.deployTransaction)
       setDeploySuccess(true)
     } catch (error: any) {
       setMessage("😥 - Something wrong: " + error.message)
