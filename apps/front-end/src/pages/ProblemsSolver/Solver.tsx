@@ -120,21 +120,10 @@ export default function Solver({ value }: { value: any }) {
         console.log(compiled)
         setDeploybtn(true)
         setCompiledContract(() => compiled)
-        setBytecode(
-          compiled.contracts?.Compiled_Contracts.map((cont: any) =>
-            JSON.stringify(
-              compiledContract?.contracts?.Compiled_Contracts[cont]?.evm
-                ?.bytecode?.object
-            )
-          )
-        )
-        setABI(
-          compiled.contracts?.Compiled_Contracts.map((cont: any) =>
-            JSON.stringify(
-              compiledContract?.contracts?.Compiled_Contracts[cont]?.abi
-            )
-          )
-        )
+        const obj = compiled?.contracts?.Compiled_Contracts
+        const targetKey = Object.keys(obj)[Object.keys(obj).length - 1]
+        setBytecode(obj[targetKey]?.evm?.bytecode?.object)
+        setABI(obj[targetKey]?.abi)
       } catch (e: any) {
         if (e.message.includes("failed to load")) {
           setCompiledContract((prev) => ({
@@ -162,18 +151,11 @@ export default function Solver({ value }: { value: any }) {
     if (!compiledContract || !signer) {
       return
     }
-    const factory = new ContractFactory(
-      [
-        "constructor(address owner, uint256 initialValue)",
-        "function value() view returns (uint)"
-      ],
-      "6080604052348015600f57600080fd5b5060ac8061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c806360fe47b11460375780636d4ce63c146049575b600080fd5b60476042366004605e565b600055565b005b60005460405190815260200160405180910390f35b600060208284031215606f57600080fd5b503591905056fea26469706673582212203cbe373b6dba92baa57e438a4db7d95a25544e5b480ad87496ca9f760b70a90f64736f6c63430008110033",
-      signer
-    )
+    const factory = new ContractFactory(ABI, Bytecode, signer)
 
     console.log(signer)
-    console.log(factory.interface)
-    console.log(factory.bytecode)
+    console.log(ABI)
+    console.log(Bytecode)
 
     return factory
   }
@@ -183,11 +165,8 @@ export default function Solver({ value }: { value: any }) {
 
     setDeploying(true)
 
-    //   const contract = await factory.deploy("ricmoo.eth", 42)
-    //   await contract.deployTransaction.wait()
-
     try {
-      const contract = await factory.deploy("ricmoo.eth", 42)
+      const contract = await factory.deploy()
       await contract.deployTransaction.wait()
 
       console.log(contract.address)
