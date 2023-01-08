@@ -11,20 +11,21 @@
 
 ### Core Functionality
 
-- [`Front-End`](./apps/front-end) folder holds the whole front-end client, including:
-  - [**Main Website**](./apps/front-end/src):
-  - [**User Profile**](./apps/front-end/src/components/UserProfile/):
-  - [**Answer Interface**](./apps/front-end/src/components/ProblemsInterface/):
-  - [**Online-Compiler & Problem Solver**](./apps/front-end/src/components/ProblemsSolver/):
+- [`Front-End`](./apps/front-end)
+  - [**Main Website**](./apps/front-end/src)
+  - [**User Profile**](./apps/front-end/src/components/UserProfile/)
+  - [**Answer Interface**](./apps/front-end/src/components/ProblemsInterface/)
+  - [**Online-Compiler & Problem Solver**](./apps/front-end/src/components/ProblemsSolver/)
 - [`Back-End`](./apps/back-end)
-  - [**Signing Server**](./apps/back-end/): Listen to the client, and sign the msg for the solver NFT mint.
+  - [**Signing Server**](./apps/back-end/)
 
 ### Project Link Tree
 
 - [Project Plan](https://docs.google.com/spreadsheets/d/1JHpkHeemQ1i-WCXACzaRqulWoGvU9uJ2xneoW05S42A/edit?usp=sharing)
 - [Problems Database](https://github.com/SWF-Lab/DappChef-ProblemsDB)
-- [Contract Address(Mainnet): `0x`]()
-- [Contract Address(Goerli): `0x`]()
+- [Reward Contract Address(Mainnet): `0x`]()
+- [Reward Contract Address(Goerli): `0x`]()
+- [Deployer Contract Address(Goerli): `0x`]()
 
 ## 🛠 Start Your Journey
 

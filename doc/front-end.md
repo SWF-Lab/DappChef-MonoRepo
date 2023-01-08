@@ -1,4 +1,4 @@
-# Web APP Internal Documentation
+# Web APP Front-End Internal Documentation
 
 ## Website
 
