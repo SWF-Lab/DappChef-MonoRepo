@@ -7,6 +7,8 @@ import Solver from "../ProblemsSolver/Solver"
 
 export const ProblemsInterface = () => {
   const [code, setCode] = useState(contractDoc)
+  const [solution, setSolution] = useState([])
+  const [problemNo, setProblemNo] = useState(0)
 
   return (
     <div>
@@ -19,7 +21,7 @@ export const ProblemsInterface = () => {
           value={code}
           onChange={(e: any) => setCode(e.target.value)}
         />
-        <Solver value={code} />
+        <Solver code={code} solution={solution} problemNo={problemNo} />
       </Container>
     </div>
   )
