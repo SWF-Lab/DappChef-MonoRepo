@@ -4,6 +4,7 @@ import {
   solidityCompiler,
   getCompilerVersions
 } from "@agnostico/browser-solidity-compiler"
+import deployerABI from "./deployerABI.json"
 
 
 type BuildType = { version: string; path: string }
@@ -154,7 +155,6 @@ export default function Solver({ code, solution, problemNo }: { code: any, solut
     }
 
     const deployerAddress = process.env.DEPLOYER_CONTRACT_ADDR as string
-    const deployerABI = "" as any
 
     const DeployerContract = new ethers.Contract(deployerAddress, deployerABI, signer); 
     
