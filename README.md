@@ -1,6 +1,6 @@
 <p align="center">
     <h1 align="center">
-        DappChef Website
+        🍩 DappChef Website
     </h1>
 </p>
 
@@ -25,7 +25,7 @@
 - [Problems Database](https://github.com/SWF-Lab/DappChef-ProblemsDB)
 - [Reward Contract Address(Mainnet): `0x`]()
 - [Reward Contract Address(Goerli): `0x`]()
-- [Deployer Contract Address(Goerli): `0x`]()
+- [Deployer Contract Address(Goerli): `0x434C9D4Ec784295E6051951FC5B0Fb17AABFF5BC`](https://goerli.etherscan.io/address/0x434C9D4Ec784295E6051951FC5B0Fb17AABFF5BC)
 
 ## 🛠 Start Your Journey
 

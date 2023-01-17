@@ -1,6 +1,6 @@
 <p align="center">
     <h1 align="center">
-        DappChef Internal Documentation
+        🍩 DappChef Internal Documentation
     </h1>
 </p>
 
