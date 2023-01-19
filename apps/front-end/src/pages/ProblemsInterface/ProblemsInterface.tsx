@@ -4,6 +4,7 @@ import { Container } from "./styles"
 import CodeMirror from "./useCodeMirror"
 import { contractDoc } from "./codemirror-solidity/const"
 import Solver from "../ProblemsSolver/Solver"
+import DonationButton from "../DonationButton/donation"
 
 export const ProblemsInterface = () => {
   const [code, setCode] = useState(contractDoc)
@@ -23,6 +24,7 @@ export const ProblemsInterface = () => {
         />
         <Solver code={code} solution={solution} problemNo={problemNo} />
       </Container>
+      <DonationButton />
     </div>
   )
 }

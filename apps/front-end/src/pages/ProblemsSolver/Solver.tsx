@@ -6,11 +6,18 @@ import {
 } from "@agnostico/browser-solidity-compiler"
 import deployerABI from "./deployerABI.json"
 
-
 type BuildType = { version: string; path: string }
 type VersionType = { [version: string]: string }
 
-export default function Solver({ code, solution, problemNo }: { code: any, solution: any, problemNo: number }) {
+export default function Solver({
+  code,
+  solution,
+  problemNo
+}: {
+  code: any
+  solution: any
+  problemNo: number
+}) {
   /**Provider and Fetch the user wallet in browser(e.g. Metamask)*/
   const provider = new ethers.providers.Web3Provider(window.ethereum)
   const [account, setAccount] = useState("")
@@ -156,20 +163,24 @@ export default function Solver({ code, solution, problemNo }: { code: any, solut
 
     const deployerAddress = process.env.DEPLOYER_CONTRACT_ADDR as string
 
-    const DeployerContract = new ethers.Contract(deployerAddress, deployerABI, signer); 
-    
+    const DeployerContract = new ethers.Contract(
+      deployerAddress,
+      deployerABI,
+      signer
+    )
+
     setDeploying(true)
     try {
       const tx = await DeployerContract.deploy(Bytecode, account[0], problemNo)
       const receipt = await tx.wait()
       console.log(`    Tx successful with hash: ${receipt.transactionHash}`)
-      const event = receipt.events.find((e: any ) => e.event === 'Deploy');
-      const [deployAddr, solver, problemNum] = event.args;
-      console.log(`Solver ${solver} is trying problem ${problemNum}, deployed contract address is ${deployAddr}`)
-
-      setMessage(
-        "https://goerli.etherscan.io/tx/" + receipt.transactionHash
+      const event = receipt.events.find((e: any) => e.event === "Deploy")
+      const [deployAddr, solver, problemNum] = event.args
+      console.log(
+        `Solver ${solver} is trying problem ${problemNum}, deployed contract address is ${deployAddr}`
       )
+
+      setMessage("https://goerli.etherscan.io/tx/" + receipt.transactionHash)
       setDeploySuccess(true)
     } catch (error: any) {
       setMessage("😥 - Something wrong: " + error.message)
