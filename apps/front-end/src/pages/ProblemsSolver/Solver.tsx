@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { ethers } from "ethers"
+import { errors, ethers } from "ethers"
 import {
   solidityCompiler,
   getCompilerVersions
@@ -51,7 +51,10 @@ export default function Solver({
   const [deploybtn, setDeploybtn] = useState(false)
   const [deploy_open, setDeployOpen] = useState(false)
   const [deploySuccess, setDeploySuccess] = useState(false)
+  const [deployAddr, setDeployAddr] = useState("")
+  const [accepted, setAccepted] = useState(false)
 
+  /**Compiler Status*/
   const [solcVersions, setSolcVersions] = useState<any>(null)
   const [compiledContract, setCompiledContract] = useState<{
     errors: { formattedMessage: string }[]
@@ -175,13 +178,14 @@ export default function Solver({
       const receipt = await tx.wait()
       console.log(`    Tx successful with hash: ${receipt.transactionHash}`)
       const event = receipt.events.find((e: any) => e.event === "Deploy")
-      const [deployAddr, solver, problemNum] = event.args
+      const [_deployAddr, _solver, _problemNum] = event.args
       console.log(
-        `Solver ${solver} is trying problem ${problemNum}, deployed contract address is ${deployAddr}`
+        `Solver ${_solver} is trying problem ${_problemNum}, deployed contract address is ${_deployAddr}`
       )
 
       setMessage("https://goerli.etherscan.io/tx/" + receipt.transactionHash)
       setDeploySuccess(true)
+      setDeployAddr(_deployAddr)
     } catch (error: any) {
       setMessage("😥 - Something wrong: " + error.message)
       setDeploySuccess(false)
@@ -192,6 +196,44 @@ export default function Solver({
   }
 
   /**Problem Solver */
+
+  const handleMint = async () => {
+    await window.ethereum.enable()
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    const signer = provider.getSigner(account)
+
+    if (!compiledContract || !signer) {
+      return
+    }
+
+    // Interact with signing server in the backend here, and get the signature here!
+
+    const RewardContract = new ethers.Contract(
+      process.env.REWARDS_CONTRACT_ADDR as string,
+      deployerABI,
+      signer
+    )
+
+    RewardContract.mint()
+  }
+
+  const handleJudge = async (_provider: any, _signer: any) => {
+    setAccepted(false)
+    const AnswerContract = new ethers.Contract(deployAddr, ABI, _signer)
+
+    for (let i = 0; i < solution.length; i++) {
+      const _return = await AnswerContract[solution[i].methodName](
+        solution[i].callData
+      )
+      if (!(_return == solution[i].expectReturn)) {
+        setAccepted(false)
+        throw new Error(
+          `Calling ${solution[i].methodName} failed!` || "Assertion failed"
+        )
+      }
+    }
+    setAccepted(true)
+  }
 
   return (
     <main>
