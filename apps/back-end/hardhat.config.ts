@@ -10,7 +10,9 @@ import chaiAsPromised from "chai-as-promised"
 chai.use(chaiAsPromised)
 
 const accounts = {
-  mnemonic: process.env.MNEMONIC || "test test test test test test test test test test test junk",
+  mnemonic:
+    process.env.MNEMONIC ||
+    "test test test test test test test test test test test junk"
 }
 const provuderURL = process.env.ETHEREUM_URL || ""
 
@@ -18,7 +20,7 @@ module.exports = {
   networks: {
     localhost: {
       url: "http://localhost:8545",
-      accounts,
+      accounts
     },
     hardhat: {
       // chainId: 1,
@@ -31,13 +33,13 @@ module.exports = {
     mainnet: {
       chainId: 1,
       url: provuderURL,
-      accounts,
+      accounts
     },
     goerli: {
       chainId: 5,
       url: provuderURL,
-      accounts,
-    },
+      accounts
+    }
   },
   solidity: {
     compilers: [
@@ -45,13 +47,13 @@ module.exports = {
         version: "0.8.17",
         settings: {
           optimizer: {
-            enabled: true,
-          },
-        },
-      },
-    ],
+            enabled: true
+          }
+        }
+      }
+    ]
   },
   mocha: {
-    timeout: 4000,
-  },
+    timeout: 4000
+  }
 }
