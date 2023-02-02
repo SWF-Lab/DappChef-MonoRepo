@@ -4,7 +4,7 @@ import {
   solidityCompiler,
   getCompilerVersions
 } from "@agnostico/browser-solidity-compiler"
-import deployerABI from "./deployerABI.json"
+import deployerABI from "../../../contract-artifacts/deployerABI.json"
 
 type BuildType = { version: string; path: string }
 type VersionType = { [version: string]: string }
