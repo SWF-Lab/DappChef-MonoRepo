@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { Signer, ContractFactory, ethers } from "ethers"
 import { Container } from "./styles"
 
-export const Example = () => {
+export const Main = () => {
   const navigate = useNavigate()
   const [account, setAccount] = useState("")
 
@@ -33,6 +33,9 @@ export const Example = () => {
       <p>Connected Account: {account}</p>
       <button type="button" onClick={() => navigate("/ProblemsInterface")}>
         Go to ProblemsInterface
+      </button>
+      <button type="button" onClick={() => navigate("/UserProfile")}>
+        Go to User Profile
       </button>
     </Container>
   )

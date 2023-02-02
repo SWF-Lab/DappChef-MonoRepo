@@ -1,7 +1,7 @@
-import { Component, ReactNode } from "react"
+import { Component, ReactElement } from "react"
 
 interface Props {
-  children: ReactNode
+  children: ReactElement
 }
 
 interface State {
@@ -9,7 +9,7 @@ interface State {
 }
 
 export default class ErrorBoundary extends Component<Props, State> {
-  constructor(props: { children: ReactNode }) {
+  constructor(props: { children: ReactElement }) {
     super(props)
     this.state = { hasError: false }
   }

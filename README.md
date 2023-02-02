@@ -23,8 +23,7 @@
 
 - [Project Plan](https://docs.google.com/spreadsheets/d/1JHpkHeemQ1i-WCXACzaRqulWoGvU9uJ2xneoW05S42A/edit?usp=sharing)
 - [Problems Database](https://github.com/SWF-Lab/DappChef-ProblemsDB)
-- [Reward Contract Address(Mainnet): `0x`]()
-- [Reward Contract Address(Goerli): `0x`]()
+- [Reward Contract Address(Goerli): `0x6A7a08162AD6c40bFACFA28653b240FC1DDABCc1`](https://goerli.etherscan.io/address/0x6A7a08162AD6c40bFACFA28653b240FC1DDABCc1)
 - [Deployer Contract Address(Goerli): `0xfC40d561B265008E9887339cF421Ac59e0A16CAc`](https://goerli.etherscan.io/address/0xfC40d561B265008E9887339cF421Ac59e0A16CAc)
 
 ## 🛠 Start Your Journey

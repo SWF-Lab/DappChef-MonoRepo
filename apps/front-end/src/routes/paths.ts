@@ -1,13 +1,18 @@
 import { lazy } from "react"
 
-export const Example = lazy(() =>
-  import("src/pages/Example/Example").then((module) => ({
-    default: module.Example
+export const Main = lazy(() =>
+  import("src/pages/Main/Main").then((module) => ({
+    default: module.Main
   }))
 )
 export const ProblemsInterface = lazy(() =>
   import("src/pages/ProblemsInterface/ProblemsInterface").then((module) => ({
     default: module.ProblemsInterface
+  }))
+)
+export const UserProfile = lazy(() =>
+  import("src/pages/UserProfile/UserProfile").then((module) => ({
+    default: module.UserProfile
   }))
 )
 export const GenericNotFound = lazy(() =>
