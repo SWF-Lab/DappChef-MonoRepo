@@ -1,12 +1,10 @@
 # Answer Interface
 
-
-## Problem List 
+## Problem List
 
 1. Fetching the Problem Files (solidity file and json file) with Github API
 2. Show the problem list
 3. Fetch the login account and his problem status (accepted or not)
-
 
 ## Answer Interface
 
@@ -17,4 +15,3 @@ e.g. Number, Difficulty, Classification, Problem Statement, RewardNFT Image, Pro
 ### CodeMirror
 
 Solidity Editor
-
