@@ -21,6 +21,39 @@ export default function ProblemList() {
   const [probs, setProbs] = useState([])
   const [status, setStatus] = useState([])
 
+  async function getAnsProbInfo(probNum: number) {
+    await window.ethereum.enable()
+    const provider = new ethers.providers.Web3Provider(
+      (window as any).ethereum,
+      "goerli"
+    )
+    provider
+      .send("eth_requestAccounts", [])
+      .then((accounts) => {
+        if (accounts.length > 0) setAccount(accounts[0])
+      })
+      .catch((e) => console.log(e))
+
+    const signer = provider.getSigner()
+    const RewardNFTAddress = "0xaFAD4dC9C0f1D05bcB6a2dfa5123bbd27284C8d3"
+
+    const RewardNFTContract = new ethers.Contract(
+      RewardNFTAddress,
+      REWARD_NFT_ABI,
+      signer
+    )
+    
+    const TargetAccount_TargetProblem_TokenID =
+      await RewardNFTContract.getTokenID(await signer.getAddress(), probNum)
+
+    const TargetAccount_TargetProblem_TokenURI =
+      await RewardNFTContract.tokenURI(TargetAccount_TargetProblem_TokenID)
+    return {
+      TokenID: TargetAccount_TargetProblem_TokenID,
+      TokenURL: TargetAccount_TargetProblem_TokenURI
+    }
+  }
+
   async function getTokenInfoOfUser() {
     /** --------------------------------------------------------
      * Setting up the basic ethers object
@@ -61,32 +94,20 @@ export default function ProblemList() {
     /**  --------------------------------------------------------
      * Get User Answer Status
      * -------------------------------------------------------- */
-
+    // const getAnsweredStat = await RewardNFTContract
     // Get the User's finished problems
     const TargetAccountBalance = await RewardNFTContract.getSolvingStatus(
       await signer.getAddress()
       // 去抓這個 ERIC 寫對過哪些題目
       // 按照上面的例子應該是 [2, [2, 49, 0, 0, 0,...]]
     )
-    console.log(TargetAccountBalance[1][0]._hex)
     setStatus(TargetAccountBalance[1])
     setProbs(await problems.getProbInfo())
 
     // Get the Target Problem TokenID of the User
-    // const TargetAccount_TargetProblem_TokenID =
-    //   await RewardNFTContract.getTokenID(
-    //     await signer.getAddress(),
-    //     49 // 去抓這個 ERIC 的第四十九題的 TokenID
-    //     // 按照上面的例子應該是 6
-    //   )
 
     // Get the Target Problem TokenURI of the User
-    // const TargetAccount_TargetProblem_TokenURI =
-    //   await RewardNFTContract.tokenURI(
-    //     TargetAccount_TargetProblem_TokenID
-    //     // 去抓這個 ERIC 的第四十九題的 TokenURI
-    //     // 按照上面的例子應該是 ipfs://2f9…y2z
-    //   )
+
     // return {
     //   TargetAccountBalance: TargetAccountBalance,
     //   TargetAccount_TargetProblem_TokenID: TargetAccount_TargetProblem_TokenID,
