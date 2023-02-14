@@ -11,7 +11,7 @@
 
 Used to collect a Token for a registered User.
 
-**URL** : `172.105.202.22:3000/getSign`
+**URL** : `API_URL/getSign`
 
 **Method** : `POST`
 
@@ -67,5 +67,287 @@ const get_sign = (psa, pn, psts, n) => {
       password: "password"
     }
   })
+}
+```
+
+### getProbTxt
+
+Used to collect a Token for a registered User.
+
+**URL** : `API_URL/getProbTxt?:probNum`
+
+**Method** : `GET`
+
+**Auth required** : basic auth (Ask Sen for it.)
+
+## Success Response
+
+**Code** : `200 OK`
+
+**Content example**
+
+
+```txt
+// SPDX-License-Identifier: Apache License
+pragma solidity ^0.8.17;
+
+// The system will deploy `Called` for you
+contract Called {
+bool public called = false;
+
+function setCalled() external {
+called = true;
+}
+function getCalled() external view returns (bool) {
+return called;
+}
+}
+
+// TODO: write an interface named `ICalled`, implement the two functions in contract `Called`.
+
+
+contract problem10 {
+Called public calledContract;
+
+constructor() {
+calledContract = new Called();
+}
+
+function setCalled() external {
+// TODO: finish this function by using `ICalled` to call `setCalled()` in contract `Called`.
+
+}
+
+function checkAns() external view returns (bool) {
+return ICalled(address(calledContract)).getCalled();
+}
+}
+```
+
+**Front-end api function can be written in the form like:**
+
+```javascript
+const getProbTxt = (num) => {
+  return axios
+    .get(API_URL + "getProbTxt?probNum=" + num, {
+      auth: {
+        username: "dappcheff",
+        password: "cheffdapp"
+      }
+    })
+    .then((res) => {
+      return res.data
+    })
+}
+```
+
+### getProbJson
+
+Used to collect a Token for a registered User.
+
+**URL** : `API_URL/getProbJson?:probNum`
+
+**Method** : `GET`
+
+**Auth required** : basic auth (Ask Sen for it.)
+
+## Success Response
+
+**Code** : `200 OK`
+
+**Content example**
+
+
+```json
+{
+    "problemNumber": 10,
+    "problemVersion": 1,
+    "description": "Interface ! Call other functions with interface.",
+    "constructorCallData": [],
+    "problemSolution": [
+        {
+            "methodName": "setCalled()",
+            "callData": [],
+            "expectReturn": []
+        },
+        {
+            "methodName": "checkAns()",
+            "callData": [],
+            "expectReturn": [
+                true
+            ]
+        }
+    ],
+    "image": "ipfs://<ipfsPrefix>/10"
+}
+```
+
+**Front-end api function can be written in the form like:**
+
+```javascript
+const getProbJson = (num) => {
+  return axios
+    .get(API_URL + "getProbJson?probNum=" + num, {
+      auth: {
+        username: "dappcheff",
+        password: "cheffdapp"
+      }
+    })
+    .then((res) => {
+      return res.data
+    })
+}
+```
+
+### getProbAns
+
+Used to collect a Token for a registered User.
+
+**URL** : `API_URL/getProbAns?:probNum`
+
+**Method** : `GET`
+
+**Auth required** : basic auth (Ask Sen for it.)
+
+## Success Response
+
+**Code** : `200 OK`
+
+**Content example**
+
+
+```txt
+// SPDX-License-Identifier: Apache License
+pragma solidity ^0.8.17;
+
+contract Called {
+bool public called = false;
+
+function setCalled() external {
+called = true;
+}
+function getCalled() external view returns (bool) {
+return called;
+}
+}
+
+interface ICalled {
+function setCalled() external;
+function getCalled() external view returns (bool);
+}
+
+contract answer10 {
+Called public calledContract;
+
+constructor() {
+calledContract = new Called();
+}
+
+function setCalled() external {
+ICalled(address(calledContract)).setCalled();
+}
+
+function checkAns() external view returns (bool) {
+return ICalled(address(calledContract)).getCalled();
+}
+}
+```
+
+**Front-end api function can be written in the form like:**
+
+```javascript
+const getProbAns = (num) => {
+  return axios
+    .get(API_URL + "getProbAns?probNum=" + num, {
+      auth: {
+        username: "dappcheff",
+        password: "cheffdapp"
+      }
+    })
+    .then((res) => {
+      return res.data
+    })
+}
+```
+
+### getProbInfo
+
+Used to collect a Token for a registered User.
+
+**URL** : `API_URL/getProbInfo`
+
+**Method** : `GET`
+
+**Auth required** : basic auth (Ask Sen for it.)
+
+## Success Response
+
+**Code** : `200 OK`
+
+**Content example**
+
+
+```json
+[
+    {
+        "probNum": 0,
+        "description": "Hello World! The reserved word 'pragma' specifies the compiler version of Solidity.",
+        "image": "ipfs://<ipfsPrefix>/0"
+    },
+    {
+        "probNum": 1,
+        "description": "State Variables and its default value.",
+        "image": "ipfs://<ipfsPrefix>/1"
+    },
+    {
+        "probNum": 2,
+        "description": "Functions! View functions do only readings of the state on blockchain, and pure functions do no readings.",
+        "image": "ipfs://<ipfsPrefix>/2"
+    },
+    {
+        "probNum": 3,
+        "description": "If Else! as simple as it is in other language.",
+        "image": "ipfs://<ipfsPrefix>/3"
+    },
+    {
+        "probNum": 4,
+        "description": "Mapping! This is how we record balance.",
+        "image": "ipfs://<ipfsPrefix>/4"
+    },
+    {
+        "probNum": 5,
+        "description": "Modifier! Use modifier to modify functions with repeated steps.",
+        "image": "ipfs://<ipfsPrefix>/5"
+    },
+
+    ...
+
+    {
+        "probNum": 96,
+        "description": "Sparse Merkle Tree",
+        "image": "ipfs://<ipfsPrefix>/96"
+    },
+    {
+        "probNum": 97,
+        "description": "Send Message to Layer2 Optimism Contract",
+        "image": "ipfs://<ipfsPrefix>/97"
+    }
+]
+```
+
+**Front-end api function can be written in the form like:**
+
+```javascript
+const getProbInfo = () => {
+  return axios
+    .get(API_URL + "getProbInfo", {
+      auth: {
+        username: "dappcheff",
+        password: "cheffdapp"
+      }
+    })
+    .then((res) => {
+      return res.data
+    })
 }
 ```
