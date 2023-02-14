@@ -63,7 +63,6 @@ export default function ProblemList() {
     const TargetAccountBalance = await RewardNFTContract.getSolvingStatus(
       await signer.getAddress()
     )
-    console.log(TargetAccountBalance[1][0]._hex)
     setStatus(TargetAccountBalance[1])
   }
 
