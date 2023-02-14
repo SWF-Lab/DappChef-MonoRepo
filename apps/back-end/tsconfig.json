@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
+    // "module": "esnext",
     /* Visit https://aka.ms/tsconfig to read more about this file */
-
+    "resolveJsonModule": true,
+    // "esModuleInterop": true,
     /* Projects */
     // "incremental": true,                              /* Save .tsbuildinfo files to allow for incremental compilation of projects. */
     // "composite": true,                                /* Enable constraints that allow a TypeScript project to be used with project references. */
@@ -25,7 +27,9 @@
     // "moduleDetection": "auto",                        /* Control what method is used to detect module-format JS files. */
 
     /* Modules */
-    "module": "commonjs" /* Specify what module code is generated. */,
+    "module": "commonjs",
+
+    /* Specify what module code is generated. */
     // "rootDir": "./",                                  /* Specify the root folder within your source files. */
     // "moduleResolution": "node",                       /* Specify how TypeScript looks up a file from a given module specifier. */
     // "baseUrl": "./",                                  /* Specify the base directory to resolve non-relative module names. */
@@ -99,6 +103,5 @@
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
-  },
-  "include": ["**/*.ts"]
+  }
 }

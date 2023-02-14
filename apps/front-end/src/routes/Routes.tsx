@@ -12,6 +12,10 @@ export const Routes = () => {
       <RoutesReactRouterDom>
         <Route path="/" element={<Main />} />
         <Route path="/ProblemsInterface" element={<ProblemsInterface />} />
+        <Route
+          path="/ProblemsInterface/:probNum"
+          element={<ProblemsInterface />}
+        />
         <Route path="/UserProfile" element={<UserProfile />} />
         <Route path="*" element={<Navigate to="/404" />} />
         <Route path="/404" element={<GenericNotFound />} />
