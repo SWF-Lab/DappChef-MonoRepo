@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
 import { TextExample } from "src/components/TextExample/TextExample"
 import { useNavigate } from "react-router-dom"
-import { Signer, ContractFactory, ethers } from "ethers"
+import { ethers } from "ethers"
 import { Container } from "./styles"
+import ProblemList from "../ProblemsInterface/ProblemList"
 
 export const Main = () => {
   const navigate = useNavigate()
@@ -31,9 +32,7 @@ export const Main = () => {
         Log In with Metamask
       </button>
       <p>Connected Account: {account}</p>
-      <button type="button" onClick={() => navigate("/ProblemsInterface")}>
-        Go to ProblemsInterface
-      </button>
+      <ProblemList />
       <button type="button" onClick={() => navigate("/UserProfile")}>
         Go to User Profile
       </button>

@@ -1,66 +1,95 @@
-import { useEffect, useState } from "react"
-import { TextExample } from "src/components/TextExample/TextExample"
+import { useEffect, useState, useRef } from "react"
 import { Container } from "./styles"
-import CodeMirror from "./useCodeMirror"
-import ProblemList from "./ProblemList"
-import { contractDoc } from "./codemirror-solidity/const"
 import Solver from "../ProblemsSolver/Solver"
 import DonationButton from "../DonationButton/donation"
+import { contractDoc } from "./codemirror-solidity/const"
 import { useParams } from "react-router-dom"
-import problems from "../../api/problems"
+
+import { solidity } from "./codemirror-solidity"
+import { basicSetup } from "codemirror"
+import { EditorView, keymap } from "@codemirror/view"
+import { EditorState } from "@codemirror/state"
+import { indentWithTab } from "@codemirror/commands"
+
+function Editor({ value, onChange }: { value: any; onChange: any }) {
+  const editor = useRef<any>()
+  const ref = useRef()
+
+  useEffect(() => {
+    editor.current = new EditorView({
+      state: EditorState.create({
+        doc: value,
+        extensions: [
+          basicSetup,
+          keymap.of([indentWithTab]),
+          solidity,
+          EditorView.updateListener.of(({ state }) => {
+            onChange({ target: { value: state.doc.toString() } })
+          })
+        ]
+      }),
+      parent: ref.current
+    })
+
+    return () => {
+      editor.current.destroy()
+      editor.current = null
+    }
+  }, [])
+
+  useEffect(() => {
+    if (editor.current && editor.current.state.doc.toString() !== value) {
+      editor.current.dispatch({
+        changes: { from: 0, to: editor.current.state.doc.length, insert: "" }
+      })
+    }
+  }, [value])
+
+  return <div ref={ref as any} />
+}
 
 export const ProblemsInterface = () => {
   const { probNum } = useParams<{ probNum: string | undefined }>()
-  const [found, setFound] = useState(false)
-  const [code, setCode] = useState("dapp")
-  const [info, setInfo] = useState<{
-    description?: String
-    image?: String
-  }>({})
+  const [problemsInfo, setProblemsInfo] = useState<any>()
+  const [code, setCode] = useState(contractDoc)
+  const [ans, setAns] = useState<any>()
 
-  const [ans, setAns] = useState("")
+  /** Problem Information Getter */
 
-  async function getProb(probNum: string | undefined) {
-    if (probNum !== undefined) {
-      setCode(await problems.getProbTxt(probNum))
-      setInfo(await problems.getProbJson(probNum))
-      setAns(await problems.getProbAns(probNum))
-      setFound(true)
-    } else {
-      setFound(false)
-    }
+  const RewardNFTAddress = "0xaFAD4dC9C0f1D05bcB6a2dfa5123bbd27284C8d3"
+  const PROBLEMS_IPFS_CID =
+    "https://nftstorage.link/ipfs/bafkreias5uyk5qwoh2iwzgxriavjvlntzhkig6c7m7ygipislddf4slvqi"
+  const PROBLEMS_CODE_IPFS_CID = `https://nftstorage.link/ipfs/bafybeih3xtj4u6wqu4rib6xrwkmozvrqcrfccmz3pn7cr535khthkzgu4i/${probNum}.txt`
+
+  async function getProblems() {
+    const problemsCodeResponse = await fetch(PROBLEMS_CODE_IPFS_CID)
+    const codeData = await problemsCodeResponse.text()
+    setCode(codeData)
+    console.log(codeData)
+
+    const problemsResponse = await fetch(PROBLEMS_IPFS_CID)
+    const data = await problemsResponse.json()
+    const target = data[probNum as string]
+    setProblemsInfo(target)
+    setAns(target.problemSolution)
   }
 
   useEffect(() => {
-    getProb(probNum)
-    if (probNum === undefined) {
-      setFound(false)
-    }
+    getProblems()
   }, [probNum])
 
-  return probNum === undefined ? (
-    <>
-      <Container>
-        <TextExample>Problems Interface</TextExample>
-      </Container>
-      <Container>
-        <ProblemList />
-      </Container>
-    </>
-  ) : found ? (
+  return (
     <div>
       <Container style={{ flexDirection: "column" }}>
-        <p>{info.description}</p>
+        <p>
+          {problemsInfo?.problemNumber} - {problemsInfo?.description}
+        </p>
+        <p>{code}</p>
         <button onClick={() => setCode("")}>Clear</button>
-        <CodeMirror
-          value={code}
-          onChange={(e: any) => setCode(e.target.value)}
-        />
+        <Editor value={code} onChange={(e: any) => setCode(e.target.value)} />
         <Solver code={code} solution={ans} problemNo={Number(probNum)} />
       </Container>
       <DonationButton />
     </div>
-  ) : (
-    <>載入中</>
   )
 }
