@@ -1,58 +1,18 @@
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState } from "react"
 import { Container } from "./styles"
-import Solver from "../ProblemsSolver/Solver"
 import DonationButton from "../DonationButton/donation"
 import { contractDoc } from "./codemirror-solidity/const"
 import { useParams } from "react-router-dom"
 
-import { solidity } from "./codemirror-solidity"
-import { basicSetup } from "codemirror"
-import { EditorView, keymap } from "@codemirror/view"
-import { EditorState } from "@codemirror/state"
-import { indentWithTab } from "@codemirror/commands"
-
-function Editor({ value, onChange }: { value: any; onChange: any }) {
-  const editor = useRef<any>()
-  const ref = useRef()
-
-  useEffect(() => {
-    editor.current = new EditorView({
-      state: EditorState.create({
-        doc: value,
-        extensions: [
-          basicSetup,
-          keymap.of([indentWithTab]),
-          solidity,
-          EditorView.updateListener.of(({ state }) => {
-            onChange({ target: { value: state.doc.toString() } })
-          })
-        ]
-      }),
-      parent: ref.current
-    })
-
-    return () => {
-      editor.current.destroy()
-      editor.current = null
-    }
-  }, [])
-
-  useEffect(() => {
-    if (editor.current && editor.current.state.doc.toString() !== value) {
-      editor.current.dispatch({
-        changes: { from: 0, to: editor.current.state.doc.length, insert: "" }
-      })
-    }
-  }, [value])
-
-  return <div ref={ref as any} />
-}
+import axios from "axios"
+import { CodeEditor } from "./CodeEditor"
 
 export const ProblemsInterface = () => {
   const { probNum } = useParams<{ probNum: string | undefined }>()
   const [problemsInfo, setProblemsInfo] = useState<any>()
-  const [code, setCode] = useState(contractDoc)
+  const [code, setCode] = useState<string>(contractDoc)
   const [ans, setAns] = useState<any>()
+  const [loading, setLoading] = useState(true)
 
   /** Problem Information Getter */
 
@@ -62,16 +22,18 @@ export const ProblemsInterface = () => {
   const PROBLEMS_CODE_IPFS_CID = `https://nftstorage.link/ipfs/bafybeih3xtj4u6wqu4rib6xrwkmozvrqcrfccmz3pn7cr535khthkzgu4i/${probNum}.txt`
 
   async function getProblems() {
-    const problemsCodeResponse = await fetch(PROBLEMS_CODE_IPFS_CID)
-    const codeData = await problemsCodeResponse.text()
-    setCode(codeData)
-    console.log(codeData)
-
     const problemsResponse = await fetch(PROBLEMS_IPFS_CID)
     const data = await problemsResponse.json()
     const target = data[probNum as string]
     setProblemsInfo(target)
     setAns(target.problemSolution)
+
+    await axios.get(PROBLEMS_CODE_IPFS_CID).then((res) => {
+      setCode(res.data.toString())
+      console.log(res.data.toString())
+      return res.data
+    })
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -81,13 +43,16 @@ export const ProblemsInterface = () => {
   return (
     <div>
       <Container style={{ flexDirection: "column" }}>
-        <p>
-          {problemsInfo?.problemNumber} - {problemsInfo?.description}
-        </p>
-        <p>{code}</p>
-        <button onClick={() => setCode("")}>Clear</button>
-        <Editor value={code} onChange={(e: any) => setCode(e.target.value)} />
-        <Solver code={code} solution={ans} problemNo={Number(probNum)} />
+        {loading ? (
+          <>Loading...</>
+        ) : (
+          <>
+            <p>
+              {problemsInfo?.problemNumber} - {problemsInfo?.description}
+            </p>
+            <CodeEditor {...{ code }} />
+          </>
+        )}
       </Container>
       <DonationButton />
     </div>

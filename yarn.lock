@@ -1005,6 +1005,13 @@
   dependencies:
     regenerator-runtime "^0.13.11"
 
+"@babel/runtime@^7.18.6":
+  version "7.20.13"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.20.13.tgz#7055ab8a7cff2b8f6058bf6ae45ff84ad2aded4b"
+  integrity sha512-gt3PKXs0DBoL9xCvOIIZ2NEqAGZqHjAnmVbfQtB620V0uReIQutpel14KcneZuer7UioY8ALKZ7iocavvzTNFA==
+  dependencies:
+    regenerator-runtime "^0.13.11"
+
 "@babel/template@^7.18.10", "@babel/template@^7.20.7", "@babel/template@^7.3.3":
   version "7.20.7"
   resolved "https://registry.npmjs.org/@babel/template/-/template-7.20.7.tgz"
@@ -1082,6 +1089,16 @@
     "@codemirror/view" "^6.0.0"
     "@lezer/common" "^1.0.0"
 
+"@codemirror/commands@^6.1.0":
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/@codemirror/commands/-/commands-6.2.1.tgz#ab5e979ad1458bbe395bf69ac601f461ac73cf08"
+  integrity sha512-FFiNKGuHA5O8uC6IJE5apI5rT9gyjlw4whqy4vlcX0wE/myxL6P1s0upwDhY4HtMWLOwzwsp0ap3bjdQhvfDOA==
+  dependencies:
+    "@codemirror/language" "^6.0.0"
+    "@codemirror/state" "^6.2.0"
+    "@codemirror/view" "^6.0.0"
+    "@lezer/common" "^1.0.0"
+
 "@codemirror/language@^6.0.0":
   version "6.3.2"
   resolved "https://registry.npmjs.org/@codemirror/language/-/language-6.3.2.tgz"
@@ -1112,10 +1129,20 @@
     "@codemirror/view" "^6.0.0"
     crelt "^1.0.5"
 
-"@codemirror/state@^6.0.0", "@codemirror/state@^6.1.4", "@codemirror/state@^6.2.0":
+"@codemirror/state@^6.0.0", "@codemirror/state@^6.1.1", "@codemirror/state@^6.1.4", "@codemirror/state@^6.2.0":
   version "6.2.0"
   resolved "https://registry.npmjs.org/@codemirror/state/-/state-6.2.0.tgz"
   integrity sha512-69QXtcrsc3RYtOtd+GsvczJ319udtBf1PTrr2KbLWM/e2CXUPnh0Nz9AUo8WfhSQ7GeL8dPVNUmhQVgpmuaNGA==
+
+"@codemirror/theme-one-dark@^6.0.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@codemirror/theme-one-dark/-/theme-one-dark-6.1.0.tgz#6f8b3c7fc22e9fec59edd573f4ba9546db42e007"
+  integrity sha512-AiTHtFRu8+vWT9wWUWDM+cog6ZwgivJogB1Tm/g40NIpLwph7AnmxrSzWfvJN5fBVufsuwBxecQCNmdcR5D7Aw==
+  dependencies:
+    "@codemirror/language" "^6.0.0"
+    "@codemirror/state" "^6.0.0"
+    "@codemirror/view" "^6.0.0"
+    "@lezer/highlight" "^1.0.0"
 
 "@codemirror/view@^6.0.0", "@codemirror/view@^6.00.0", "@codemirror/view@^6.6.0":
   version "6.7.2"
@@ -3394,6 +3421,31 @@
   dependencies:
     "@typescript-eslint/types" "5.48.0"
     eslint-visitor-keys "^3.3.0"
+
+"@uiw/codemirror-extensions-basic-setup@4.19.9":
+  version "4.19.9"
+  resolved "https://registry.yarnpkg.com/@uiw/codemirror-extensions-basic-setup/-/codemirror-extensions-basic-setup-4.19.9.tgz#9c14901c7165bba9ef9a06d9c7a80d025e9c1ad7"
+  integrity sha512-O4yAgVpD3Pon4t4+lwZ2MTGg2TeU/Jv8YzKS9ap4fP/WMTVrKmpdq+DOafbhZSlhmU0XGfQPPJ4WX6rtZgx3Rw==
+  dependencies:
+    "@codemirror/autocomplete" "^6.0.0"
+    "@codemirror/commands" "^6.0.0"
+    "@codemirror/language" "^6.0.0"
+    "@codemirror/lint" "^6.0.0"
+    "@codemirror/search" "^6.0.0"
+    "@codemirror/state" "^6.0.0"
+    "@codemirror/view" "^6.0.0"
+
+"@uiw/react-codemirror@^4.19.9":
+  version "4.19.9"
+  resolved "https://registry.yarnpkg.com/@uiw/react-codemirror/-/react-codemirror-4.19.9.tgz#c999e35eb2739ff15031a358b675393576909474"
+  integrity sha512-U+A1fSfELMFFs5a+ZOPwCJKZMYaMy6QHOfNOOV7WhSveM7GYHT970GjTfs2dn1LlvhebwyK9ei0rCXZdsI9n9Q==
+  dependencies:
+    "@babel/runtime" "^7.18.6"
+    "@codemirror/commands" "^6.1.0"
+    "@codemirror/state" "^6.1.1"
+    "@codemirror/theme-one-dark" "^6.0.0"
+    "@uiw/codemirror-extensions-basic-setup" "4.19.9"
+    codemirror "^6.0.0"
 
 "@web3-react/abstract-connector@^6.0.7":
   version "6.0.7"

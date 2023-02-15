@@ -1,18 +1,20 @@
-// import axios from "axios"
-// const API_URL = "http://172.105.202.22:3001/"
+import axios from "axios"
+const API_URL = "http://172.105.202.22:3001/"
 
-// const getProbTxt = (num) => {
-//   return axios
-//     .get(API_URL + "getProbTxt?probNum=" + num, {
-//       auth: {
-//         username: "dappcheff",
-//         password: "cheffdapp"
-//       }
-//     })
-//     .then((res) => {
-//       return res.data
-//     })
-// }
+const getProbTxt = (num) => {
+  return axios
+    .get(API_URL + "getProbTxt?probNum=" + num, {
+      auth: {
+        username: "dappcheff",
+        password: "cheffdapp"
+      }
+    })
+    .then((res) => {
+      return res.data
+    })
+}
+
+export default { getProbTxt }
 
 // const getProbJson = (num) => {
 //   return axios
@@ -52,5 +54,3 @@
 //       return res.data
 //     })
 // }
-
-// export default { getProbTxt }

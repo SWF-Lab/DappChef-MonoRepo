@@ -14,6 +14,7 @@
   "dependencies": {
     "@agnostico/browser-solidity-compiler": "^0.1.1",
     "@replit/codemirror-lang-solidity": "^6.0.1",
+    "@uiw/react-codemirror": "^4.19.9",
     "@web3-react/core": "^6.1.9",
     "dotenv": "^16.0.3",
     "dotenv-webpack": "^7.0.3",
