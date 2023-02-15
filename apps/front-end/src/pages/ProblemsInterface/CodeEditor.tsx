@@ -2,10 +2,7 @@ import { useCallback, useState, useEffect } from "react"
 import { ethers } from "ethers"
 import styled from "styled-components"
 import { Editor } from "../../components/Editor"
-import {
-  solidityCompiler,
-  getCompilerVersions
-} from "@agnostico/browser-solidity-compiler"
+import { solidityCompiler } from "@agnostico/browser-solidity-compiler"
 import deployerABI from "../../../contract-artifacts/deployerABI.json"
 
 /** ---------------------------------------------------
@@ -68,15 +65,15 @@ export const CodeEditor = ({ code }: { code: string }) => {
    * --------------------------------------------------- */
 
   const [value, setValue] = useState(code)
-  const onChange = useCallback((value: string) => {
-    setValue(value)
+  const onChange = useCallback((_value: string) => {
+    console.log(_value)
+    setValue(_value)
   }, [])
 
   /** ---------------------------------------------------
    * Contract Information
    * --------------------------------------------------- */
 
-  const [contract, setContract] = useState<string>(code)
   const [ABI, setABI] = useState<string>("")
   const [Bytecode, setBytecode] = useState<any>("")
 
@@ -115,7 +112,16 @@ export const CodeEditor = ({ code }: { code: string }) => {
     --------------------------------------------------- */
 
   const handleCompile = async () => {
+    let temp_array: string[] = []
+    let temp = value.split("\n")
+    temp.forEach((element) => {
+      if (!element.includes("//") && !element.includes("pragma")) {
+        temp_array.push(element)
+      }
+    })
+    const code = temp_array.join("\n")
     console.log(code)
+
     let options = {} as any
     setCompiling(true)
     if (optimizeOption.optimize) {
@@ -125,7 +131,7 @@ export const CodeEditor = ({ code }: { code: string }) => {
       }
     }
 
-    let trimContent = contract.trim()
+    let trimContent = code.trim()
 
     const contractsAvailable = trimContent.match(/contract/g)?.length || 0
 
@@ -148,7 +154,7 @@ export const CodeEditor = ({ code }: { code: string }) => {
       try {
         const compiled = (await solidityCompiler({
           version: `https://binaries.soliditylang.org/bin/${usingVersion}`,
-          contractBody: contract,
+          contractBody: code,
           options
         })) as any
 
