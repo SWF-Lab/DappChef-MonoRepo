@@ -93,6 +93,7 @@ export default function Solver({
   }, [])
 
   const handleCompile = async () => {
+    console.log(code)
     let options = {} as any
     setCompiling(true)
     if (optimizeOption.optimize) {

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { Container } from "./styles"
 import DonationButton from "../DonationButton/donation"
-import { contractDoc } from "./codemirror-solidity/const"
 import { useParams } from "react-router-dom"
 
 import axios from "axios"
@@ -10,7 +9,7 @@ import { CodeEditor } from "./CodeEditor"
 export const ProblemsInterface = () => {
   const { probNum } = useParams<{ probNum: string | undefined }>()
   const [problemsInfo, setProblemsInfo] = useState<any>()
-  const [code, setCode] = useState<string>(contractDoc)
+  const [code, setCode] = useState<string>("")
   const [ans, setAns] = useState<any>()
   const [loading, setLoading] = useState(true)
 
@@ -30,7 +29,7 @@ export const ProblemsInterface = () => {
 
     await axios.get(PROBLEMS_CODE_IPFS_CID).then((res) => {
       setCode(res.data.toString())
-      console.log(res.data.toString())
+      // console.log(res.data.toString())
       return res.data
     })
     setLoading(false)
