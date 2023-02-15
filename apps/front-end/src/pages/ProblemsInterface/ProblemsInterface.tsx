@@ -2,9 +2,9 @@ import { useEffect, useState } from "react"
 import { Container } from "./styles"
 import DonationButton from "../DonationButton/donation"
 import { useParams } from "react-router-dom"
-
 import axios from "axios"
 import { CodeEditor } from "./CodeEditor"
+import * as ENV from "../../const/const"
 
 export const ProblemsInterface = () => {
   const { probNum } = useParams<{ probNum: string | undefined }>()
@@ -15,10 +15,9 @@ export const ProblemsInterface = () => {
 
   /** Problem Information Getter */
 
-  const RewardNFTAddress = "0xaFAD4dC9C0f1D05bcB6a2dfa5123bbd27284C8d3"
-  const PROBLEMS_IPFS_CID =
-    "https://nftstorage.link/ipfs/bafkreias5uyk5qwoh2iwzgxriavjvlntzhkig6c7m7ygipislddf4slvqi"
-  const PROBLEMS_CODE_IPFS_CID = `https://nftstorage.link/ipfs/bafybeih3xtj4u6wqu4rib6xrwkmozvrqcrfccmz3pn7cr535khthkzgu4i/${probNum}.txt`
+  const RewardNFTAddress = ENV.REWARDS_CONTRACT_ADDR
+  const PROBLEMS_IPFS_CID = ENV.PROBLEMS_IPFS_CID
+  const PROBLEMS_CODE_IPFS_CID = `${ENV.PROBLEMS_CODE_IPFS_CID}${probNum}.txt`
 
   async function getProblems() {
     const problemsResponse = await fetch(PROBLEMS_IPFS_CID)

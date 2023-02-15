@@ -4,12 +4,12 @@ import { Container } from "./styles"
 import { useNavigate } from "react-router-dom"
 import { ethers } from "ethers"
 import REWARD_NFT_ABI from "../../../contract-artifacts/rewardABI.json"
+import * as ENV from "../../const/const"
 
-export default function ProblemList() {
-  const RewardNFTAddress = "0xaFAD4dC9C0f1D05bcB6a2dfa5123bbd27284C8d3"
-  const PROBLEMS_IPFS_CID =
-    "https://nftstorage.link/ipfs/bafkreias5uyk5qwoh2iwzgxriavjvlntzhkig6c7m7ygipislddf4slvqi"
-
+export const ProblemList = () => {
+  const RewardNFTAddress = ENV.REWARDS_CONTRACT_ADDR
+  const PROBLEMS_IPFS_CID = ENV.PROBLEMS_IPFS_CID
+  
   const navigate = useNavigate()
   const [account, setAccount] = useState("")
   const [status, setStatus] = useState([])

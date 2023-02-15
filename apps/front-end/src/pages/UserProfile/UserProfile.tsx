@@ -3,11 +3,11 @@ import { ethers } from "ethers"
 import { TextExample } from "src/components/TextExample/TextExample"
 import { Container } from "./styles"
 import REWARD_NFT_ABI from "../../../contract-artifacts/rewardABI.json"
+import * as ENV from "../../const/const"
 
 export const UserProfile = () => {
-  const RewardNFTAddress = "0xaFAD4dC9C0f1D05bcB6a2dfa5123bbd27284C8d3"
-  const PROBLEMS_IPFS_CID =
-    "https://nftstorage.link/ipfs/bafkreias5uyk5qwoh2iwzgxriavjvlntzhkig6c7m7ygipislddf4slvqi"
+  const RewardNFTAddress = ENV.REWARDS_CONTRACT_ADDR
+  const PROBLEMS_IPFS_CID = ENV.PROBLEMS_IPFS_CID
 
   const [account, setAccount] = useState("")
   const [status, setStatus] = useState([])
@@ -67,7 +67,6 @@ export const UserProfile = () => {
     const nSolvingProb = TargetAccountBalance[0]
     const solvingProb = TargetAccountBalance[1]
     const temp = solvingProb.map(Number)
-    // console.log(temp.slice(0, nSolvingProb.toNumber()))
     setStatus(temp)
 
     for (let i = 0; i < nSolvingProb; i++) {
@@ -78,12 +77,10 @@ export const UserProfile = () => {
           signerAddress,
           solvingProb[i].toNumber()
         )
-      // console.log(TargetAccount_TargetProblem_TokenID)
 
       // Get the Target Problem TokenURI of the User
       const TargetAccount_TargetProblem_TokenURI =
         await RewardNFTContract.tokenURI(TargetAccount_TargetProblem_TokenID)
-      // console.log(TargetAccount_TargetProblem_TokenURI)
 
       const problemsResponse = await fetch(TargetAccount_TargetProblem_TokenURI)
       const data = await problemsResponse.json()

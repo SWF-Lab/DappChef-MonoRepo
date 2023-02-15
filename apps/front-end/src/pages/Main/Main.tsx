@@ -3,7 +3,7 @@ import { TextExample } from "src/components/TextExample/TextExample"
 import { useNavigate } from "react-router-dom"
 import { ethers } from "ethers"
 import { Container } from "./styles"
-import ProblemList from "../ProblemsInterface/ProblemList"
+import { ProblemList } from "../ProblemsInterface/ProblemList"
 
 export const Main = () => {
   const navigate = useNavigate()

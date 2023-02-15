@@ -52,7 +52,7 @@ $ cd DappChef-MonoRepo && yarn
 $ yarn start
 ```
 
-> Make sure the `.env` arguments are same as your image.
+> Make sure the `apps/front-end/const/const` arguments are same as your image.
 
 ### Start the Development
 
