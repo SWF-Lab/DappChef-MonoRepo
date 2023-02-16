@@ -3,7 +3,7 @@ import { ethers } from "ethers"
 import styled from "styled-components"
 import { Editor } from "../../components/Editor"
 import { solidityCompiler } from "@agnostico/browser-solidity-compiler"
-import deployerABI from "../../../contract-artifacts/deployerABI.json"
+import { JudgeInterface } from "./JudgeInterface"
 
 /** ---------------------------------------------------
  * Provider and Fetch the user wallet in browser(e.g. Metamask)
@@ -35,7 +35,13 @@ const EditorTop = styled.div`
  * Export Components
  * --------------------------------------------------- */
 
-export const CodeEditor = ({ code }: { code: string }) => {
+export const CodeEditor = ({
+  code,
+  problemsInfo
+}: {
+  code: string
+  problemsInfo: any
+}) => {
   /** ---------------------------------------------------
    * Provider and Fetch the user wallet in browser(e.g. Metamask)
    * --------------------------------------------------- */
@@ -66,7 +72,6 @@ export const CodeEditor = ({ code }: { code: string }) => {
 
   const [value, setValue] = useState(code)
   const onChange = useCallback((_value: string) => {
-    console.log(_value)
     setValue(_value)
   }, [])
 
@@ -82,13 +87,7 @@ export const CodeEditor = ({ code }: { code: string }) => {
    * --------------------------------------------------- */
 
   const [compiling, setCompiling] = useState(false)
-  const [judging, setJudging] = useState(false)
-  const [message, setMessage] = useState<string>("")
-  const [deploybtn, setDeploybtn] = useState(false)
-  const [deploy_open, setDeployOpen] = useState(false)
-  const [deploySuccess, setDeploySuccess] = useState(false)
-  const [deployAddr, setDeployAddr] = useState("")
-  const [accepted, setAccepted] = useState(false)
+  const [judgebtn, setJudgebtn] = useState(false)
 
   /** ---------------------------------------------------
      * Compiler Status
@@ -120,7 +119,6 @@ export const CodeEditor = ({ code }: { code: string }) => {
       }
     })
     const code = temp_array.join("\n")
-    console.log(code)
 
     let options = {} as any
     setCompiling(true)
@@ -159,12 +157,15 @@ export const CodeEditor = ({ code }: { code: string }) => {
         })) as any
 
         console.log(compiled)
-        setDeploybtn(true)
+        setJudgebtn(true)
         setCompiledContract(() => compiled)
         const obj = compiled?.contracts?.Compiled_Contracts
-        const targetKey = Object.keys(obj)[Object.keys(obj).length - 1]
-        setBytecode(obj[targetKey]?.evm?.bytecode?.object)
-        setABI(obj[targetKey]?.abi)
+        // const targetKey = Object.keys(obj)[Object.keys(obj).length - 1]
+
+        setBytecode(
+          obj[`answer${problemsInfo?.problemNumber}`]?.evm?.bytecode?.object
+        )
+        setABI(obj[`answer${problemsInfo?.problemNumber}`]?.abi)
       } catch (e: any) {
         if (e.message.includes("failed to load")) {
           setCompiledContract((prev) => ({
@@ -180,20 +181,6 @@ export const CodeEditor = ({ code }: { code: string }) => {
 
       setCompiling(false)
     }
-  }
-
-  /** ---------------------------------------------------
-   * Handle Judge
-   * --------------------------------------------------- */
-
-  const handleJudge = async () => {
-    setJudging(true)
-    setAccepted(false)
-
-    // ...
-
-    setAccepted(true)
-    setJudging(false)
   }
 
   /** ---------------------------------------------------
@@ -218,41 +205,10 @@ export const CodeEditor = ({ code }: { code: string }) => {
       {/**Compile Result */}
       <div className="compiled">
         <div
-          className="contracts"
-          style={{
-            width: "400px",
-            height: "400px",
-            resize: "none"
-          }}
-        >
-          <h2>Compiled</h2>
-          {compiledContract?.contracts?.Compiled_Contracts &&
-            Object.keys(compiledContract?.contracts?.Compiled_Contracts).map(
-              (cont) => (
-                <div key={cont}>
-                  <h3>Contract: {cont}</h3>
-                  <h4>Bytecode</h4>{" "}
-                  <small>
-                    {
-                      compiledContract?.contracts?.Compiled_Contracts[cont]?.evm
-                        ?.bytecode?.object
-                    }
-                  </small>
-                  <h4>ABI</h4>{" "}
-                  <small>
-                    {JSON.stringify(
-                      compiledContract?.contracts?.Compiled_Contracts[cont]?.abi
-                    )}
-                  </small>
-                </div>
-              )
-            )}
-        </div>
-        <div
           className="errors"
           style={{
             width: "400px",
-            height: "75px",
+            height: "400px",
             resize: "none"
           }}
         >
@@ -268,6 +224,7 @@ export const CodeEditor = ({ code }: { code: string }) => {
       </div>
 
       {/**Judge Result */}
+
       <div
         className="settings"
         style={{
@@ -287,35 +244,11 @@ export const CodeEditor = ({ code }: { code: string }) => {
               {compiling ? "Compiling..." : "Compile"}
             </button>
           </div>
-          <h3 />
           <div className="deploy">
-            {deploybtn && (
-              <button
-                className="resource flex"
-                onClick={handleJudge}
-                disabled={judging}
-              >
-                {judging ? "Judging..." : "Judge"}
-              </button>
+            {judgebtn && (
+              <JudgeInterface {...{ problemsInfo, Bytecode, ABI }} />
             )}
           </div>
-        </div>
-        <div>
-          {deploy_open && !deploySuccess && !judging ? (
-            <h4>{message}</h4>
-          ) : (
-            <div />
-          )}
-          {deploy_open && deploySuccess && !judging ? (
-            <h4>
-              ✅ - Check your transaction on{" "}
-              <a target="_blank" href={message}>
-                Etherscan
-              </a>
-            </h4>
-          ) : (
-            <div />
-          )}
         </div>
       </div>
     </>

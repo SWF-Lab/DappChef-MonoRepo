@@ -12,12 +12,12 @@
 ### Core Functionality
 
 - [`Front-End`](./apps/front-end)
-  - [**Main Website**](./apps/front-end/src)
-  - [**User Profile**](./apps/front-end/src/components/UserProfile/)
-  - [**Answer Interface**](./apps/front-end/src/components/ProblemsInterface/)
-  - [**Online-Compiler & Problem Solver**](./apps/front-end/src/components/ProblemsSolver/)
+  - **Main Website**
+  - **User Profile**
+  - **Answer Interface**
+  - [**Online-Compiler & Problem Solver**
 - [`Back-End`](./apps/back-end)
-  - [**Signing Server**](./apps/back-end/)
+  - **Signing Server**
 
 ### Project Link Tree
 

@@ -26,16 +26,20 @@ export const Main = () => {
   }
 
   return (
-    <Container>
-      <TextExample>Example</TextExample>
-      <button type="button" onClick={() => onClickConnect()}>
-        Log In with Metamask
-      </button>
-      <p>Connected Account: {account}</p>
-      <ProblemList />
-      <button type="button" onClick={() => navigate("/UserProfile")}>
-        Go to User Profile
-      </button>
-    </Container>
+    <div>
+      <Container>
+        <TextExample>DappChef</TextExample>
+        <button type="button" onClick={() => onClickConnect()}>
+          Log In with Metamask
+        </button>
+        <TextExample>Connected Account: {account}</TextExample>
+        <button type="button" onClick={() => navigate("/UserProfile")}>
+          Go to User Profile
+        </button>
+      </Container>
+      <Container>
+        <ProblemList />
+      </Container>
+    </div>
   )
 }

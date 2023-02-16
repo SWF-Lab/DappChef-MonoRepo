@@ -10,7 +10,6 @@ export const ProblemsInterface = () => {
   const { probNum } = useParams<{ probNum: string | undefined }>()
   const [problemsInfo, setProblemsInfo] = useState<any>()
   const [code, setCode] = useState<string>("")
-  const [ans, setAns] = useState<any>()
   const [loading, setLoading] = useState(true)
 
   /** Problem Information Getter */
@@ -24,7 +23,6 @@ export const ProblemsInterface = () => {
     const data = await problemsResponse.json()
     const target = data[probNum as string]
     setProblemsInfo(target)
-    setAns(target.problemSolution)
 
     await axios.get(PROBLEMS_CODE_IPFS_CID).then((res) => {
       setCode(res.data.toString())
@@ -48,7 +46,7 @@ export const ProblemsInterface = () => {
             <p>
               {problemsInfo?.problemNumber} - {problemsInfo?.description}
             </p>
-            <CodeEditor {...{ code }} />
+            <CodeEditor {...{ code, problemsInfo }} />
           </>
         )}
       </Container>

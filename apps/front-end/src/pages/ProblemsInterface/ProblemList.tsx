@@ -9,7 +9,7 @@ import * as ENV from "../../const/const"
 export const ProblemList = () => {
   const RewardNFTAddress = ENV.REWARDS_CONTRACT_ADDR
   const PROBLEMS_IPFS_CID = ENV.PROBLEMS_IPFS_CID
-  
+
   const navigate = useNavigate()
   const [account, setAccount] = useState("")
   const [status, setStatus] = useState([])
