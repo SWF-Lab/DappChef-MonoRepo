@@ -255,7 +255,7 @@ export const JudgeInterface = (judgeObject: any) => {
   const handleMint = async () => {
     setMinting(true)
     await sleep(5000)
-
+    setAccepted(false)
     setMinting(false)
   }
 
