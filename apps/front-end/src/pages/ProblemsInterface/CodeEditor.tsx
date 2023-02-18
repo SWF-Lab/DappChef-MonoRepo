@@ -119,7 +119,7 @@ export const CodeEditor = ({
       }
     })
     const code = temp_array.join("\n")
-
+    console.log("compiling")
     let options = {} as any
     setCompiling(true)
     if (optimizeOption.optimize) {
@@ -201,27 +201,6 @@ export const CodeEditor = ({
       <EditorContainer>
         <Editor value={value} onChange={onChange} />
       </EditorContainer>
-
-      {/**Compile Result */}
-      <div className="compiled">
-        <div
-          className="errors"
-          style={{
-            width: "400px",
-            height: "400px",
-            resize: "none"
-          }}
-        >
-          <h2>Errors</h2>
-          {compiledContract.errors.length > 0 && (
-            <ul>
-              {compiledContract?.errors.map((err) => (
-                <li key={err.formattedMessage}>{err.formattedMessage}</li>
-              ))}
-            </ul>
-          )}
-        </div>
-      </div>
 
       {/**Judge Result */}
 

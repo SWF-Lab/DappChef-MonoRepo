@@ -15,6 +15,7 @@ export const JudgeInterface = (judgeObject: any) => {
 
   const [judging, setJudging] = useState(false)
   const [accepted, setAccepted] = useState(false)
+  const [minting, setMinting] = useState(false)
   const handleJudge = async () => {
     setJudging(true)
     setAccepted(false)
@@ -24,8 +25,12 @@ export const JudgeInterface = (judgeObject: any) => {
     console.log(problemInfo)
 
     const _return = await judge(problemInfo, "0x" + Bytecode, ABI)
+    if (_return) {
+      setAccepted(true)
+    } else {
+      setAccepted(false)
+    }
 
-    setAccepted(true)
     setJudging(false)
   }
 
@@ -153,7 +158,7 @@ export const JudgeInterface = (judgeObject: any) => {
           } else {
             msg += "\n" + `    ...Wrong Answer!`
             setMessage(msg)
-            return
+            return false
           }
           continue
         }
@@ -168,7 +173,7 @@ export const JudgeInterface = (judgeObject: any) => {
             pastTXInfo = await _return.wait()
             msg += "\n" + `    ...Wrong Answer!`
             setMessage(msg)
-            return
+            return false
           } catch (e: any) {
             msg += "\n" + `    ...Accepted!`
             setMessage(msg)
@@ -231,19 +236,31 @@ export const JudgeInterface = (judgeObject: any) => {
           } else {
             msg += "\n" + `    ...Wrong Answer!`
             setMessage(msg)
-            return
+            return false
           }
         }
       } catch (e: any) {
         msg += "\n" + e.toString()
         setMessage(msg)
-        return
+        return false
       }
     }
     msg += "\n" + "\nAll Accepted!"
     setMessage(msg)
     msg += "\n" + `Total Used Gas: ${totalGas.toString()}`
     setMessage(msg)
+    return true
+  }
+
+  const handleMint = async () => {
+    setMinting(true)
+    await sleep(5000)
+
+    setMinting(false)
+  }
+
+  const sleep = (milliseconds: number) => {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds))
   }
 
   return (
@@ -262,6 +279,15 @@ export const JudgeInterface = (judgeObject: any) => {
       >
         {judging ? "Judging..." : "Judge"}
       </button>
+      {accepted && (
+        <button
+          className="resource flex"
+          onClick={handleMint}
+          disabled={minting}
+        >
+          {minting ? "Minting..." : "Mint"}
+        </button>
+      )}
       <label htmlFor="message">Result</label>
       <textarea value={message} onChange={handleMessageChange} disabled />
     </div>
