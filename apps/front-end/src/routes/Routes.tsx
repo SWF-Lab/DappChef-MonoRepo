@@ -4,7 +4,13 @@ import {
   Route,
   Routes as RoutesReactRouterDom
 } from "react-router-dom"
-import { Main, GenericNotFound, ProblemsInterface, UserProfile } from "./paths"
+import {
+  Main,
+  GenericNotFound,
+  ProblemsInterface,
+  UserProfile,
+  MemberInfo
+} from "./paths"
 
 export const Routes = () => {
   return (
@@ -13,6 +19,7 @@ export const Routes = () => {
         <Route path="/" element={<Main />} />
         <Route path=":probNum" element={<ProblemsInterface />} />
         <Route path="/UserProfile" element={<UserProfile />} />
+        <Route path="/About" element={<MemberInfo />} />
         <Route path="*" element={<Navigate to="/404" />} />
         <Route path="/404" element={<GenericNotFound />} />
       </RoutesReactRouterDom>
