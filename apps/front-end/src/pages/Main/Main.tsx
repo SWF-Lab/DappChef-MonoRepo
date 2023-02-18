@@ -29,19 +29,21 @@ export const Main = () => {
     <div>
       <Container>
         <TextExample>DappChef</TextExample>
-        {!account && (
+        {/* TODO: About */}
+        {account ? (
+          <button type="button" onClick={() => navigate("/UserProfile")}>
+            Go to User Profile
+          </button>
+        ) : (
           <button type="button" onClick={() => onClickConnect()}>
             Log In with Metamask
           </button>
         )}
-
-        <button type="button" onClick={() => navigate("/UserProfile")}>
-          Go to User Profile
-        </button>
       </Container>
       <Container>
         <ProblemList />
       </Container>
+      {/* TODO: Sponsor Area.... */}
     </div>
   )
 }

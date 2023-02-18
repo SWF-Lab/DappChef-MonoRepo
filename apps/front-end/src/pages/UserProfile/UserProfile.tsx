@@ -10,10 +10,10 @@ export const UserProfile = () => {
   const PROBLEMS_IPFS_CID = ENV.PROBLEMS_IPFS_CID
 
   const [account, setAccount] = useState("")
-  const [status, setStatus] = useState([])
-  const [nftImageList, setNFTImageList] = useState<Blob[]>([])
-  const [problemsInfo, setProblemsInfo] = useState([])
-  const [problemList, setProblemList] = useState<any>([])
+  const [status, setStatus] = useState([]) // 答對的題目的題號們
+  const [nftImageList, setNFTImageList] = useState<Blob[]>([]) // 答對的題目的 NFT Image
+  const [problemsInfo, setProblemsInfo] = useState([]) // 所有的題目的資訊
+  const [problemList, setProblemList] = useState<any>([]) // 所有的題目
   const [loading, setLoading] = useState(true)
 
   const getProblems = async () => {

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { ethers } from "ethers"
+import { useNavigate } from "react-router-dom"
 import * as ENV from "../../const/const"
 import DEPLOYER_ABI from "../../../contract-artifacts/deployerABI.json"
 
@@ -8,6 +9,7 @@ export const JudgeInterface = (judgeObject: any) => {
   const Bytecode = judgeObject.Bytecode
   const ABI = judgeObject.ABI
 
+  const navigate = useNavigate()
   const [message, setMessage] = useState("")
   const handleMessageChange = (event: any) => {
     setMessage(event.target.value)
@@ -36,6 +38,7 @@ export const JudgeInterface = (judgeObject: any) => {
 
   async function judge(JudgeInfo: any, creationCode: string, AnswerABI: any) {
     let msg: string = ""
+
     /** ---------------------------------------------------------------------------
      * Setting up the basic ethers object
      * --------------------------------------------------------------------------- */
@@ -257,6 +260,7 @@ export const JudgeInterface = (judgeObject: any) => {
     await sleep(5000)
     setAccepted(false)
     setMinting(false)
+    navigate("/")
   }
 
   const sleep = (milliseconds: number) => {
