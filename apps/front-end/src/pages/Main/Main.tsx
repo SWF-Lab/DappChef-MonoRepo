@@ -29,10 +29,12 @@ export const Main = () => {
     <div>
       <Container>
         <TextExample>DappChef</TextExample>
-        <button type="button" onClick={() => onClickConnect()}>
-          Log In with Metamask
-        </button>
-        <TextExample>Connected Account: {account}</TextExample>
+        {!account && (
+          <button type="button" onClick={() => onClickConnect()}>
+            Log In with Metamask
+          </button>
+        )}
+
         <button type="button" onClick={() => navigate("/UserProfile")}>
           Go to User Profile
         </button>
