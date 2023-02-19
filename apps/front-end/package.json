@@ -13,6 +13,9 @@
   },
   "dependencies": {
     "@agnostico/browser-solidity-compiler": "^0.1.1",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/material": "^5.11.9",
     "@replit/codemirror-lang-solidity": "^6.0.1",
     "@uiw/react-codemirror": "^4.19.9",
     "@web3-react/core": "^6.1.9",
