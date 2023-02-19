@@ -15,6 +15,11 @@ export const UserProfile = lazy(() =>
     default: module.UserProfile
   }))
 )
+export const MemberInfo = lazy(() =>
+  import("src/pages/MemberInfo/MemberInfo").then((module) => ({
+    default: module.MemberInfo
+  }))
+)
 export const GenericNotFound = lazy(() =>
   import("src/pages/GenericNotFound/GenericNotFound").then((module) => ({
     default: module.GenericNotFound

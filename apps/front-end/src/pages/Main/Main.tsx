@@ -29,7 +29,9 @@ export const Main = () => {
     <div>
       <Container>
         <TextExample>DappChef</TextExample>
-        {/* TODO: About */}
+        <button type="button" onClick={() => navigate("/About")}>
+          About
+        </button>
         {account ? (
           <button type="button" onClick={() => navigate("/UserProfile")}>
             Go to User Profile
