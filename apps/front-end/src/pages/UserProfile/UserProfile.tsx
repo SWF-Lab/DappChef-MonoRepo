@@ -5,6 +5,11 @@ import { Container } from "./styles"
 import REWARD_NFT_ABI from "../../../contract-artifacts/rewardABI.json"
 import * as ENV from "../../const/const"
 
+//frontend
+import { ResponsiveAppBar } from "../../components/Appbar"
+import { Footer } from "../../components/Footer"
+import { useHook } from "../useHooks"
+
 export const UserProfile = () => {
   const RewardNFTAddress = ENV.REWARDS_CONTRACT_ADDR
   const PROBLEMS_IPFS_CID = ENV.PROBLEMS_IPFS_CID
@@ -101,26 +106,41 @@ export const UserProfile = () => {
     getTokenInfoOfUser()
   }, [])
 
+  /**  --------------------------------------------------------
+   * Front-end
+   * -------------------------------------------------------- */
+  const { onClickConnect, toAbout } = useHook()
+
   return (
-    <div>
-      <Container>
-        <TextExample>User Profile</TextExample>
-      </Container>
-      <Container>
-        <p>{account}</p>
-        {loading ? (
-          <>Loading...</>
-        ) : (
-          <>
-            {nftImageList.map((image, i) => (
-              <div>
-                <p>{i}</p>
-                <img src={URL.createObjectURL(image)} width="50" height="58" />
-              </div>
-            ))}
-          </>
-        )}
-      </Container>
-    </div>
+    <>
+      <ResponsiveAppBar
+        account={account}
+        toAbout={toAbout}
+        onClickConnect={onClickConnect}
+      />
+      <main style={{ background: "black" }}>
+        <Container>
+          <p style={{ color: "white" }}>{account}</p>
+          {loading ? (
+            <>Loading...</>
+          ) : (
+            <>
+              {nftImageList.map((image, i) => (
+                <div>
+                  <p>{i}</p>
+                  <img
+                    alt="abcdefg"
+                    src={URL.createObjectURL(image)}
+                    width="50"
+                    height="58"
+                  />
+                </div>
+              ))}
+            </>
+          )}
+        </Container>
+      </main>
+      <Footer />
+    </>
   )
 }

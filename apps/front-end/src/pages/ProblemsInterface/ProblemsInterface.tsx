@@ -6,6 +6,11 @@ import axios from "axios"
 import { CodeEditor } from "./CodeEditor"
 import * as ENV from "../../const/const"
 
+/* front end*/
+import { useHook } from "../useHooks"
+import { ResponsiveAppBar } from "../../components/Appbar"
+import { Footer } from "../../components/Footer"
+
 export const ProblemsInterface = () => {
   const { probNum } = useParams<{ probNum: string | undefined }>()
   const [problemsInfo, setProblemsInfo] = useState<any>()
@@ -36,21 +41,48 @@ export const ProblemsInterface = () => {
     getProblems()
   }, [probNum])
 
+  /*front end*/
+  const { account, onClickConnect, toAbout, toUserProfile } = useHook()
+
   return (
-    <div>
-      <Container style={{ flexDirection: "column" }}>
-        {loading ? (
-          <>Loading...</>
-        ) : (
-          <>
-            <p>
-              {problemsInfo?.problemNumber} - {problemsInfo?.description}
-            </p>
-            <CodeEditor {...{ code, problemsInfo }} />
-          </>
-        )}
-      </Container>
-      <DonationButton />
-    </div>
+    <>
+      <ResponsiveAppBar
+        account={account}
+        toAbout={toAbout}
+        onClickConnect={onClickConnect}
+        toUserProfile={toUserProfile}
+      />
+      <main style={{ background: "white" }}>
+        <Container style={{ flexDirection: "column" }}>
+          {loading ? (
+            <>Loading...</>
+          ) : (
+            <>
+              <p>
+                {problemsInfo?.problemNumber} - {problemsInfo?.description}
+              </p>
+              <CodeEditor {...{ code, problemsInfo }} />
+            </>
+          )}
+        </Container>
+        <DonationButton />
+      </main>
+      <Footer />
+    </>
+    // <div>
+    //   <Container style={{ flexDirection: "column" }}>
+    //     {loading ? (
+    //       <>Loading...</>
+    //     ) : (
+    //       <>
+    //         <p>
+    //           {problemsInfo?.problemNumber} - {problemsInfo?.description}
+    //         </p>
+    //         <CodeEditor {...{ code, problemsInfo }} />
+    //       </>
+    //     )}
+    //   </Container>
+    //   <DonationButton />
+    // </div>
   )
 }

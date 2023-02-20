@@ -1,28 +1,28 @@
-import { ResponsiveAppBar } from "../../components/Appbar"
 import * as React from "react"
-
 import Button from "@mui/material/Button"
-import CameraIcon from "@mui/icons-material/PhotoCamera"
 import Card from "@mui/material/Card"
-import CardActions from "@mui/material/CardActions"
 import CardContent from "@mui/material/CardContent"
 import CardMedia from "@mui/material/CardMedia"
-import CssBaseline from "@mui/material/CssBaseline"
 import Grid from "@mui/material/Grid"
 import Stack from "@mui/material/Stack"
-
-import Box from "@mui/material/Box"
-// import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
 import Container from "@mui/material/Container"
-import Link from "@mui/material/Link"
+
 import { CardActionArea } from "@mui/material"
 import { useHook } from "../useHooks"
+import { ResponsiveAppBar } from "../../components/Appbar"
+import { Footer } from "../../components/Footer"
+import { maxHeight } from "@mui/system"
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
 export const MemberInfo = () => {
   const { account, onClickConnect, toUserProfile } = useHook()
+  const Style = {
+    height: "32%",
+    maxHeight: 132
+  };
+
 
   return (
     <>
@@ -34,9 +34,7 @@ export const MemberInfo = () => {
       <main style={{ background: "black" }}>
         {/* Hero unit */}
         <Container
-          sx={{
-            pt: 1
-          }}
+          sx={{ pt: 1 }}
           align="center"
           maxWidth="xl"
         >
@@ -54,7 +52,7 @@ export const MemberInfo = () => {
               direction="row"
               justifyContent="space-between"
               alignItems="center"
-              // spacing={2}
+            // spacing={2}
             >
               <Stack
                 direction="row"
@@ -185,11 +183,12 @@ export const MemberInfo = () => {
                     sx={{
                       pt: 1.5,
                       px: 1.5,
+                      // height: "45",
                       borderRadius: "25px"
+                      // maxHeight: "32%"
                     }}
+                    style={Style}
                     component="img"
-                    width=""
-                    height="130vh"
                     image="https://yt3.googleusercontent.com/ytc/AL5GRJVcbQPZqImGvAtqEnJQXQflyc1TJIVfQvuNbPZ0=s900-c-k-c0x00ffffff-no-rj"
                     alt="green iguana"
                   />
@@ -199,6 +198,7 @@ export const MemberInfo = () => {
                       align="center"
                       variant="h5"
                       component="div"
+                      sx={{ typography: { lg: "h5", sm: "body1", sx: "body1" } }}
                     >
                       ExcitedMail
                     </Typography>
@@ -206,6 +206,7 @@ export const MemberInfo = () => {
                       color="white"
                       align="center"
                       variant="subtitle1"
+                      sx={{ typography: { lg: "subtitle1", sm: "caption" } }}
                     >
                       Restaurant Manager
                     </Typography>
@@ -216,91 +217,7 @@ export const MemberInfo = () => {
           </Grid>
         </Container>
       </main>
-      {/* Footer */}
-      <Container
-        sx={{ p: 2, m: 0, background: "#dcdcdc" }}
-        maxWidth="xl"
-        // component="footer"
-      >
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          // spacing={2}
-        >
-          <Button
-            sx={{
-              color: "white",
-              width: "150px",
-              height: "45px",
-              fontsize: "24px",
-              borderRadius: "8px",
-              textTransform: "none",
-              background:
-                " linear-gradient(90deg, #FF8177 0%, #FF867A 0%, #FF8C7F 21%, #F99185 52%, #CF556C 78%, #B12A5B 100%)"
-            }}
-          >
-            SWFLab
-          </Button>
-          <Stack
-            direction="row"
-            justifyContent="flex-end"
-            alignItems="center"
-            spacing={6}
-          >
-            <Typography
-              variant="subtitle1"
-              align="center"
-              color="#363636"
-              component="p"
-            >
-              Copyright @swfLab Version Alpha
-            </Typography>
-            <Button
-              sx={{
-                ml: 15,
-                color: "white",
-                width: "150px",
-                height: "45px",
-                fontsize: "24px",
-                borderRadius: "8px",
-                textTransform: "none",
-                background: "  linear-gradient(90deg, #4FACFE 0%, #00F2FE 100%)"
-              }}
-            >
-              Github
-            </Button>
-
-            <Button
-              sx={{
-                color: "white",
-                width: "150px",
-                height: "45px",
-                fontsize: "24px",
-                borderRadius: "8px",
-                textTransform: "none",
-                background: "  linear-gradient(90deg, #4FACFE 0%, #00F2FE 100%)"
-              }}
-            >
-              OpenSea
-            </Button>
-            <Button
-              sx={{
-                color: "white",
-                width: "150px",
-                height: "45px",
-                fontsize: "24px",
-                borderRadius: "8px",
-                textTransform: "none",
-                background: "  linear-gradient(90deg, #4FACFE 0%, #00F2FE 100%)"
-              }}
-            >
-              Twitter
-            </Button>
-          </Stack>
-        </Stack>
-      </Container>
-      {/* End footer */}
+      <Footer />
     </>
   )
 }
