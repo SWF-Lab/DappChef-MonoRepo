@@ -12,7 +12,6 @@ import { CardActionArea } from "@mui/material"
 import { useHook } from "../useHooks"
 import { ResponsiveAppBar } from "../../components/Appbar"
 import { Footer } from "../../components/Footer"
-import { maxHeight } from "@mui/system"
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
@@ -21,8 +20,7 @@ export const MemberInfo = () => {
   const Style = {
     height: "32%",
     maxHeight: 132
-  };
-
+  }
 
   return (
     <>
@@ -31,13 +29,9 @@ export const MemberInfo = () => {
         onClickConnect={onClickConnect}
         toUserProfile={toUserProfile}
       />
-      <main style={{ background: "black" }}>
+      <main style={{ background: "black", height: "100%" }}>
         {/* Hero unit */}
-        <Container
-          sx={{ pt: 1 }}
-          align="center"
-          maxWidth="xl"
-        >
+        <Container sx={{ pt: 1, height: "100%" }} maxWidth="xl">
           <Card
             style={{ backgroundColor: "black" }}
             sx={{
@@ -52,7 +46,7 @@ export const MemberInfo = () => {
               direction="row"
               justifyContent="space-between"
               alignItems="center"
-            // spacing={2}
+              // spacing={2}
             >
               <Stack
                 direction="row"
@@ -108,7 +102,7 @@ export const MemberInfo = () => {
                 direction="row"
                 justifyContent="flex-end"
                 alignItems="flex-end"
-                spacing={1}
+                spacing={7}
               >
                 <Button
                   sx={{
@@ -156,10 +150,10 @@ export const MemberInfo = () => {
             </Stack>
           </Card>
         </Container>
-        <Container sx={{ px: 2, pt: 4, ml: 2 }} maxWidth="xl">
+        <Container sx={{ px: 2, pt: 4, ml: 2, height: "100%" }} maxWidth="xl">
           {/* End hero unit */}
           <Grid
-            sx={{ pt: 2, pb: 4 }}
+            sx={{ pt: 2, pb: 4, height: "100%" }}
             container
             direction="row"
             justifyContent="center"
@@ -172,46 +166,55 @@ export const MemberInfo = () => {
                 sx={{
                   m: 1,
                   width: 1 / 7,
-                  height: "30vh",
+                  height: "29vh",
                   maxWidth: 345,
                   borderRadius: "20px",
                   border: "5px solid white"
                 }}
               >
-                <CardActionArea>
-                  <CardMedia
-                    sx={{
-                      pt: 1.5,
-                      px: 1.5,
-                      // height: "45",
-                      borderRadius: "25px"
-                      // maxHeight: "32%"
-                    }}
-                    style={Style}
-                    component="img"
-                    image="https://yt3.googleusercontent.com/ytc/AL5GRJVcbQPZqImGvAtqEnJQXQflyc1TJIVfQvuNbPZ0=s900-c-k-c0x00ffffff-no-rj"
-                    alt="green iguana"
-                  />
-                  <CardContent sx={{ px: 1, pt: 0.5, pb: 0 }}>
-                    <Typography
-                      color="white"
-                      align="center"
-                      variant="h5"
-                      component="div"
-                      sx={{ typography: { lg: "h5", sm: "body1", sx: "body1" } }}
-                    >
-                      ExcitedMail
-                    </Typography>
-                    <Typography
-                      color="white"
-                      align="center"
-                      variant="subtitle1"
-                      sx={{ typography: { lg: "subtitle1", sm: "caption" } }}
-                    >
-                      Restaurant Manager
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
+                <Grid
+                  container
+                  height="100%"
+                  direction="row"
+                  justify="center"
+                  alignItems="center"
+                  spacing={0}
+                >
+                  <CardActionArea>
+                    <CardMedia
+                      sx={{
+                        pt: 1.5,
+                        px: 1.5,
+                        // height: "45vh",
+                        borderRadius: "25px"
+                        // maxHeight: "32%"
+                      }}
+                      style={Style}
+                      component="img"
+                      image="https://yt3.googleusercontent.com/ytc/AL5GRJVcbQPZqImGvAtqEnJQXQflyc1TJIVfQvuNbPZ0=s900-c-k-c0x00ffffff-no-rj"
+                      alt="green iguana"
+                    />
+                    <CardContent sx={{ px: 1, pt: 0.5, pb: 0 }}>
+                      <Typography
+                        color="white"
+                        align="center"
+                        variant="h5"
+                        component="div"
+                        sx={{ typography: { lg: "h5", sm: "body1" } }}
+                      >
+                        ExcitedMail
+                      </Typography>
+                      <Typography
+                        color="white"
+                        align="center"
+                        variant="subtitle1"
+                        sx={{ typography: { lg: "subtitle1", sm: "caption" } }}
+                      >
+                        Restaurant Manager
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Grid>
               </Card>
             ))}
           </Grid>
@@ -222,6 +225,4 @@ export const MemberInfo = () => {
   )
 }
 
-// export const MemberInfo = () => {
-//   return <div></div>
-// }
+

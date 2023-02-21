@@ -6,6 +6,11 @@ import REWARD_NFT_ABI from "../../../contract-artifacts/rewardABI.json"
 import * as ENV from "../../const/const"
 
 //frontend
+import Paper from "@mui/material/Paper"
+import Typography from "@mui/material/Typography"
+import Grid from "@mui/material/Grid"
+import List from "@mui/material/List"
+import Stack from "@mui/material/Stack"
 import { ResponsiveAppBar } from "../../components/Appbar"
 import { Footer } from "../../components/Footer"
 import { useHook } from "../useHooks"
@@ -118,27 +123,172 @@ export const UserProfile = () => {
         toAbout={toAbout}
         onClickConnect={onClickConnect}
       />
-      <main style={{ background: "black" }}>
-        <Container>
-          <p style={{ color: "white" }}>{account}</p>
-          {loading ? (
-            <>Loading...</>
-          ) : (
-            <>
-              {nftImageList.map((image, i) => (
-                <div>
-                  <p>{i}</p>
-                  <img
-                    alt="abcdefg"
-                    src={URL.createObjectURL(image)}
-                    width="50"
-                    height="58"
-                  />
-                </div>
-              ))}
-            </>
-          )}
-        </Container>
+      <main style={{ background: "black", height: "100%" }}>
+        <Grid sx={{ py: 5, height: "100%" }} maxWidth="xl">
+          <Grid
+            m={0}
+            container
+            direction="row"
+            justifyContent="space-evenly"
+            alignItems="flex-start"
+          >
+            <Paper
+              style={{ backgroundColor: "black" }}
+              sx={{
+                py: 2,
+
+                width: "25%",
+                height: "77vh",
+                borderRadius: "20px",
+                border: "5px solid white"
+              }}
+            >
+              <Typography
+                variant="h4"
+                align="center"
+                color="white"
+                component="p"
+                sx={{ typography: { lg: "h4", sm: "body1" } }}
+              >
+                Badges
+              </Typography>
+              <Grid
+                container
+                direction="row"
+                justifyContent="space-evenly"
+                alignItems="center"
+                sx={{
+                  pl: 2,
+                  mt: 4,
+                  height: "60vh",
+                  overflow: "auto",
+                  "&::-webkit-scrollbar": {
+                    width: 20
+                  },
+                  "&::-webkit-scrollbar-track": {
+                    backgroundColor: "orange"
+                  },
+                  "&::-webkit-scrollbar-thumb": {
+                    backgroundColor: "red",
+                    borderRadius: 2
+                  }
+                }}
+                spacing={2}
+              >
+                {loading ? (
+                  <Typography
+                    variant="h6"
+                    align="center"
+                    color="white"
+                    component="p"
+                  >
+                    Loading...
+                  </Typography>
+                ) : (
+                  <>
+                    {nftImageList.map((image, i) => (
+                      <>
+                        <Stack
+                          direction="row"
+                          sx={{ width: "30%", height: "28%", m: 1 }}
+                          justifyContent="flex-start"
+                          alignItems="flex-start"
+                          xs={10}
+                          sm={4}
+                          spacing={4}
+                        >
+                          {/* <item justify="center" key={i} xs={10} sm={4}> */}
+                          {/* <Typography
+                            variant="body2"
+                            align="center"
+                            color="white"
+                          >
+                            {i}
+                          </Typography> */}
+                          <img
+                            alt="acdf"
+                            style={{ borderRadius: "50%" }}
+                            src={URL.createObjectURL(image)}
+                            width="100%"
+                            height="100%"
+                          />
+                        </Stack>
+                      </>
+                    ))}
+                  </>
+                )}
+              </Grid>
+            </Paper>
+            <Paper
+              style={{ backgroundColor: "black" }}
+              sx={{
+                py: 2,
+
+                width: "25%",
+                height: "77vh",
+                borderRadius: "20px",
+                border: "5px solid white"
+              }}
+            >
+              {" "}
+              <Typography
+                variant="h4"
+                align="center"
+                color="white"
+                component="p"
+                sx={{ typography: { lg: "h4", sm: "body1" } }}
+              >
+                Solved Problem
+              </Typography>
+            </Paper>
+            <Paper
+              style={{ backgroundColor: "black" }}
+              sx={{
+                py: 2,
+                px: 4,
+                width: "25%",
+                height: "77vh",
+                borderRadius: "20px",
+                border: "5px solid white"
+              }}
+            >
+              <Typography
+                variant="h4"
+                align="center"
+                color="white"
+                component="p"
+                sx={{ typography: { lg: "h4", sm: "body1" } }}
+              >
+                User Info
+              </Typography>
+
+              <Stack
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+                spacing={2}
+                sx={{ mt: 2 }}
+              >
+                <img
+                  alt="acdf"
+                  style={{ borderRadius: "50%" }}
+                  src="http://cdn.shopify.com/s/files/1/0577/1254/1891/collections/CqG1bnp9Gy89e1Hl.jpg?v=1666354550"
+                  width="50%"
+                  height="50%"
+                />
+              </Stack>
+
+              <Typography
+                align="center"
+                variant="h5"
+                style={{ color: "white" }}
+                sx={{ mt: 2, typography: { lg: "h5", sm: "body2" } }}
+              >
+                {account.substring(0, 5)}...{account.slice(-5)}
+              </Typography>
+            </Paper>
+          </Grid>
+        </Grid>
       </main>
       <Footer />
     </>

@@ -10,7 +10,8 @@ import Avatar from "@mui/material/Avatar"
 import Button from "@mui/material/Button"
 import Tooltip from "@mui/material/Tooltip"
 import MenuItem from "@mui/material/MenuItem"
-import AdbIcon from "@mui/icons-material/Adb"
+import Stack from "@mui/material/Stack"
+import logo from "./Img/logo transparent_white.png"
 // import { Theme, makeStyles } from "@material-ui/core/styles";
 
 const settings = ["LightingMode", "Logout"]
@@ -35,16 +36,19 @@ export const ResponsiveAppBar = ({
 
   return (
     <AppBar position="sticky" style={{ background: "#000000" }}>
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" xs={{ height: "100%" }}>
         <Toolbar disableGutters>
-          <AdbIcon sx={{ mr: 1 }} />
+          <Stack spacing={1} sx={{ p: 2 }}>
+            <img src={logo} alt="logo" width={48} height={48} />
+          </Stack>
+          {/* <AdbIcon sx={{ mr: 1 }} /> */}
           <Button
             sx={{
               m: 2,
               color: "white",
               display: "block",
               textTransform: "none",
-              fontSize: "24px",
+              fontSize: { lg: "24px", sm: "16px" },
               ":hover": {
                 color: "#D9D9D9"
               }
@@ -59,7 +63,7 @@ export const ResponsiveAppBar = ({
               color: "white",
               display: "block",
               textTransform: "none",
-              fontSize: "24px",
+              fontSize: { lg: "24px", sm: "16px" },
               ":hover": {
                 color: "#D9D9D9"
               }
@@ -98,7 +102,7 @@ export const ResponsiveAppBar = ({
                 >
                   {settings.map((setting) => (
                     <MenuItem
-                      sx={{ fontSize: "24px" }}
+                      sx={{ fontSize: { lg: "24px", sm: "16px" } }}
                       key={setting}
                       onClick={handleCloseUserMenu}
                     >
@@ -112,7 +116,7 @@ export const ResponsiveAppBar = ({
                     color: "white",
                     display: "block",
                     textTransform: "none",
-                    fontSize: "24px",
+                    fontSize: { lg: "24px", sm: "16px" },
                     ":hover": {
                       color: "#D9D9D9"
                     }
@@ -124,7 +128,7 @@ export const ResponsiveAppBar = ({
               </>
             ) : (
               <Button
-                variant="outlined"
+                // variant="outlined"
                 sx={{
                   m: 2,
                   color: "white",
@@ -133,7 +137,7 @@ export const ResponsiveAppBar = ({
                   borderRadius: "15px",
                   display: "block",
                   textTransform: "none",
-                  fontSize: "24px",
+                  fontSize: { lg: "24px", sm: "16px" },
                   "&:hover": {
                     color: "black",
                     backgroundColor: "white"
@@ -150,7 +154,7 @@ export const ResponsiveAppBar = ({
                 color: "white",
                 display: "block",
                 textTransform: "none",
-                fontSize: "24px",
+                fontSize: { lg: "24px", sm: "16px" },
                 ":hover": {
                   color: "#D9D9D9"
                 }
