@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "private": true,
   "repository": "https://github.com/SWF-Lab/DappChef-MonoRepo.git",
-  "homepage": "https://github.com/SWF-Lab/DappChef-MonoRepo.git",
+  "homepage": ".",
   "scripts": {
     "start": "yarn workspace website start",
     "format": "prettier --write ."

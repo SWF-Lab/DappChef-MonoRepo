@@ -6,7 +6,7 @@
   "homepage": ".",
   "scripts": {
     "start": "webpack serve --mode development --open --config webpack.ts",
-    "build": "webpack --mode production --config webpack.ts",
+    "build": "webpack --config webpack.ts",
     "test": "jest",
     "test:coverage": "jest --coverage --watchAll=false",
     "test:watch": "jest --watch"
