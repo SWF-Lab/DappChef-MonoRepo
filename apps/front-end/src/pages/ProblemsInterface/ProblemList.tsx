@@ -74,9 +74,9 @@ export const ProblemList = () => {
   return (
     <div>
       <Container style={{ flexDirection: "column" }}>
-        <TextExample>Problem List Page</TextExample>
+        <TextExample color="white">Problem List Page</TextExample>
         <br />
-        <p>Address:{account}</p>
+        <p style={{ color: "white" }}>Address:{account}</p>
         {problemList.map(
           (t: {
             attributes: { trait_type: string; value: number }[]
@@ -85,7 +85,7 @@ export const ProblemList = () => {
           }) => {
             return (
               <p
-                style={{ cursor: "pointer", marginTop: "10px" }}
+                style={{ cursor: "pointer", marginTop: "10px", color: "white" }}
                 onClick={() => navigate("/" + t.problemNumber)}
               >
                 {t.problemNumber} - {t.description}
