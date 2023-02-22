@@ -19,13 +19,32 @@ type VersionType = { [version: string]: string }
 const EditorContainer = styled.div`
   height: 100%;
   width: 100%;
+  border-left: 5px solid white;
+  border-right: 5px solid white;
+  // border-radius: 15px;
 `
 const EditorTop = styled.div`
-  height: 40px;
+  height: 12px;
   width: 100%;
-  background-color: black;
+  background-color: #282c34;
+  border-top: 5px solid white;
+  border-right: 5px solid white;
+  border-left: 5px solid white;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+const EditorBottom = styled.div`
+  height: 12px;
+  width: 100%;
+  background-color: #282c34;
+  border-bottom: 5px solid white;
+  border-right: 5px solid white;
+  border-left: 5px solid white;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -201,7 +220,7 @@ export const CodeEditor = ({
       <EditorContainer>
         <Editor value={value} onChange={onChange} />
       </EditorContainer>
-
+      <EditorBottom />
       {/**Judge Result */}
 
       <div

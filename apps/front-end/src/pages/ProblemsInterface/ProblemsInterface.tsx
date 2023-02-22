@@ -7,9 +7,11 @@ import { CodeEditor } from "./CodeEditor"
 import * as ENV from "../../const/const"
 
 /* front end*/
+import Paper from "@mui/material/Paper"
 import { useHook } from "../useHooks"
 import { ResponsiveAppBar } from "../../components/Appbar"
 import { Footer } from "../../components/Footer"
+import Typography from "@mui/material/Typography"
 
 export const ProblemsInterface = () => {
   const { probNum } = useParams<{ probNum: string | undefined }>()
@@ -42,47 +44,57 @@ export const ProblemsInterface = () => {
   }, [probNum])
 
   /*front end*/
-  const { account, onClickConnect, toAbout, toUserProfile } = useHook()
+  // const { account, onClickConnect, toAbout, toUserProfile } = useHook()
 
   return (
     <>
       <ResponsiveAppBar
-        account={account}
-        toAbout={toAbout}
-        onClickConnect={onClickConnect}
-        toUserProfile={toUserProfile}
+      // account={account}
+      // toAbout={toAbout}
+      // onClickConnect={onClickConnect}
+      // toUserProfile={toUserProfile}
       />
-      <main style={{ background: "white" }}>
+      <main style={{ background: "black", height: "100%" }}>
         <Container style={{ flexDirection: "column" }}>
-          {loading ? (
-            <>Loading...</>
-          ) : (
-            <>
-              <p>
-                {problemsInfo?.problemNumber} - {problemsInfo?.description}
-              </p>
-              <CodeEditor {...{ code, problemsInfo }} />
-            </>
-          )}
+          <Paper
+            style={{ backgroundColor: "#1C1B29" }}
+            sx={{
+              p: 4,
+              my: 5,
+              width: "88%",
+              borderRadius: "20px"
+            }}
+          >
+            {loading ? (
+              <>Loading...</>
+            ) : (
+              <>
+                <Paper
+                  style={{ backgroundColor: "black" }}
+                  sx={{
+                    py: 2,
+                    borderRadius: "20px",
+                    border: "5px solid white"
+                  }}
+                >
+                  <Typography
+                    variant="h4"
+                    align="center"
+                    color="white"
+                    component="p"
+                    sx={{ typography: { lg: "h4", sm: "body1" } }}
+                  >
+                    {problemsInfo?.problemNumber} - {problemsInfo?.description}
+                  </Typography>
+                </Paper>
+                <CodeEditor {...{ code, problemsInfo }} />
+              </>
+            )}
+          </Paper>
         </Container>
         <DonationButton />
       </main>
       <Footer />
     </>
-    // <div>
-    //   <Container style={{ flexDirection: "column" }}>
-    //     {loading ? (
-    //       <>Loading...</>
-    //     ) : (
-    //       <>
-    //         <p>
-    //           {problemsInfo?.problemNumber} - {problemsInfo?.description}
-    //         </p>
-    //         <CodeEditor {...{ code, problemsInfo }} />
-    //       </>
-    //     )}
-    //   </Container>
-    //   <DonationButton />
-    // </div>
   )
 }

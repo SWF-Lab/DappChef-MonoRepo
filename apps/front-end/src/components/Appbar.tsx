@@ -13,19 +13,15 @@ import MenuItem from "@mui/material/MenuItem"
 import Stack from "@mui/material/Stack"
 import logo from "./Img/logo transparent_white.png"
 // import { Theme, makeStyles } from "@material-ui/core/styles";
-
+import { useHook } from "../pages/useHooks"
 const settings = ["LightingMode", "Logout"]
 
-export const ResponsiveAppBar = ({
-  account,
-  onClickConnect,
-  toAbout,
-  toUserProfile
-}) => {
+export const ResponsiveAppBar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   )
 
+  const { account, onClickConnect, toAbout, toUserProfile } = useHook()
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget)
   }

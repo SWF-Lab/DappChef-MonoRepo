@@ -25,9 +25,9 @@ export const MemberInfo = () => {
   return (
     <>
       <ResponsiveAppBar
-        account={account}
-        onClickConnect={onClickConnect}
-        toUserProfile={toUserProfile}
+      // account={account}
+      // onClickConnect={onClickConnect}
+      // toUserProfile={toUserProfile}
       />
       <main style={{ background: "black", height: "100%" }}>
         {/* Hero unit */}
@@ -224,5 +224,3 @@ export const MemberInfo = () => {
     </>
   )
 }
-
-

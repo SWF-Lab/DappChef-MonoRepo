@@ -26,7 +26,10 @@ export const Footer = () => {
             borderRadius: "8px",
             textTransform: "none",
             background:
-              " linear-gradient(90deg, #FF8177 0%, #FF867A 0%, #FF8C7F 21%, #F99185 52%, #CF556C 78%, #B12A5B 100%)"
+              " linear-gradient(90deg, #FF8177 0%, #FF867A 0%, #FF8C7F 21%, #F99185 52%, #CF556C 78%, #B12A5B 100%)",
+            ":hover": {
+              transform: "scale(1.1)"
+            }
           }}
         >
           SWFLab
@@ -54,7 +57,10 @@ export const Footer = () => {
               fontsize: "24px",
               borderRadius: "8px",
               textTransform: "none",
-              background: "  linear-gradient(90deg, #4FACFE 0%, #00F2FE 100%)"
+              background: "  linear-gradient(90deg, #4FACFE 0%, #00F2FE 100%)",
+              ":hover": {
+                transform: "scale(1.1)"
+              }
             }}
           >
             Github
@@ -68,7 +74,10 @@ export const Footer = () => {
               fontsize: "24px",
               borderRadius: "8px",
               textTransform: "none",
-              background: "  linear-gradient(90deg, #4FACFE 0%, #00F2FE 100%)"
+              background: "  linear-gradient(90deg, #4FACFE 0%, #00F2FE 100%)",
+              ":hover": {
+                transform: "scale(1.1)"
+              }
             }}
           >
             OpenSea
@@ -81,7 +90,10 @@ export const Footer = () => {
               fontsize: "24px",
               borderRadius: "8px",
               textTransform: "none",
-              background: "  linear-gradient(90deg, #4FACFE 0%, #00F2FE 100%)"
+              background: "  linear-gradient(90deg, #4FACFE 0%, #00F2FE 100%)",
+              ":hover": {
+                transform: "scale(1.1)"
+              }
             }}
           >
             Twitter

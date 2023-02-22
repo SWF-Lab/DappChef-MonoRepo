@@ -119,9 +119,9 @@ export const UserProfile = () => {
   return (
     <>
       <ResponsiveAppBar
-        account={account}
-        toAbout={toAbout}
-        onClickConnect={onClickConnect}
+      // account={account}
+      // toAbout={toAbout}
+      // onClickConnect={onClickConnect}
       />
       <main style={{ background: "black", height: "100%" }}>
         <Grid sx={{ py: 5, height: "100%" }} maxWidth="xl">
@@ -163,13 +163,14 @@ export const UserProfile = () => {
                   height: "60vh",
                   overflow: "auto",
                   "&::-webkit-scrollbar": {
-                    width: 20
+                    width: 15
                   },
                   "&::-webkit-scrollbar-track": {
-                    backgroundColor: "orange"
+                    backgroundColor: "#323232",
+                    borderRadius: 2
                   },
                   "&::-webkit-scrollbar-thumb": {
-                    backgroundColor: "red",
+                    backgroundColor: "#D9D9D9",
                     borderRadius: 2
                   }
                 }}
