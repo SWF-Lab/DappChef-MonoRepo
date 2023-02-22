@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "main": "src/index.tsx",
   "license": "Apache-2.0",
+  "homepage": ".",
   "scripts": {
     "start": "webpack serve --mode development --open --config webpack.ts",
     "build": "webpack --mode production --config webpack.ts",
@@ -78,7 +79,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "html-webpack-plugin": "^5.3.2",
+    "html-webpack-plugin": "^5.5.0",
     "husky": "^7.0.2",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.2.4",
