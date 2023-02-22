@@ -8,8 +8,7 @@
     "build": "webpack --mode production --config webpack.ts",
     "test": "jest",
     "test:coverage": "jest --coverage --watchAll=false",
-    "test:watch": "jest --watch",
-    "prepare": "husky install apps/front-end/.husky"
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@agnostico/browser-solidity-compiler": "^0.1.1",
