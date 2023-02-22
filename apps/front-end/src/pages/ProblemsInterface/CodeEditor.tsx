@@ -5,6 +5,11 @@ import { Editor } from "../../components/Editor"
 import { solidityCompiler } from "@agnostico/browser-solidity-compiler"
 import { JudgeInterface } from "./JudgeInterface"
 
+//front-end
+import Box from "@mui/material/Box"
+import Button from "@mui/material/Button"
+import Grid from "@mui/material/Grid"
+
 /** ---------------------------------------------------
  * Provider and Fetch the user wallet in browser(e.g. Metamask)
  * --------------------------------------------------- */
@@ -19,13 +24,33 @@ type VersionType = { [version: string]: string }
 const EditorContainer = styled.div`
   height: 100%;
   width: 100%;
+  padding-right: 10px;
+  border-left: 5px solid white;
+  border-right: 5px solid white;
+  // border-radius: 15px;
 `
 const EditorTop = styled.div`
-  height: 40px;
+  height: 12px;
   width: 100%;
-  background-color: black;
+  background-color: #282c34;
+  border-top: 5px solid white;
+  border-right: 5px solid white;
+  border-left: 5px solid white;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+const EditorBottom = styled.div`
+  height: 12px;
+  width: 100%;
+  background-color: #282c34;
+  border-bottom: 5px solid white;
+  border-right: 5px solid white;
+  border-left: 5px solid white;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -189,19 +214,17 @@ export const CodeEditor = ({
 
   return (
     <>
-      <div>{account}</div>
-      <EditorTop>
-        <div
-          style={{
-            marginLeft: "10px",
-            display: "flex"
-          }}
-        ></div>
-      </EditorTop>
+      {/* <div>{account}</div> */}
+      {/* <Box
+      sx={{
+        width: 300,
+        height: 300,}}>   */}
+      <EditorTop />
       <EditorContainer>
         <Editor value={value} onChange={onChange} />
       </EditorContainer>
-
+      <EditorBottom />
+      {/* </Box> */}
       {/**Judge Result */}
 
       <div
@@ -219,9 +242,25 @@ export const CodeEditor = ({
           }}
         >
           <div className="compile">
-            <button onClick={handleCompile} disabled={compiling}>
+            <Button
+              sx={{
+                ml: 15,
+                color: "white",
+                width: "150px",
+                height: "45px",
+                fontSize: { lg: "20px", sm: "14px" },
+                borderRadius: "8px",
+                textTransform: "none",
+                background: "linear-gradient(90deg, #F6D365 0%, #FDA085 100%)",
+                ":hover": {
+                  color: "black"
+                }
+              }}
+              onClick={handleCompile}
+              disabled={compiling}
+            >
               {compiling ? "Compiling..." : "Compile"}
-            </button>
+            </Button>
           </div>
           <div className="deploy">
             {judgebtn && (

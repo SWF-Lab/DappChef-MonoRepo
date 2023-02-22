@@ -6,6 +6,14 @@ import axios from "axios"
 import { CodeEditor } from "./CodeEditor"
 import * as ENV from "../../const/const"
 
+/* front end*/
+import Paper from "@mui/material/Paper"
+import Grid from "@mui/material/Grid"
+// import { useHook } from "../useHooks"
+import { ResponsiveAppBar } from "../../components/Appbar"
+import { Footer } from "../../components/Footer"
+import Typography from "@mui/material/Typography"
+
 export const ProblemsInterface = () => {
   const { probNum } = useParams<{ probNum: string | undefined }>()
   const [problemsInfo, setProblemsInfo] = useState<any>()
@@ -36,21 +44,111 @@ export const ProblemsInterface = () => {
     getProblems()
   }, [probNum])
 
+  /*front end*/
+  // const { account, onClickConnect, toAbout, toUserProfile } = useHook()
+
   return (
-    <div>
-      <Container style={{ flexDirection: "column" }}>
-        {loading ? (
-          <>Loading...</>
-        ) : (
-          <>
-            <p>
-              {problemsInfo?.problemNumber} - {problemsInfo?.description}
-            </p>
-            <CodeEditor {...{ code, problemsInfo }} />
-          </>
-        )}
-      </Container>
-      <DonationButton />
-    </div>
+    <>
+      <ResponsiveAppBar
+      // account={account}
+      // toAbout={toAbout}
+      // onClickConnect={onClickConnect}
+      // toUserProfile={toUserProfile}
+      />
+      <main style={{ background: "black", height: "100%" }}>
+        {/* <Grid  container
+              direction="column"
+              justifyContent="flex-start"
+              alignItems="center" sx={{ py: 2, height: "100%" }} 
+              maxWidth="xl"> */}
+        <Container
+          style={{ flexDirection: "column", height: "100%" }}
+          minWidth="xl"
+        >
+          <Paper
+            style={{ backgroundColor: "#1C1B29" }}
+            sx={{
+              py: 4,
+              px: 8,
+              my: 0,
+              width: "88%",
+              height: "80%",
+              borderRadius: "18px"
+            }}
+          >
+            <Grid
+              container
+              direction="column"
+              justifyContent="space-around"
+              alignItems="center"
+              sx={{ m: 0 }}
+            >
+              {loading ? (
+                <Typography
+                  variant="h4"
+                  align="center"
+                  color="white"
+                  component="p"
+                  sx={{ typography: { lg: "h4", sm: "body1" } }}
+                >
+                  Loading...
+                </Typography>
+              ) : (
+                <>
+                  <Paper
+                    style={{ backgroundColor: "#1C1B29" }}
+                    sx={{
+                      py: 2,
+
+                      m: 1,
+                      width: "100%",
+                      borderRadius: "20px",
+                      border: "5px solid white"
+                    }}
+                  >
+                    <Typography
+                      variant="h4"
+                      align="center"
+                      color="white"
+                      component="p"
+                      sx={{ typography: { lg: "h4", sm: "body1" } }}
+                    >
+                      {problemsInfo?.problemNumber} -{" "}
+                      {problemsInfo?.description}
+                    </Typography>
+                  </Paper>
+                  {/*Ads*/}
+                  <Paper
+                    style={{ backgroundColor: "#1C1B29" }}
+                    sx={{
+                      pt: 2,
+                      m: 1,
+                      mb: 2,
+                      width: "100%",
+                      borderRadius: "20px",
+                      border: "5px solid white"
+                    }}
+                  >
+                    <Typography
+                      variant="h4"
+                      align="center"
+                      color="white"
+                      component="p"
+                      sx={{ typography: { lg: "h4", sm: "body1" } }}
+                    >
+                      Ads
+                    </Typography>
+                  </Paper>
+                  <CodeEditor {...{ code, problemsInfo }} />
+                </>
+              )}
+            </Grid>
+          </Paper>
+        </Container>
+        {/* </Grid> */}
+        <DonationButton />
+      </main>
+      <Footer />
+    </>
   )
 }
