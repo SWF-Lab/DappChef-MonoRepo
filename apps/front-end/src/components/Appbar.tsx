@@ -44,7 +44,7 @@ export const ResponsiveAppBar = () => {
               color: "white",
               display: "block",
               textTransform: "none",
-              fontSize: { lg: "24px", sm: "16px" },
+              fontSize: { lg: "24px", sm: "14px" },
               ":hover": {
                 color: "#D9D9D9"
               }
@@ -59,7 +59,7 @@ export const ResponsiveAppBar = () => {
               color: "white",
               display: "block",
               textTransform: "none",
-              fontSize: { lg: "24px", sm: "16px" },
+              fontSize: { lg: "24px", sm: "14px" },
               ":hover": {
                 color: "#D9D9D9"
               }
@@ -98,7 +98,7 @@ export const ResponsiveAppBar = () => {
                 >
                   {settings.map((setting) => (
                     <MenuItem
-                      sx={{ fontSize: { lg: "24px", sm: "16px" } }}
+                      sx={{ fontSize: { lg: "24px", sm: "14px" } }}
                       key={setting}
                       onClick={handleCloseUserMenu}
                     >
@@ -112,7 +112,7 @@ export const ResponsiveAppBar = () => {
                     color: "white",
                     display: "block",
                     textTransform: "none",
-                    fontSize: { lg: "24px", sm: "16px" },
+                    fontSize: { lg: "24px", sm: "14px" },
                     ":hover": {
                       color: "#D9D9D9"
                     }
@@ -133,10 +133,11 @@ export const ResponsiveAppBar = () => {
                   borderRadius: "15px",
                   display: "block",
                   textTransform: "none",
-                  fontSize: { lg: "24px", sm: "16px" },
+                  fontSize: { lg: "24px", sm: "14px" },
                   "&:hover": {
                     color: "black",
-                    backgroundColor: "white"
+                    backgroundColor: "white",
+                    borderColor: "white"
                   }
                 }}
                 onClick={() => onClickConnect()}
@@ -150,7 +151,7 @@ export const ResponsiveAppBar = () => {
                 color: "white",
                 display: "block",
                 textTransform: "none",
-                fontSize: { lg: "24px", sm: "16px" },
+                fontSize: { lg: "24px", sm: "14px" },
                 ":hover": {
                   color: "#D9D9D9"
                 }

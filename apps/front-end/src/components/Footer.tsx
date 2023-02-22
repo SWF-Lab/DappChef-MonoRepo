@@ -22,13 +22,13 @@ export const Footer = () => {
             color: "white",
             width: "150px",
             height: "45px",
-            fontsize: "24px",
+            fontSize: { lg: "24px", sm: "12px" },
             borderRadius: "8px",
             textTransform: "none",
             background:
               " linear-gradient(90deg, #FF8177 0%, #FF867A 0%, #FF8C7F 21%, #F99185 52%, #CF556C 78%, #B12A5B 100%)",
             ":hover": {
-              transform: "scale(1.1)"
+              color: "black"
             }
           }}
         >
@@ -45,6 +45,7 @@ export const Footer = () => {
             align="center"
             color="#363636"
             component="p"
+            sx={{ typography: { lg: "subtitle1", sm: "caption" } }}
           >
             Copyright @swfLab Version Alpha
           </Typography>
@@ -54,12 +55,12 @@ export const Footer = () => {
               color: "white",
               width: "150px",
               height: "45px",
-              fontsize: "24px",
+              fontSize: { lg: "24px", sm: "12px" },
               borderRadius: "8px",
               textTransform: "none",
               background: "  linear-gradient(90deg, #4FACFE 0%, #00F2FE 100%)",
               ":hover": {
-                transform: "scale(1.1)"
+                color: "black"
               }
             }}
           >
@@ -71,12 +72,12 @@ export const Footer = () => {
               color: "white",
               width: "150px",
               height: "45px",
-              fontsize: "24px",
+              fontSize: { lg: "24px", sm: "12px" },
               borderRadius: "8px",
               textTransform: "none",
               background: "  linear-gradient(90deg, #4FACFE 0%, #00F2FE 100%)",
               ":hover": {
-                transform: "scale(1.1)"
+                color: "black"
               }
             }}
           >
@@ -87,12 +88,12 @@ export const Footer = () => {
               color: "white",
               width: "150px",
               height: "45px",
-              fontsize: "24px",
+              fontSize: { lg: "24px", sm: "14px" },
               borderRadius: "8px",
               textTransform: "none",
               background: "  linear-gradient(90deg, #4FACFE 0%, #00F2FE 100%)",
               ":hover": {
-                transform: "scale(1.1)"
+                color: "black"
               }
             }}
           >
