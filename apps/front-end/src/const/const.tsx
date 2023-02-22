@@ -1,7 +1,3 @@
-const ETHEREUM_URL =
-  "https://goerli.infura.io/v3/1d40ec7b051f4659a563e44381ceb798"
-const DB_LOCATION = "SWF-Lab/DappChef-ProblemsDB"
-const BACKEND_API_KEY = "http://172.105.202.22:3001/"
 const NETWORK = "goerli"
 
 /**Address/Problems Information */
@@ -20,9 +16,6 @@ const DEV_KEY_1_ARRR = "0xd8538ea74825080c0c80B9B175f57e91Ff885Cb4"
 const DEV_KEY_2_ARRR = "0xDEcf23CbB14972F2e9f91Ce30515ee955a124Cba"
 
 export {
-  ETHEREUM_URL,
-  DB_LOCATION,
-  BACKEND_API_KEY,
   NETWORK,
   REWARDS_CONTRACT_ADDR,
   DEPLOYER_CONTRACT_ADDR,
