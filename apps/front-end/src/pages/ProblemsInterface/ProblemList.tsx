@@ -4,11 +4,10 @@ import { Container } from "./styles"
 import { useNavigate } from "react-router-dom"
 import { ethers } from "ethers"
 import REWARD_NFT_ABI from "../../../contract-artifacts/rewardABI.json"
-import * as ENV from "../../const/const"
 
 export const ProblemList = () => {
-  const RewardNFTAddress = ENV.REWARDS_CONTRACT_ADDR
-  const PROBLEMS_IPFS_CID = ENV.PROBLEMS_IPFS_CID
+  const RewardNFTAddress = process.env.REWARDS_CONTRACT_ADDR as string
+  const PROBLEMS_IPFS_CID = process.env.PROBLEMS_IPFS_CID as string
 
   const navigate = useNavigate()
   const [account, setAccount] = useState("")

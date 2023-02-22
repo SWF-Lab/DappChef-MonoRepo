@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react"
 import { Container } from "./styles"
-import DonationButton from "../DonationButton/donation"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 import { CodeEditor } from "./CodeEditor"
-import * as ENV from "../../const/const"
 
 /* front end*/
 import Paper from "@mui/material/Paper"
@@ -22,9 +20,9 @@ export const ProblemsInterface = () => {
 
   /** Problem Information Getter */
 
-  const RewardNFTAddress = ENV.REWARDS_CONTRACT_ADDR
-  const PROBLEMS_IPFS_CID = ENV.PROBLEMS_IPFS_CID
-  const PROBLEMS_CODE_IPFS_CID = `${ENV.PROBLEMS_CODE_IPFS_CID}${probNum}.txt`
+  const RewardNFTAddress = process.env.REWARDS_CONTRACT_ADDR
+  const PROBLEMS_IPFS_CID = process.env.PROBLEMS_IPFS_CID as string
+  const PROBLEMS_CODE_IPFS_CID = `${process.env.PROBLEMS_CODE_IPFS_CID}${probNum}.txt`
 
   async function getProblems() {
     const problemsResponse = await fetch(PROBLEMS_IPFS_CID)
@@ -146,7 +144,6 @@ export const ProblemsInterface = () => {
           </Paper>
         </Container>
         {/* </Grid> */}
-        <DonationButton />
       </main>
       <Footer />
     </>

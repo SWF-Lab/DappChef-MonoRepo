@@ -10,7 +10,6 @@ import { TotalMarquee } from "../../components/Murquee"
 import { Footer } from "../../components/Footer"
 import BeforeLoginVideo from "../../components/Img/DappChef_v3_BeforeLogin.mp4"
 
-
 export const Main = () => {
   return (
     <>

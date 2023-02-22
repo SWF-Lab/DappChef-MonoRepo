@@ -3,7 +3,6 @@ import { ethers } from "ethers"
 import { TextExample } from "src/components/TextExample/TextExample"
 import { Container } from "./styles"
 import REWARD_NFT_ABI from "../../../contract-artifacts/rewardABI.json"
-import * as ENV from "../../const/const"
 
 //frontend
 import Paper from "@mui/material/Paper"
@@ -16,8 +15,8 @@ import { Footer } from "../../components/Footer"
 import { useHook } from "../useHooks"
 
 export const UserProfile = () => {
-  const RewardNFTAddress = ENV.REWARDS_CONTRACT_ADDR
-  const PROBLEMS_IPFS_CID = ENV.PROBLEMS_IPFS_CID
+  const RewardNFTAddress = process.env.REWARDS_CONTRACT_ADDR
+  const PROBLEMS_IPFS_CID = process.env.PROBLEMS_IPFS_CID
 
   const [account, setAccount] = useState("")
   const [status, setStatus] = useState([]) // 答對的題目的題號們

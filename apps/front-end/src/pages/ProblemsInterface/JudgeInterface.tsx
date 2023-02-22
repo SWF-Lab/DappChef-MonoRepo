@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { ethers } from "ethers"
 import { useNavigate } from "react-router-dom"
-import * as ENV from "../../const/const"
 import DEPLOYER_ABI from "../../../contract-artifacts/deployerABI.json"
 
 export const JudgeInterface = (judgeObject: any) => {
@@ -76,7 +75,7 @@ export const JudgeInterface = (judgeObject: any) => {
      * --------------------------------------------------------------------------- */
 
     const DeployerContract = new ethers.Contract(
-      ENV.DEPLOYER_CONTRACT_ADDR as string,
+      process.env.DEPLOYER_CONTRACT_ADDR as string,
       DEPLOYER_ABI,
       wallet
     )
