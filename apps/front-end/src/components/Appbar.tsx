@@ -21,7 +21,7 @@ export const ResponsiveAppBar = () => {
     null
   )
 
-  const { account, onClickConnect, toAbout, toUserProfile } = useHook()
+  const { account, onClickConnect, toAbout, toUserProfile, toMain } = useHook()
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget)
   }
@@ -30,12 +30,31 @@ export const ResponsiveAppBar = () => {
     setAnchorElUser(null)
   }
 
+  const imageStyle = {
+    cursor: "pointer"
+  }
+
   return (
-    <AppBar position="sticky" style={{ background: "#000000" }}>
+    <AppBar position="sticky" style={{ background: "#0F0B18" }}>
       <Container maxWidth="xl" xs={{ height: "100%" }}>
         <Toolbar disableGutters>
-          <Stack spacing={1} sx={{ p: 2 }}>
-            <img src={logo} alt="logo" width={48} height={48} />
+          <Stack
+            spacing={1}
+            sx={{
+              p: 2,
+              ":hover": {
+                cursor: { cursorPointer: "pointer", bgcolor: "#0000ff" }
+              }
+            }}
+            onClick={toMain}
+          >
+            <img
+              src={logo}
+              alt="logo"
+              style={imageStyle}
+              width={48}
+              height={48}
+            />
           </Stack>
           {/* <AdbIcon sx={{ mr: 1 }} /> */}
           <Button
@@ -44,9 +63,11 @@ export const ResponsiveAppBar = () => {
               color: "white",
               display: "block",
               textTransform: "none",
+
               fontSize: { lg: "24px", sm: "14px" },
               ":hover": {
-                color: "#D9D9D9"
+                color: "#727171",
+                background: "#0F0B18"
               }
             }}
             onClick={toAbout}
@@ -61,7 +82,8 @@ export const ResponsiveAppBar = () => {
               textTransform: "none",
               fontSize: { lg: "24px", sm: "14px" },
               ":hover": {
-                color: "#D9D9D9"
+                color: "#727171",
+                background: "#0F0B18"
               }
             }}
           >
@@ -114,7 +136,8 @@ export const ResponsiveAppBar = () => {
                     textTransform: "none",
                     fontSize: { lg: "24px", sm: "14px" },
                     ":hover": {
-                      color: "#D9D9D9"
+                      color: "#727171",
+                      background: "#0F0B18"
                     }
                   }}
                   onClick={toUserProfile}
@@ -153,7 +176,8 @@ export const ResponsiveAppBar = () => {
                 textTransform: "none",
                 fontSize: { lg: "24px", sm: "14px" },
                 ":hover": {
-                  color: "#D9D9D9"
+                  color: "#727171",
+                  background: "#0F0B18"
                 }
               }}
             >

@@ -213,7 +213,13 @@ export const CodeEditor = ({
      --------------------------------------------------- */
 
   return (
-    <>
+    <Grid
+      container
+      direction="column"
+      justifyContent="space-around"
+      alignItems="center"
+      sx={{ m: 0 }}
+    >
       {/* <div>{account}</div> */}
       {/* <Box
       sx={{
@@ -221,13 +227,15 @@ export const CodeEditor = ({
         height: 300,}}>   */}
       <EditorTop />
       <EditorContainer>
-        <Editor value={value} onChange={onChange} />
+        <div className="cm-scroller">
+          <Editor value={value} onChange={onChange} />
+        </div>
       </EditorContainer>
       <EditorBottom />
       {/* </Box> */}
       {/**Judge Result */}
 
-      <div
+      {/* <div
         className="settings"
         style={{
           width: "400px",
@@ -240,35 +248,32 @@ export const CodeEditor = ({
           style={{
             padding: "1em"
           }}
-        >
-          <div className="compile">
-            <Button
-              sx={{
-                ml: 15,
-                color: "white",
-                width: "150px",
-                height: "45px",
-                fontSize: { lg: "20px", sm: "14px" },
-                borderRadius: "8px",
-                textTransform: "none",
-                background: "linear-gradient(90deg, #F6D365 0%, #FDA085 100%)",
-                ":hover": {
-                  color: "black"
-                }
-              }}
-              onClick={handleCompile}
-              disabled={compiling}
-            >
-              {compiling ? "Compiling..." : "Compile"}
-            </Button>
-          </div>
-          <div className="deploy">
-            {judgebtn && (
-              <JudgeInterface {...{ problemsInfo, Bytecode, ABI }} />
-            )}
-          </div>
-        </div>
+        > */}
+      {/* <div className="compile"> */}
+      <Button
+        sx={{
+          color: "white",
+          width: "150px",
+          height: "45px",
+          fontSize: { lg: "20px", sm: "14px" },
+          borderRadius: "8px",
+          textTransform: "none",
+          background: "linear-gradient(90deg, #F6D365 0%, #FDA085 100%)",
+          ":hover": {
+            color: "black"
+          }
+        }}
+        onClick={handleCompile}
+        disabled={compiling}
+      >
+        {compiling ? "Compiling..." : "Compile"}
+      </Button>
+      {/* </div> */}
+      <div className="deploy">
+        {judgebtn && <JudgeInterface {...{ problemsInfo, Bytecode, ABI }} />}
       </div>
-    </>
+      {/* </div>
+      </div> */}
+    </Grid>
   )
 }

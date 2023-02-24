@@ -122,7 +122,7 @@ export const UserProfile = () => {
       // toAbout={toAbout}
       // onClickConnect={onClickConnect}
       />
-      <main style={{ background: "black", height: "100%" }}>
+      <main style={{ background: "#0F0B18", height: "100%" }}>
         <Grid sx={{ py: 5, height: "100%" }} maxWidth="xl">
           <Grid
             m={0}

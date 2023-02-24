@@ -5,7 +5,8 @@ import { ethers } from "ethers"
 const HookContext = createContext({
   onClickConnect: () => {},
   toAbout: () => {},
-  toUserProfile: () => {}
+  toUserProfile: () => {},
+  toMain: () => {}
 })
 
 const HookProvider = (props) => {
@@ -35,6 +36,9 @@ const HookProvider = (props) => {
   const toUserProfile = () => {
     navigate("/UserProfile")
   }
+  const toMain = () => {
+    navigate("/")
+  }
 
   return (
     <HookContext.Provider
@@ -43,7 +47,8 @@ const HookProvider = (props) => {
         setAccount,
         onClickConnect,
         toAbout,
-        toUserProfile
+        toUserProfile,
+        toMain
       }}
       {...props}
     />

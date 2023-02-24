@@ -69,7 +69,16 @@ const config = {
         test: /\.svg$/,
         use: ["@svgr/webpack", "url-loader"],
         type: "javascript/auto"
+      },
+      {
+        test: /\.mp4$/,
+        use: "file-loader?name=videos/[name].[ext]"
       }
+      // {
+      //   test: /\.(mp4)(\?.*)?$/,
+      //   loader: "file-loader",
+      //   options: { name: urlHash.parse("video/[name].[ext]"), limit: 10000 }
+      // }
     ]
   },
   devServer: {

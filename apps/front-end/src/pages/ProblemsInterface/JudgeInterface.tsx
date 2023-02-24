@@ -3,6 +3,11 @@ import { ethers } from "ethers"
 import { useNavigate } from "react-router-dom"
 import DEPLOYER_ABI from "../../../contract-artifacts/deployerABI.json"
 
+//front end
+import Textarea from "@mui/joy/Textarea"
+import TextareaAutosize from "@mui/base/TextareaAutosize"
+import Grid from "@mui/material/Grid"
+
 export const JudgeInterface = (judgeObject: any) => {
   const problemInfo = judgeObject.problemsInfo
   const Bytecode = judgeObject.Bytecode
@@ -267,13 +272,19 @@ export const JudgeInterface = (judgeObject: any) => {
   }
 
   return (
-    <div
-      className="settings"
-      style={{
-        width: "400px",
-        height: "200px",
-        resize: "none"
-      }}
+    // <div
+    //   className="settings"
+    //   style={{
+    //     width: "400px",
+    //     height: "200px",
+    //     resize: "none"
+    //   }}
+    // >
+    <Grid
+      container
+      direction="column"
+      justifyContent="space-around"
+      alignItems="center"
     >
       <button
         className="resource flex"
@@ -291,8 +302,26 @@ export const JudgeInterface = (judgeObject: any) => {
           {minting ? "Minting..." : "Mint"}
         </button>
       )}
-      <label htmlFor="message">Result</label>
-      <textarea value={message} onChange={handleMessageChange} disabled />
-    </div>
+      {/* <label htmlFor="message">Result</label> */}
+      <textarea
+        style={{
+          backgroundColor: "#1C1B29",
+          border: "5px solid white",
+          borderRadius: "18px",
+          width: "100%",
+          resize: "none"
+        }}
+        value={message}
+        onChange={handleMessageChange}
+        disabled
+      />
+      {/* <TextareaAutosize
+        aria-label="empty textarea"
+        placeholder="Empty"
+        style={{ width: 200 }}
+      />
+      <Textarea color="danger" minRows={2} variant="plain" /> */}
+      {/* </div> */}
+    </Grid>
   )
 }
