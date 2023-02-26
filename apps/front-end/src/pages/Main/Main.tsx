@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { TextExample } from "src/components/TextExample/TextExample"
 import { useNavigate } from "react-router-dom"
 import { ethers } from "ethers"
@@ -14,6 +14,7 @@ import LoginVideo from "../../components/Img/DappChef_v3_login.mp4"
 
 export const Main = () => {
   const { account } = useHook()
+
   return (
     <>
       <ResponsiveAppBar />

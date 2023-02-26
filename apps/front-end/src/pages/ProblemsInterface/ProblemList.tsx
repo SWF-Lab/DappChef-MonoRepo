@@ -93,36 +93,29 @@ export const ProblemList = () => {
 
   const navigate = useNavigate()
   const [account, setAccount] = useState("")
-  const [status, setStatus] = useState([])
   const [problemsInfo, setProblemsInfo] = useState([])
   const [problemList, setProblemList] = useState<any>([])
-
-  const getProblems = async () => {
-    const problemsResponse = await fetch(PROBLEMS_IPFS_CID)
-    const data = await problemsResponse.json()
-    setProblemsInfo(data)
-    // console.log(data)
-    const pList = Object.values(data)
-    setProblemList(pList)
-    console.log(pList)
-  }
 
   async function getTokenInfoOfUser() {
     /** --------------------------------------------------------
      * Setting up the basic ethers object
      * -------------------------------------------------------- */
-
+    if (!(window as any).ethereum) {
+      return
+    }
     await window.ethereum.enable()
     const provider = new ethers.providers.Web3Provider(
       (window as any).ethereum,
-      "goerli"
+      "any"
     )
+    await provider
+      .send("wallet_switchEthereumChain", [{ chainId: "0x5" }])
+      .catch((e) => console.log(e))
 
     provider
       .send("eth_requestAccounts", [])
       .then((accounts) => {
         if (accounts.length > 0) setAccount(accounts[0])
-        console.log(account)
       })
       .catch((e) => console.log(e))
 
@@ -145,11 +138,41 @@ export const ProblemList = () => {
     const TargetAccountBalance = await RewardNFTContract.getSolvingStatus(
       await signer.getAddress()
     )
-    setStatus(TargetAccountBalance[1])
+
+    let t: Array<number> = []
+    const len = TargetAccountBalance[0].toNumber()
+    TargetAccountBalance[1].map((element: any, index: number) => {
+      if (index < len) t.push(element.toNumber())
+    })
+
+    /**  --------------------------------------------------------
+     * Get Problem Info
+     * -------------------------------------------------------- */
+
+    const problemsResponse = await fetch(PROBLEMS_IPFS_CID)
+    const data = await problemsResponse.json()
+    setProblemsInfo(data)
+
+    let pList: Array<any> = Object.values(data)
+    pList.map((element: any, index: any) => {
+      if (t.includes(element.problemNumber)) {
+        pList[index].solved = true
+      } else {
+        pList[index].solved = false
+      }
+      let attributes = data[pList[index].problemNumber].attributes
+      if (attributes != undefined) {
+        pList[index].difficulty = attributes[0].value
+        pList[index].class = attributes[1].value
+      } else {
+        pList[index].difficulty = "undefined"
+        pList[index].class = "undefined"
+      }
+    })
+    setProblemList(pList)
   }
 
   useEffect(() => {
-    getProblems()
     getTokenInfoOfUser()
   }, [])
 

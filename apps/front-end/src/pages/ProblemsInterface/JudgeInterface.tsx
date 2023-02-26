@@ -2,6 +2,8 @@ import { useState } from "react"
 import { ethers } from "ethers"
 import { useNavigate } from "react-router-dom"
 import DEPLOYER_ABI from "../../../contract-artifacts/deployerABI.json"
+import REWARD_ABI from "../../../contract-artifacts/rewardABI.json"
+import api from "../../api/api"
 
 //front end
 import Textarea from "@mui/joy/Textarea"
@@ -22,14 +24,21 @@ export const JudgeInterface = (judgeObject: any) => {
 
   const [judging, setJudging] = useState(false)
   const [accepted, setAccepted] = useState(false)
+  const [requestParams, setRequestParams] = useState({
+    problemSolverAddr: "",
+    problemNumber: "",
+    problemSolvedTimestamp: 0,
+    difficulty: 0,
+    class: ""
+  })
   const [minting, setMinting] = useState(false)
   const handleJudge = async () => {
     setJudging(true)
     setAccepted(false)
 
-    console.log(ABI)
-    console.log(Bytecode)
-    console.log(problemInfo)
+    // console.log(ABI)
+    // console.log(Bytecode)
+    // console.log(problemInfo)
 
     const _return = await judge(problemInfo, "0x" + Bytecode, ABI)
     if (_return) {
@@ -49,6 +58,9 @@ export const JudgeInterface = (judgeObject: any) => {
      * --------------------------------------------------------------------------- */
 
     const provider = new ethers.providers.Web3Provider(window.ethereum)
+    await provider
+      .send("wallet_switchEthereumChain", [{ chainId: "0x5" }])
+      .catch((e) => console.log(e))
     const wallet = provider.getSigner()
 
     /**  ---------------------------------------------------------------------------
@@ -62,7 +74,6 @@ export const JudgeInterface = (judgeObject: any) => {
     const originalSolution = JudgeInfo.problemSolution
     const stringified = JSON.stringify(originalSolution)
     const replaced = stringified.replace(/"MSG_SENDER"/g, `"${wallet_address}"`)
-    console.log(wallet_address)
 
     const solution = JSON.parse(replaced)
 
@@ -99,11 +110,6 @@ export const JudgeInterface = (judgeObject: any) => {
     const receipt = await tx.wait()
     const event = receipt.events.find((e: any) => e.event === "Deploy")
     const [_deployAddr, _solver, _problemNum] = event.args
-    msg += "\n" + `    Tx successful with hash: ${receipt.transactionHash}`
-    setMessage(msg)
-    msg += "\n" + `    Deployed contract address is ${_deployAddr}`
-    setMessage(msg)
-
     msg += "\n" + `    Tx successful with hash: ${receipt.transactionHash}`
     setMessage(msg)
     msg += "\n" + `    Deployed contract address is ${_deployAddr}`
@@ -257,15 +263,65 @@ export const JudgeInterface = (judgeObject: any) => {
     setMessage(msg)
     msg += "\n" + `Total Used Gas: ${totalGas.toString()}`
     setMessage(msg)
+
+    const problemsResponse = await fetch(
+      process.env.PROBLEMS_IPFS_CID as string
+    )
+    const data = await problemsResponse.json()
+    const attributes = data[problemNumber].attributes
+    let problemDifficulty: number
+    let problemClass: string
+    if (attributes != undefined) {
+      problemDifficulty = attributes[0].value
+      problemClass = attributes[1].value
+    } else {
+      problemDifficulty = 0
+      problemClass = "undefined"
+    }
+
+    setRequestParams({
+      problemSolverAddr: wallet_address,
+      problemNumber: problemNumber,
+      problemSolvedTimestamp: Date.now(),
+      difficulty: problemDifficulty,
+      class: problemClass
+    })
     return true
   }
 
   const handleMint = async () => {
     setMinting(true)
     await sleep(5000)
+    const result = await api.getResponse(
+      requestParams.problemSolverAddr,
+      requestParams.problemNumber,
+      requestParams.problemSolvedTimestamp,
+      requestParams.difficulty,
+      requestParams.class
+    )
+    console.log(result)
+
+    /** ---------------------------------------------------------------------------
+     * Setting up the basic ethers object
+     * --------------------------------------------------------------------------- */
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    await provider
+      .send("wallet_switchEthereumChain", [{ chainId: "0x5" }])
+      .catch((e) => console.log(e))
+    const wallet = provider.getSigner()
+
+    const RewardContract = new ethers.Contract(
+      process.env.REWARD_CONTRACT_ADDR as string,
+      REWARD_ABI,
+      wallet
+    )
+
+    await RewardContract.mint()
+
     setAccepted(false)
     setMinting(false)
-    navigate("/")
+    // navigate("/")
   }
 
   const sleep = (milliseconds: number) => {

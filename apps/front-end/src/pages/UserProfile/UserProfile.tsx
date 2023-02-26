@@ -72,25 +72,20 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }))
 
 export const UserProfile = () => {
-  const RewardNFTAddress = process.env.REWARDS_CONTRACT_ADDR
-  const PROBLEMS_IPFS_CID = process.env.PROBLEMS_IPFS_CID
+  const RewardNFTAddress = process.env.REWARDS_CONTRACT_ADDR as string
+  const PROBLEMS_IPFS_CID = process.env.PROBLEMS_IPFS_CID as string
 
   const [account, setAccount] = useState("")
-  const [status, setStatus] = useState([]) // 答對的題目的題號們
+  const [statistics, setStatistics] = useState({
+    totalAC: 0,
+    totalHardAC: 0,
+    totalMediumAC: 0,
+    totalEasyAC: 0
+  }) // 答對的題目的題號們
   const [nftImageList, setNFTImageList] = useState<Blob[]>([]) // 答對的題目的 NFT Image
   const [problemsInfo, setProblemsInfo] = useState([]) // 所有的題目的資訊
   const [problemList, setProblemList] = useState<any>([]) // 所有的題目
   const [loading, setLoading] = useState(true)
-
-  const getProblems = async () => {
-    const problemsResponse = await fetch(PROBLEMS_IPFS_CID)
-    const data = await problemsResponse.json()
-    setProblemsInfo(data)
-    // console.log(data)
-    const pList = Object.values(data)
-    setProblemList(pList)
-    console.log(problemList)
-  }
 
   async function getTokenInfoOfUser() {
     /** --------------------------------------------------------
@@ -133,7 +128,6 @@ export const UserProfile = () => {
     const nSolvingProb = TargetAccountBalance[0]
     const solvingProb = TargetAccountBalance[1]
     const temp = solvingProb.map(Number)
-    setStatus(temp)
 
     for (let i = 0; i < nSolvingProb; i++) {
       console.log(solvingProb[i].toNumber())
@@ -159,11 +153,66 @@ export const UserProfile = () => {
       console.log(image)
     }
 
+    /**  --------------------------------------------------------
+     * Get Problem Info
+     * -------------------------------------------------------- */
+
+    let t: Array<number> = []
+    const len = TargetAccountBalance[0].toNumber()
+    TargetAccountBalance[1].map((element: any, index: number) => {
+      if (index < len) t.push(element.toNumber())
+    })
+
+    const problemsResponse = await fetch(PROBLEMS_IPFS_CID)
+    const data = await problemsResponse.json()
+    setProblemsInfo(data)
+
+    let pList: Array<any> = Object.values(data)
+    pList.map((element: any, index: any) => {
+      if (t.includes(element.problemNumber)) {
+        pList[index].solved = true
+      } else {
+        pList[index].solved = false
+      }
+      let attributes = data[pList[index].problemNumber].attributes
+      if (attributes != undefined) {
+        pList[index].difficulty = attributes[0].value
+        pList[index].class = attributes[1].value
+      } else {
+        pList[index].difficulty = "undefined"
+        pList[index].class = "undefined"
+      }
+    })
+    setProblemList(pList)
+    console.log(pList)
+
+    /**  --------------------------------------------------------
+     * Get User Statistics
+     * -------------------------------------------------------- */
+
+    const totalAC = len
+    let totalHardAC = 0
+    let totalMediumAC = 0
+    let totalEasyAC = 0
+    pList.map((element: any) => {
+      if (element.solved) {
+        if (element.difficulty === 1) totalEasyAC += 1
+        else if (element.difficulty === 2) totalMediumAC += 1
+        else if (element.difficulty === 3) totalHardAC += 1
+      }
+    })
+
+    setStatistics({
+      totalAC: totalAC,
+      totalHardAC: totalHardAC,
+      totalMediumAC: totalMediumAC,
+      totalEasyAC: totalEasyAC
+    })
+
     setLoading(false)
   }
 
   useEffect(() => {
-    getProblems()
     getTokenInfoOfUser()
   }, [])
 

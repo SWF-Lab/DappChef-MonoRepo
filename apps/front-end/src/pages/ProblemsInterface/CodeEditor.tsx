@@ -124,6 +124,10 @@ export const CodeEditor = ({
     sources: any
     contracts: any
   }>({ errors: [], sources: null, contracts: null })
+  const [compiledResult, setCompiledResult] = useState<string>("")
+  const handleMessageChange = (event: any) => {
+    setCompiledResult(event.target.value)
+  }
   const [optimizeOption, setOptimizer] = useState({
     optimize: true,
     runs: 200
@@ -182,12 +186,27 @@ export const CodeEditor = ({
           options
         })) as any
 
-        console.log(compiled)
+        // Setting Result
         setJudgebtn(true)
         setCompiledContract(() => compiled)
-        const obj = compiled?.contracts?.Compiled_Contracts
-        // const targetKey = Object.keys(obj)[Object.keys(obj).length - 1]
+        let temp = compiled.errors.map((err: any) => err.formattedMessage)
+        temp = temp.filter(
+          (value: string, index: number, arr: Array<string>) => {
+            if (value.includes("Warning")) {
+              arr.splice(index, 1)
+              return false
+            }
+            return true
+          }
+        )
+        if (temp.length <= 0) {
+          setCompiledResult("Compiled Successfully!")
+        } else {
+          setCompiledResult(temp.join("\n"))
+        }
 
+        // Setting Contract Object Result
+        const obj = compiled?.contracts?.Compiled_Contracts
         setBytecode(
           obj[`answer${problemsInfo?.problemNumber}`]?.evm?.bytecode?.object
         )
@@ -248,8 +267,13 @@ export const CodeEditor = ({
             resize: "none",
             padding: "5px"
           }}
+          value={compiledResult}
+          onChange={handleMessageChange}
           disabled
-        />
+        >
+          Meow
+        </textarea>
+
         <Button
           sx={{
             color: "white",
@@ -269,21 +293,8 @@ export const CodeEditor = ({
           {compiling ? "Compiling..." : "Compile"}
         </Button>
       </Grid>
-      {/*原本的compile area*/}
-      {/* <h2>Errors</h2>
-          {compiledContract.errors.length > 0 && (
-            <ul>
-              {compiledContract?.errors.map((err) => (
-                <li key={err.formattedMessage}>{err.formattedMessage}</li>
-              ))}
-            </ul>
-          )} */}
-      {/*Deploy*/}
 
       {judgebtn && <JudgeInterface {...{ problemsInfo, Bytecode, ABI }} />}
-
-      {/* </div>
-      </div> */}
     </Grid>
   )
 }
