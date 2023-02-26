@@ -47,12 +47,7 @@ export const ProblemsInterface = () => {
 
   return (
     <>
-      <ResponsiveAppBar
-      // account={account}
-      // toAbout={toAbout}
-      // onClickConnect={onClickConnect}
-      // toUserProfile={toUserProfile}
-      />
+      <ResponsiveAppBar />
       <main style={{ background: "#0F0B18", height: "100%" }}>
         <Container
           style={{ flexDirection: "column", height: "100%" }}
@@ -72,6 +67,7 @@ export const ProblemsInterface = () => {
           >
             <Paper
               style={{ backgroundColor: "#1C1B29" }}
+              // style={{ backgroundColor: "white" }}
               sx={{
                 py: 2,
                 px: 8,
@@ -106,7 +102,7 @@ export const ProblemsInterface = () => {
                         py: 2,
                         m: 1,
                         width: "100%",
-                        borderRadius: "20px",
+                        borderRadius: "15px",
                         border: "5px solid white"
                       }}
                     >
@@ -129,7 +125,7 @@ export const ProblemsInterface = () => {
                         m: 1,
                         mb: 2,
                         width: "100%",
-                        borderRadius: "20px",
+                        borderRadius: "15px",
                         border: "5px solid white"
                       }}
                     >

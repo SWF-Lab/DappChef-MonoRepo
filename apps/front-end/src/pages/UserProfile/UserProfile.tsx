@@ -12,7 +12,64 @@ import List from "@mui/material/List"
 import Stack from "@mui/material/Stack"
 import { ResponsiveAppBar } from "../../components/Appbar"
 import { Footer } from "../../components/Footer"
-import { useHook } from "../useHooks"
+import { makeStyles } from "@material-ui/core/styles"
+import TableRow, { tableRowClasses } from "@mui/material/TableRow"
+import Table from "@mui/material/Table"
+import TableBody from "@mui/material/TableBody"
+// import Grid from "@mui/material/Grid"
+import { styled } from "@mui/material/styles"
+// import Typography from "@mui/material/Typography"
+import TableCell, { tableCellClasses } from "@mui/material/TableCell"
+import TableContainer from "@mui/material/TableContainer"
+import TableHead from "@mui/material/TableHead"
+import Button from "@mui/material/Button"
+
+const useStyles = makeStyles({
+  root: {
+    "& td:first-child": {
+      borderTopLeftRadius: "10px",
+      borderBottomLeftRadius: "10px"
+    },
+    "& td:last-child": {
+      borderTopRightRadius: "10px",
+      borderBottomRightRadius: "10px"
+    }
+  },
+  table: {
+    minWidth: "22%",
+    borderCollapse: "separate",
+    borderSpacing: "0px 10px",
+    "& .MuiTableCell-body": {
+      padding: "3px 16px"
+    }
+  }
+})
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: "#8D8D94"
+  },
+  "&:nth-of-type(even)": {
+    backgroundColor: "#323239"
+  },
+  "& th": {
+    fontSize: { lg: "24px", sm: "16px" }
+  },
+  "&.MuiTableRow-root:hover": {
+    backgroundColor: "red",
+    //  borderColor: 'yellow',
+    borderBottom: "5px solid white",
+    borderBottomWidth: "5px",
+    borderBottomStyle: "solid",
+    borderBottomColor: "white"
+  },
+  "&:hover": {
+    borderBottom: "5px solid white",
+    borderBottomWidth: "5px",
+    borderBottomStyle: "solid",
+    borderBottomColor: "white"
+  }
+}))
 
 export const UserProfile = () => {
   const RewardNFTAddress = process.env.REWARDS_CONTRACT_ADDR
@@ -32,7 +89,7 @@ export const UserProfile = () => {
     // console.log(data)
     const pList = Object.values(data)
     setProblemList(pList)
-    // console.log(pList)
+    console.log(problemList)
   }
 
   async function getTokenInfoOfUser() {
@@ -113,15 +170,11 @@ export const UserProfile = () => {
   /**  --------------------------------------------------------
    * Front-end
    * -------------------------------------------------------- */
-  const { onClickConnect, toAbout } = useHook()
+  const classes = useStyles()
 
   return (
     <>
-      <ResponsiveAppBar
-      // account={account}
-      // toAbout={toAbout}
-      // onClickConnect={onClickConnect}
-      />
+      <ResponsiveAppBar />
       <main style={{ background: "#0F0B18", height: "100%" }}>
         <Grid sx={{ py: 5, height: "100%" }} maxWidth="xl">
           <Grid
@@ -197,14 +250,6 @@ export const UserProfile = () => {
                           sm={4}
                           spacing={4}
                         >
-                          {/* <item justify="center" key={i} xs={10} sm={4}> */}
-                          {/* <Typography
-                            variant="body2"
-                            align="center"
-                            color="white"
-                          >
-                            {i}
-                          </Typography> */}
                           <img
                             alt="acdf"
                             style={{ borderRadius: "50%" }}
@@ -230,7 +275,6 @@ export const UserProfile = () => {
                 border: "5px solid white"
               }}
             >
-              {" "}
               <Typography
                 variant="h4"
                 align="center"
@@ -240,6 +284,101 @@ export const UserProfile = () => {
               >
                 Solved Problem
               </Typography>
+              <Grid
+                container
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+                sx={{
+                  pl: 3,
+
+                  mt: 4,
+                  height: "60vh",
+                  overflow: "auto",
+                  "&::-webkit-scrollbar": {
+                    width: 15
+                  },
+                  "&::-webkit-scrollbar-track": {
+                    backgroundColor: "#323232",
+                    borderRadius: 2
+                  },
+                  "&::-webkit-scrollbar-thumb": {
+                    backgroundColor: "#D9D9D9",
+                    borderRadius: 2
+                  }
+                }}
+                spacing={2}
+              >
+                <TableContainer>
+                  <Table
+                    stickyHeader
+                    aria-label="sticky table"
+                    className={classes.table}
+                  >
+                    <TableBody>
+                      {problemList.map((row) => {
+                        return (
+                          <StyledTableRow
+                            hover
+                            tabIndex={-1}
+                            key={row}
+                            className={classes.root}
+                          >
+                            <TableCell
+                              key={row.id}
+                              // width="5vw"
+                              align="center"
+                              sx={{
+                                borderBottom: "none",
+                                color: "white",
+                                justifyContent: "center",
+                                fontSize: { lg: "18px", sm: "12px" }
+                              }}
+                            >
+                              No. {row.problemNumber}
+                            </TableCell>
+                            <TableCell
+                              key={row.id}
+                              sx={{
+                                borderBottom: "none",
+                                color: "white",
+                                fontSize: { lg: "18px", sm: "12px" }
+                              }}
+                            >
+                              <Button
+                                //  disabled
+                                sx={{
+                                  color: "white",
+                                  width: "8vw",
+                                  height: "4vh",
+                                  fontSize: { lg: "16px", sm: "12px" },
+                                  borderRadius: "20px",
+                                  cursor: "auto",
+                                  background:
+                                    "linear-gradient(90deg, #43E97B 0%, #38F9D7 100%)"
+                                }}
+                              >
+                                Type A
+                              </Button>
+                            </TableCell>
+                            <TableCell
+                              key={row.id}
+                              width="5vw"
+                              // align={column.align}
+                              sx={{
+                                borderBottom: "none",
+                                color: "white"
+                              }}
+                            >
+                              {"star"}
+                            </TableCell>
+                          </StyledTableRow>
+                        )
+                      })}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Grid>
             </Paper>
             <Paper
               style={{ backgroundColor: "black" }}

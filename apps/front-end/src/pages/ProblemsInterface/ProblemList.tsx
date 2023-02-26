@@ -6,147 +6,85 @@ import { ethers } from "ethers"
 import REWARD_NFT_ABI from "../../../contract-artifacts/rewardABI.json"
 
 //front end
+import Stack from "@mui/material/Stack"
 import { makeStyles } from "@material-ui/core/styles"
 import * as React from "react"
 import Paper from "@mui/material/Paper"
 import Table from "@mui/material/Table"
 import TableBody from "@mui/material/TableBody"
-import TableCell from "@mui/material/TableCell"
+import Grid from "@mui/material/Grid"
+import { styled } from "@mui/material/styles"
+import Typography from "@mui/material/Typography"
+import TableCell, { tableCellClasses } from "@mui/material/TableCell"
 import TableContainer from "@mui/material/TableContainer"
 import TableHead from "@mui/material/TableHead"
 import Pagination from "@mui/material/Pagination"
-import TableRow from "@mui/material/TableRow"
+import TableRow, { tableRowClasses } from "@mui/material/TableRow"
+import Button from "@mui/material/Button"
+import question from "../../components/Img/question.png"
+import trytry from "../../components/Img/Try.png"
+import lock from "../../components/Img/Lock.png"
 
-
-// const useStyles = makeStyles((theme) => ({
-//   // table: {
-//   //   minWidth: 400
-//   // },
-//   thead: {
-//     backgroundColor: "lightgray",
-//     "& th:first-child": {
-//       borderRadius: "1em 0 0 1em"
-//     },
-//     "& th:last-child": {
-//       borderRadius: "0 1em 1em 0"
-//     }
-//   },
-//   MuiTableCell: {
-//     root: {
-//       backgroundColor: "#fff",
-//       paddingTop: 0,
-//       paddingBottom: 0,
-//       paddingLeft: "0.2rem",
-//       paddingRight: "0.2rem",
-//       borderBottom: 0,
-//       overflow: "hidden",
-//       textOverflow: "ellipsis",
-//       "&:first-child": {
-//         borderTopLeftRadius: "0.7rem",
-//         borderBottomLeftRadius: "0.7rem"
-//       },
-//       "&:last-child": {
-//         borderTopRightRadius: "0.7rem",
-//         borderBottomRightRadius: "0.7rem"
-//       }
-//     }
-//   }
-// }))
-
-// const useStyles = makeStyles({
-//   root: {
-//     '& td:first-child': {
-//       borderTopLeftRadius: '10px',
-//       borderBottomLeftRadius: '10px',
-//     },
-//     '& td:last-child': {
-//       borderTopRightRadius: '10px',
-//       borderBottomRightRadius: '10px',
-//     },
-//   },
-// });
 const useStyles = makeStyles({
+  root: {
+    "& td:first-child": {
+      borderTopLeftRadius: "10px",
+      borderBottomLeftRadius: "10px"
+    },
+    "& td:last-child": {
+      borderTopRightRadius: "10px",
+      borderBottomRightRadius: "10px"
+    }
+  },
   table: {
     minWidth: 650,
-    borderCollapse: 'separate',
-    borderSpacing: '0px 4px'
-  },
-  tableRow: {
-    cursor: "pointer",
-    borderLeft: "8px solid #9a031e",
-    marginTop: "8px"
-  },
-  tableCell: {
-    marginTop: "8px"
+    borderCollapse: "separate",
+    borderSpacing: "0px 10px",
+    "& .MuiTableCell-body": {
+      padding: "3px 16px"
+    }
   }
 })
 
-interface Column {
-  id: "name" | "code" | "population" | "size" | "density"
-  label: string
-  minWidth?: number
-  align?: "right"
-  format?: (value: number) => string
-}
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: "#8D8D94"
+  },
+  "&:nth-of-type(even)": {
+    backgroundColor: "#323239"
+  },
+  "& th": {
+    fontSize: { lg: "24px", sm: "16px" }
+  },
+  "&.MuiTableRow-root:hover": {
+    backgroundColor: "red",
+    //  borderColor: 'yellow',
+    borderBottom: "5px solid white",
+    borderBottomWidth: "5px",
+    borderBottomStyle: "solid",
+    borderBottomColor: "white"
+  },
+  "&:hover": {
+    borderBottom: "5px solid white",
+    borderBottomWidth: "5px",
+    borderBottomStyle: "solid",
+    borderBottomColor: "white"
+  }
+}))
 
 const columns: readonly Column[] = [
-  { id: "name", label: "Name", minWidth: 170 },
-  { id: "code", label: "ISO\u00a0Code", minWidth: 100 },
+  { id: "tag", label: "Tag", align: "center" },
+  { id: "title", label: "Title", minWidth: 350 },
   {
-    id: "population",
-    label: "Population",
-    minWidth: 170,
-    align: "right",
-    format: (value: number) => value.toLocaleString("en-US")
+    id: "difficulty",
+    label: "Difficulty"
   },
   {
-    id: "size",
-    label: "Size\u00a0(km\u00b2)",
-    minWidth: 170,
-    align: "right",
-    format: (value: number) => value.toLocaleString("en-US")
-  },
-  {
-    id: "density",
-    label: "Density",
-    minWidth: 170,
-    align: "right",
-    format: (value: number) => value.toFixed(2)
+    id: "status",
+    label: "Status",
+    align: "center"
   }
 ]
-
-interface Data {
-  name: string
-  code: string
-  population: number
-  size: number
-  density: number
-}
-
-function createData(
-  name: string,
-  code: string,
-  population: number,
-  size: number
-): Data {
-  const density = population / size
-  return { name, code, population, size, density }
-}
-
-const rows = [
-  createData("India", "IN", 1324171354, 3287263),
-  createData("China", "CN", 1403500365, 9596961),
-  createData("Italy", "IT", 60483973, 301340),
-  createData("United States", "US", 327167434, 9833520),
-  createData("Canada", "CA", 37602103, 9984670),
-  createData("Australia", "AU", 25475400, 7692024),
-  createData("Germany", "DE", 83019200, 357578),
-  createData("Ireland", "IE", 4857000, 70273),
-  createData("Mexico", "MX", 126577691, 1972550),
-  createData("Japan", "JP", 126317000, 377973)
-]
-
-
 
 /*------------------------------------------------------ */
 export const ProblemList = () => {
@@ -166,7 +104,7 @@ export const ProblemList = () => {
     // console.log(data)
     const pList = Object.values(data)
     setProblemList(pList)
-    // console.log(pList)
+    console.log(pList)
   }
 
   async function getTokenInfoOfUser() {
@@ -184,6 +122,7 @@ export const ProblemList = () => {
       .send("eth_requestAccounts", [])
       .then((accounts) => {
         if (accounts.length > 0) setAccount(accounts[0])
+        console.log(account)
       })
       .catch((e) => console.log(e))
 
@@ -215,111 +154,196 @@ export const ProblemList = () => {
   }, [])
 
   /*front end */
-  const [page, setPage] = React.useState(0)
-  const [rowsPerPage, setRowsPerPage] = React.useState(10)
+  const [page, setPage] = React.useState(1)
   const classes = useStyles()
 
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage)
-  }
-
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setRowsPerPage(+event.target.value)
-    setPage(0)
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value)
   }
 
   return (
-    <div>
+    <>
       <Container style={{ flexDirection: "column" }}>
-        {/*ji3*/}
-        <Paper sx={{ width: "100%", overflow: "hidden", backgroundColor:"#1C1B29" }}>
-          <TableContainer>
-            <Table stickyHeader aria-label="sticky table"   >
-              <TableHead>
-                <TableRow sx={{backgroundColor:"#1C1B29" , color: "white"}}>
-                  {columns.map((column) => (
-                    <TableCell
-                      key={column.id}
-                      align={column.align}
-                      sx={{backgroundColor:"#1C1B29" , color: "white"}}
-                    >
-                      {column.label}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => {
-                    return (
-                      <TableRow
-                        // className={classes.root}
-                        // classes={{ root: classes.overrides }}
-                        hover
-                        role="checkbox"
-                        tabIndex={-1}
-                        key={row.code}
-                        sx={{ borderRadius: '50%', backgroundColor: "red"  }}
-                      // sx={{
-                      //   ".MuiDataGrid-root": {
-                      //     borderRadius: "50px"
-                      //   },
-                      //   ".MuiDataGrid-columnHeaders": {
-                      //     display: "none"
-                      //   },
+        <Stack
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          sx={{ m: -3, zIndex: "fab" }}
+        >
+          <img src={question} alt="Question" />
 
+          <Typography
+            variant="h4"
+            align="center"
+            color="white"
+            component="p"
+            sx={{ typography: { lg: "h4", sm: "h6", sx: "h6" }, mx: 4 }}
+          >
+            Problems{account}
+          </Typography>
+          <img src={question} alt="Question" />
+        </Stack>
 
-                      // }}
-
+        <Paper
+          component={Stack}
+          direction="column"
+          justifyContent="center"
+          sx={{
+            pt: 0,
+            pb: 2,
+            px: 4,
+            // width: "95%",
+            overflow: "hidden",
+            backgroundColor: "#1C1B29"
+          }}
+        >
+          <Grid
+            m={0}
+            container
+            direction="row"
+            justifyContent="space-evenly"
+            alignItems="flex-start"
+          >
+            <TableContainer>
+              <Table
+                stickyHeader
+                aria-label="sticky table"
+                className={classes.table}
+              >
+                <TableHead>
+                  <TableRow
+                    sx={{
+                      backgroundColor: "#1C1B29",
+                      color: "white",
+                      [`&.${tableRowClasses.root}`]: {
+                        height: "2"
+                      },
+                      "& th": {
+                        fontSize: { lg: "24px", sm: "16px" }
+                      }
+                    }}
+                  >
+                    {columns.map((column) => (
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        sx={{
+                          backgroundColor: "#1C1B29",
+                          color: "white",
+                          borderBottom: "5px solid white"
+                        }}
                       >
-                        {columns.map((column) => {
-                          const value = row[column.id]
-                          return (
-                            <TableCell key={column.id} align={column.align}>
-                              {column.format && typeof value === "number"
-                                ? column.format(value)
-                                : value}
-                            </TableCell>
-                          )
-                        })}
-                      </TableRow>
+                        {column.label}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {problemList.slice(page * 10 - 10, page * 10).map((row) => {
+                    return (
+                      <StyledTableRow
+                        hover
+                        tabIndex={-1}
+                        key={row}
+                        style={
+                          account
+                            ? { cursor: "pointer" }
+                            : { cursor: "not-allowed" }
+                        }
+                        className={classes.root}
+                        onClick={() =>
+                          account ? navigate("/" + row.problemNumber) : null
+                        }
+                      >
+                        <TableCell
+                          key={row.id}
+                          width="5vw"
+                          align="center"
+                          sx={{
+                            borderBottom: "none",
+                            color: "white",
+                            justifyContent: "center",
+                            "&:hover": {
+                              borderBottom: "5px solid white",
+                              borderBottomWidth: "5px",
+                              borderBottomStyle: "solid",
+                              borderBottomColor: "white"
+                            }
+                          }}
+                        >
+                          <Button
+                            sx={{
+                              color: "white",
+                              width: "8vw",
+                              height: "4vh",
+                              fontSize: { lg: "16px", sm: "12px" },
+                              borderRadius: "20px",
+
+                              background:
+                                "linear-gradient(90deg, #43E97B 0%, #38F9D7 100%)"
+                            }}
+                          >
+                            Type A
+                          </Button>
+                        </TableCell>
+                        <TableCell
+                          key={row.id}
+                          style={{ width: "90vh" }}
+                          // align={column.align}
+                          sx={{
+                            borderBottom: "none",
+                            color: "white",
+                            width: "50vw",
+
+                            fontSize: { lg: "18px", sm: "12px" }
+                          }}
+                        >
+                          {row.problemNumber}. {row.description}
+                        </TableCell>
+                        <TableCell
+                          key={row.id}
+                          width="5vw"
+                          // align={column.align}
+                          sx={{
+                            borderBottom: "none",
+                            color: "white"
+                          }}
+                        >
+                          {"star"}
+                        </TableCell>
+                        <TableCell
+                          key={row.id}
+                          width="5vw"
+                          align="center"
+                          sx={{
+                            justifyContent: "center",
+                            borderBottom: "none",
+                            color: "white"
+                          }}
+                        >
+                          {account ? (
+                            <img src={trytry} alt="Try" />
+                          ) : (
+                            <img src={lock} alt="Question" />
+                          )}
+                        </TableCell>
+                      </StyledTableRow>
                     )
                   })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <Pagination
-            component="div"
-            count={rows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <Pagination
+              count={Math.floor(problemList.length / 10)}
+              sx={{ button: { color: "#ffffff" } }}
+              defaultPage={1}
+              page={page}
+              size="large"
+              onChange={handleChange}
+            />
+          </Grid>
         </Paper>
-        <TextExample color="white">Problem List Page</TextExample>
-        <br />
-        <p style={{ color: "white" }}>Address:{account}</p>
-        {problemList.map(
-          (t: {
-            attributes: { trait_type: string; value: number }[]
-            problemNumber: number
-            description: string
-          }) => {
-            return (
-              <p
-                style={{ cursor: "pointer", marginTop: "10px", color: "white" }}
-                onClick={() => navigate("/" + t.problemNumber)}
-              >
-                {t.problemNumber} - {t.description}
-              </p>
-            )
-          }
-        )}
       </Container>
-    </div>
+    </>
   )
 }

@@ -19,7 +19,7 @@ export const TotalMarquee = () => {
           align="center"
           color="white"
           component="p"
-          sx={{ typography: { lg: "h4", sm: "body1" }, zIndex: "tooltip" }}
+          sx={{ typography: { lg: "h4", sm: "body1" }, zIndex: "fab" }}
         >
           Supporting Sponsers
         </Typography>
@@ -61,7 +61,7 @@ export const TotalMarquee = () => {
           align="center"
           color="white"
           component="p"
-          sx={{ typography: { lg: "h4", sm: "body1" } }}
+          sx={{ typography: { lg: "h4", sm: "body1" }, zIndex: "fab" }}
         >
           Colaborators
         </Typography>

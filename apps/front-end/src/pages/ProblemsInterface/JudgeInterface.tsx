@@ -6,6 +6,7 @@ import DEPLOYER_ABI from "../../../contract-artifacts/deployerABI.json"
 //front end
 import Textarea from "@mui/joy/Textarea"
 import TextareaAutosize from "@mui/base/TextareaAutosize"
+import Button from "@mui/material/Button"
 import Grid from "@mui/material/Grid"
 
 export const JudgeInterface = (judgeObject: any) => {
@@ -272,56 +273,58 @@ export const JudgeInterface = (judgeObject: any) => {
   }
 
   return (
-    // <div
-    //   className="settings"
-    //   style={{
-    //     width: "400px",
-    //     height: "200px",
-    //     resize: "none"
-    //   }}
-    // >
-    <Grid
-      container
-      direction="column"
-      justifyContent="space-around"
-      alignItems="center"
-    >
-      <button
-        className="resource flex"
-        onClick={handleJudge}
-        disabled={judging}
+    <>
+      <Grid
+        container
+        direction="row"
+        justifyContent="space-between"
+        alignItems="flex-start"
       >
-        {judging ? "Judging..." : "Judge"}
-      </button>
-      {accepted && (
-        <button
-          className="resource flex"
-          onClick={handleMint}
-          disabled={minting}
+        {/* Judge Area */}
+        <textarea
+          style={{
+            color: "white",
+            backgroundColor: "#1C1B29",
+            border: "5px solid white",
+            borderRadius: "15px",
+            width: "83%",
+            height: "15vh",
+            resize: "none",
+            padding: "5px"
+          }}
+          value={message}
+          onChange={handleMessageChange}
+          disabled
+        />
+        <Button
+          sx={{
+            color: "white",
+            width: "15%",
+            height: "45px",
+            fontSize: { lg: "20px", sm: "14px" },
+            borderRadius: "8px",
+            textTransform: "none",
+            background:
+              "linear-gradient(90deg, #16D9E3 0%, #30C7EC 47%, #46AEF7 100%)",
+            ":hover": {
+              color: "black"
+            }
+          }}
+          onClick={handleJudge}
+          disabled={judging}
         >
-          {minting ? "Minting..." : "Mint"}
-        </button>
-      )}
-      {/* <label htmlFor="message">Result</label> */}
-      <textarea
-        style={{
-          backgroundColor: "#1C1B29",
-          border: "5px solid white",
-          borderRadius: "18px",
-          width: "100%",
-          resize: "none"
-        }}
-        value={message}
-        onChange={handleMessageChange}
-        disabled
-      />
-      {/* <TextareaAutosize
-        aria-label="empty textarea"
-        placeholder="Empty"
-        style={{ width: 200 }}
-      />
-      <Textarea color="danger" minRows={2} variant="plain" /> */}
-      {/* </div> */}
-    </Grid>
+          {judging ? "Judging..." : "Judge"}
+        </Button>
+        {accepted && (
+          <button
+            className="resource flex"
+            onClick={handleMint}
+            disabled={minting}
+          >
+            {minting ? "Minting..." : "Mint"}
+          </button>
+        )}
+      </Grid>
+    </>
   )
 }
