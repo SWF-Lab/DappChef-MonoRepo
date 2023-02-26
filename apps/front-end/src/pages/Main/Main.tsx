@@ -38,7 +38,9 @@ export const Main = () => {
         </Container>
 
         <Container>
-          <ProblemList />
+          <Grid sx={{ py: 15 }}>
+            <ProblemList />
+          </Grid>
         </Container>
         {/* TODO: Sponsor Area.... */}
         <TotalMarquee />

@@ -181,7 +181,7 @@ export const ResponsiveAppBar = () => {
                 }
               }}
             >
-              CheerWeup
+              CheerUsUp
             </Button>
           </Box>
         </Toolbar>

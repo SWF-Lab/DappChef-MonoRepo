@@ -179,7 +179,7 @@ export const ProblemList = () => {
             component="p"
             sx={{ typography: { lg: "h4", sm: "h6", sx: "h6" }, mx: 4 }}
           >
-            Problems{account}
+            Problems
           </Typography>
           <img src={question} alt="Question" />
         </Stack>

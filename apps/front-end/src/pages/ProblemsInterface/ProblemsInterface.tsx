@@ -51,7 +51,7 @@ export const ProblemsInterface = () => {
       <main style={{ background: "#0F0B18", height: "100%" }}>
         <Container
           style={{ flexDirection: "column", height: "100%" }}
-          minWidth="xl"
+          // minWidth="xl"
         >
           <Grid
             container
