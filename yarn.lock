@@ -2172,7 +2172,7 @@
     tweetnacl "^1.0.3"
     tweetnacl-util "^0.15.1"
 
-"@mui/base@5.0.0-alpha.118":
+"@mui/base@5.0.0-alpha.118", "@mui/base@^5.0.0-alpha.118":
   version "5.0.0-alpha.118"
   resolved "https://registry.npmjs.org/@mui/base/-/base-5.0.0-alpha.118.tgz"
   integrity sha512-GAEpqhnuHjRaAZLdxFNuOf2GDTp9sUawM46oHZV4VnYPFjXJDkIYFWfIQLONb0nga92OiqS5DD/scGzVKCL0Mw==
@@ -2197,6 +2197,22 @@
   integrity sha512-SPANMk6K757Q1x48nCwPGdSNb8B71d+2hPMJ0V12VWerpSsbjZtvAPi5FAn13l2O5mwWkvI0Kne+0tCgnNxMNw==
   dependencies:
     "@babel/runtime" "^7.20.13"
+
+"@mui/joy@^5.0.0-alpha.68":
+  version "5.0.0-alpha.68"
+  resolved "https://registry.yarnpkg.com/@mui/joy/-/joy-5.0.0-alpha.68.tgz#5d22e786901d253fa4667bdc3a6c61f954b5284c"
+  integrity sha512-tSmrxnDFzjoiFd2kRt1zeW7OjEI8caQo7BgDx/jf8JtwswFz6rq+/sKmALpkOVV9UXYd3hdGHM3o4IqRXgFqtw==
+  dependencies:
+    "@babel/runtime" "^7.20.13"
+    "@mui/base" "5.0.0-alpha.118"
+    "@mui/core-downloads-tracker" "^5.11.9"
+    "@mui/system" "^5.11.9"
+    "@mui/types" "^7.2.3"
+    "@mui/utils" "^5.11.9"
+    clsx "^1.2.1"
+    csstype "^3.1.1"
+    prop-types "^15.8.1"
+    react-is "^18.2.0"
 
 "@mui/material@^5.11.9":
   version "5.11.10"
@@ -8320,6 +8336,14 @@ file-entry-cache@^6.0.1:
   dependencies:
     flat-cache "^3.0.4"
 
+file-loader@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/file-loader/-/file-loader-6.2.0.tgz#baef7cf8e1840df325e4390b4484879480eebe4d"
+  integrity sha512-qo3glqyTa61Ytg4u73GultjHGjdRyig3tG6lPtyX/jOEJvHif9uB0/OCI2Kif6ctF3caQTW2G5gym21oAsI4pw==
+  dependencies:
+    loader-utils "^2.0.0"
+    schema-utils "^3.0.0"
+
 fill-range@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/fill-range/-/fill-range-4.0.0.tgz"
@@ -13117,6 +13141,11 @@ react-dom@^17.0.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     scheduler "^0.20.2"
+
+react-easy-marquee@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/react-easy-marquee/-/react-easy-marquee-1.2.4.tgz#4667f6e7879788706ae672c2e6436a7e16a1be28"
+  integrity sha512-xp0pfCnvcGxniuUZSSFxU3Kf4IVBxTG1FpCuNf0+h0qo01zwrDtVJj4QoxjkPfQulX1K1PdH7SeyIYcZQdMDIg==
 
 react-error-boundary@^3.1.0:
   version "3.1.4"

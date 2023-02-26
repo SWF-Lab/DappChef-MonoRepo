@@ -6,9 +6,10 @@ import { solidityCompiler } from "@agnostico/browser-solidity-compiler"
 import { JudgeInterface } from "./JudgeInterface"
 
 //front-end
-import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
 import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
+import Paper from "@mui/material/Paper"
 
 /** ---------------------------------------------------
  * Provider and Fetch the user wallet in browser(e.g. Metamask)
@@ -213,62 +214,76 @@ export const CodeEditor = ({
      --------------------------------------------------- */
 
   return (
-    <>
-      {/* <div>{account}</div> */}
-      {/* <Box
-      sx={{
-        width: 300,
-        height: 300,}}>   */}
+    <Grid
+      container
+      direction="column"
+      justifyContent="space-around"
+      alignItems="center"
+      sx={{ m: 0 }}
+    >
       <EditorTop />
       <EditorContainer>
-        <Editor value={value} onChange={onChange} />
+        <div className="cm-scroller">
+          <Editor value={value} onChange={onChange} />
+        </div>
       </EditorContainer>
       <EditorBottom />
-      {/* </Box> */}
-      {/**Judge Result */}
 
-      <div
-        className="settings"
-        style={{
-          width: "400px",
-          height: "200px",
-          resize: "none"
-        }}
+      {/**Judge Result */}
+      <Grid
+        container
+        direction="row"
+        justifyContent="space-between"
+        alignItems="flex-start"
+        sx={{ my: 1.5 }}
       >
-        <div
-          className="select-version"
+        <textarea
           style={{
-            padding: "1em"
+            color: "white",
+            backgroundColor: "#1C1B29",
+            border: "5px solid white",
+            borderRadius: "15px",
+            width: "83%",
+            height: "15vh",
+            resize: "none",
+            padding: "5px"
           }}
+          disabled
+        />
+        <Button
+          sx={{
+            color: "white",
+            width: "15%",
+            height: "45px",
+            fontSize: { lg: "20px", sm: "14px" },
+            borderRadius: "8px",
+            textTransform: "none",
+            background: "linear-gradient(90deg, #F6D365 0%, #FDA085 100%)",
+            ":hover": {
+              color: "black"
+            }
+          }}
+          onClick={handleCompile}
+          disabled={compiling}
         >
-          <div className="compile">
-            <Button
-              sx={{
-                ml: 15,
-                color: "white",
-                width: "150px",
-                height: "45px",
-                fontSize: { lg: "20px", sm: "14px" },
-                borderRadius: "8px",
-                textTransform: "none",
-                background: "linear-gradient(90deg, #F6D365 0%, #FDA085 100%)",
-                ":hover": {
-                  color: "black"
-                }
-              }}
-              onClick={handleCompile}
-              disabled={compiling}
-            >
-              {compiling ? "Compiling..." : "Compile"}
-            </Button>
-          </div>
-          <div className="deploy">
-            {judgebtn && (
-              <JudgeInterface {...{ problemsInfo, Bytecode, ABI }} />
-            )}
-          </div>
-        </div>
-      </div>
-    </>
+          {compiling ? "Compiling..." : "Compile"}
+        </Button>
+      </Grid>
+      {/*原本的compile area*/}
+      {/* <h2>Errors</h2>
+          {compiledContract.errors.length > 0 && (
+            <ul>
+              {compiledContract?.errors.map((err) => (
+                <li key={err.formattedMessage}>{err.formattedMessage}</li>
+              ))}
+            </ul>
+          )} */}
+      {/*Deploy*/}
+
+      {judgebtn && <JudgeInterface {...{ problemsInfo, Bytecode, ABI }} />}
+
+      {/* </div>
+      </div> */}
+    </Grid>
   )
 }

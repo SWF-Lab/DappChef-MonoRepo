@@ -29,7 +29,7 @@ export const MemberInfo = () => {
       // onClickConnect={onClickConnect}
       // toUserProfile={toUserProfile}
       />
-      <main style={{ background: "black", height: "100%" }}>
+      <main style={{ background: "#0F0B18", height: "100%" }}>
         {/* Hero unit */}
         <Container sx={{ pt: 1, height: "100%" }} maxWidth="xl">
           <Card
