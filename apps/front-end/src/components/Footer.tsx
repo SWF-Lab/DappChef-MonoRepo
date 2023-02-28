@@ -7,9 +7,9 @@ import Stack from "@mui/material/Stack"
 export const Footer = () => {
   return (
     <Container
-      sx={{ p: 2, m: 0, background: "#dcdcdc" }}
       maxWidth="xl"
-      // component="footer"
+      sx={{ p: 2, background: "#dcdcdc", height: "100%", overflow: "auto" }}
+      component="footer"
     >
       <Stack
         direction="row"
@@ -20,7 +20,7 @@ export const Footer = () => {
         <Button
           sx={{
             color: "white",
-            width: "150px",
+            width: { lg: "150px", sm: "100px" },
             height: "45px",
             fontSize: { lg: "24px", sm: "12px" },
             borderRadius: "8px",
@@ -40,7 +40,7 @@ export const Footer = () => {
           direction="row"
           justifyContent="flex-end"
           alignItems="center"
-          spacing={6}
+          spacing={{ lg: 6, sm: 4 }}
         >
           <Typography
             variant="subtitle1"
@@ -53,9 +53,9 @@ export const Footer = () => {
           </Typography>
           <Button
             sx={{
-              ml: 15,
+              ml: { lg: 15, sm: 2 },
               color: "white",
-              width: "150px",
+              width: { lg: "150px", sm: "100px" },
               height: "45px",
               fontSize: { lg: "24px", sm: "12px" },
               borderRadius: "8px",
@@ -74,7 +74,7 @@ export const Footer = () => {
           <Button
             sx={{
               color: "white",
-              width: "150px",
+              width: { lg: "150px", sm: "100px" },
               height: "45px",
               fontSize: { lg: "24px", sm: "12px" },
               borderRadius: "8px",
@@ -91,7 +91,7 @@ export const Footer = () => {
           <Button
             sx={{
               color: "white",
-              width: "150px",
+              width: { lg: "150px", sm: "100px" },
               height: "45px",
               fontSize: { lg: "24px", sm: "14px" },
               borderRadius: "8px",

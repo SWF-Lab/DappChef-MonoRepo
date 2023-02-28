@@ -3,43 +3,63 @@ import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
 import Modal from "@mui/material/Modal"
+import Stack from "@mui/material/Stack"
 
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 350,
   bgcolor: "#2D2D2D",
   boxShadow: 24,
-  p: 4
+  pt: 4,
+  pl: 4,
+  pr: 4,
+  pb: 2,
+  flexDirection: "column",
+  justifyContent: "center",
+  borderRadius: 2
 }
 
-export default function BasicModal() {
-  const [open, setOpen] = React.useState(false)
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
+export const MintModal = ({ mintfunction }) => {
+  const [open, setOpen] = React.useState(true)
+  // const handleOpen = () => setOpen(true)
+  // const handleClose = () => setOpen(false)
 
   return (
     <>
       <Modal
         open={open}
-        onClose={handleClose}
+        // sx={{borderRadius: 20}}
+        // onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box display="flex" justifyContent="center" sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+        <Box display="flex" sx={style}>
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            color="white"
+            style={{ textAlign: "center" }}
+          >
             Congratulations!
           </Typography>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            color="white"
+            style={{ textAlign: "center" }}
+          >
             Do you want to Mint?
           </Typography>
           <Stack
             direction="row"
-            justifyContent="center"
-            alignItems="space-between"
-            sx={{ width: "70%" }}
+            justifyContent="space-between"
+            alignItems="center"
+            sx={{ mt: 2 }}
           >
             <Button
               sx={{
@@ -55,6 +75,9 @@ export default function BasicModal() {
                   color: "#FFFFFF"
                 }
               }}
+              onClick={() => {
+                setOpen(false)
+              }}
             >
               Skip
             </Button>
@@ -69,9 +92,11 @@ export default function BasicModal() {
                 background:
                   "linear-gradient(90deg, #B8CBB8 0%, #B8CBB8 0%, #B465DA 0%, #CF6CC9 33%, #EE609C 66%, #EE609C 100%)",
                 ":hover": {
-                  color: "black"
+                  background: "black",
+                  color: "#FFFFFF"
                 }
               }}
+              onClick={mintfunction}
             >
               Yes
             </Button>

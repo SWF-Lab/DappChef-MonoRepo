@@ -10,6 +10,7 @@ import Textarea from "@mui/joy/Textarea"
 import TextareaAutosize from "@mui/base/TextareaAutosize"
 import Button from "@mui/material/Button"
 import Grid from "@mui/material/Grid"
+import { MintModal } from "./Modal.tsx"
 
 export const JudgeInterface = (judgeObject: any) => {
   const problemInfo = judgeObject.problemsInfo
@@ -351,7 +352,7 @@ export const JudgeInterface = (judgeObject: any) => {
           style={{
             color: "white",
             backgroundColor: "#1C1B29",
-            border: "5px solid white",
+            border: "3px solid white",
             borderRadius: "15px",
             width: "83%",
             height: "20vh",
@@ -382,13 +383,16 @@ export const JudgeInterface = (judgeObject: any) => {
           {judging ? "Judging..." : "Judge"}
         </Button>
         {accepted && (
-          <button
-            className="resource flex"
-            onClick={handleMint}
-            disabled={minting}
-          >
-            {minting ? "Minting..." : "Mint"}
-          </button>
+          <>
+            {/* <button
+              className="resource flex"
+              onClick={handleMint}
+              disabled={minting}
+            >
+              {minting ? "Minting..." : "Mint"}
+            </button> */}
+            <MintModal mintfunction={handleMint} />
+          </>
         )}
       </Grid>
     </>

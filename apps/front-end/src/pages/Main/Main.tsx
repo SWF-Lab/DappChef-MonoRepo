@@ -9,19 +9,21 @@ import { useHook } from "../useHooks"
 import { TotalMarquee } from "../../components/Murquee"
 import { Footer } from "../../components/Footer"
 import Grid from "@mui/material/Grid"
-import Button from "@mui/material/Button"
+import styled from "styled-components"
 import Box from "@material-ui/core/Box"
 import ReactPlayer from "react-player"
 import BeforeLoginVideo from "../../components/Img/DappChef_v3_BeforeLogin.mp4"
 import LoginVideo from "../../components/Img/DappChef_v3_login.mp4"
 import start from "../../components/Img/Start.png"
 import { makeStyles } from "@material-ui/core/styles"
+import Ads from "../../components/Ads.tsx"
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     height: "100vh",
     position: "relative",
+
     "& video": {
       objectFit: "cover"
     }
@@ -44,11 +46,21 @@ export const Main = () => {
   const imageStyle = {
     cursor: "pointer"
   }
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 1000,
+    autoplaySpeed: 1000,
+    cssEase: "linear"
+  }
 
   return (
     <>
       <ResponsiveAppBar />
-      <main style={{ background: "#0F0B18", height: "100%" }}>
+      <main style={{ background: "#0F0B18", height: "100%", overflow: "auto" }}>
         {/* <Container> */}
         {account ? (
           <section className={classes.root}>
@@ -69,7 +81,15 @@ export const Main = () => {
                 alignItems="flex-end"
                 sx={{ pb: 5 }}
               >
-                <img src={start} width={"21%"} style={imageStyle} alt="start" />
+                <img
+                  src={start}
+                  width={"21%"}
+                  style={imageStyle}
+                  alt="start"
+                  onClick={() => {
+                    window.scrollTo({ top: 875, behavior: "smooth" })
+                  }}
+                />
               </Box>
             </div>
           </section>
@@ -91,12 +111,23 @@ export const Main = () => {
                 alignItems="flex-end"
                 sx={{ px: 11, pb: 5 }}
               >
-                <img src={start} width={"23%"} style={imageStyle} alt="start" />
+                <img
+                  src={start}
+                  width={"23%"}
+                  style={imageStyle}
+                  alt="start"
+                  onClick={() => {
+                    window.scrollTo({ top: 875, behavior: "smooth" })
+                  }}
+                />
               </Box>
             </div>
           </section>
         )}
         {/* </Container> */}
+        <Grid sx={{ mt: 2 }}>
+          <Ads />
+        </Grid>
         <Container>
           <Grid sx={{ py: 15 }}>
             <ProblemList />

@@ -26,17 +26,17 @@ const EditorContainer = styled.div`
   height: 100%;
   width: 100%;
   padding-right: 10px;
-  border-left: 5px solid white;
-  border-right: 5px solid white;
+  border-left: 3px solid white;
+  border-right: 3px solid white;
   // border-radius: 15px;
 `
 const EditorTop = styled.div`
   height: 12px;
   width: 100%;
   background-color: #282c34;
-  border-top: 5px solid white;
-  border-right: 5px solid white;
-  border-left: 5px solid white;
+  border-top: 3px solid white;
+  border-right: 3px solid white;
+  border-left: 3px solid white;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   display: flex;
@@ -47,9 +47,9 @@ const EditorBottom = styled.div`
   height: 12px;
   width: 100%;
   background-color: #282c34;
-  border-bottom: 5px solid white;
-  border-right: 5px solid white;
-  border-left: 5px solid white;
+  border-bottom: 3px solid white;
+  border-right: 3px solid white;
+  border-left: 3px solid white;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   display: flex;
@@ -260,7 +260,7 @@ export const CodeEditor = ({
           style={{
             color: "white",
             backgroundColor: "#1C1B29",
-            border: "5px solid white",
+            border: "3px solid white",
             borderRadius: "15px",
             width: "83%",
             height: "15vh",

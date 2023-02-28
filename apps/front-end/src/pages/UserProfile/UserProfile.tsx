@@ -16,13 +16,12 @@ import { makeStyles } from "@material-ui/core/styles"
 import TableRow, { tableRowClasses } from "@mui/material/TableRow"
 import Table from "@mui/material/Table"
 import TableBody from "@mui/material/TableBody"
-// import Grid from "@mui/material/Grid"
 import { styled } from "@mui/material/styles"
-// import Typography from "@mui/material/Typography"
 import TableCell, { tableCellClasses } from "@mui/material/TableCell"
 import TableContainer from "@mui/material/TableContainer"
 import star from "../../components/Img/DappChef-Asset-star.png"
 import Button from "@mui/material/Button"
+import lock from "../../components/Img/DappChef-Asset-lock-2.png"
 
 const useStyles = makeStyles({
   root: {
@@ -33,15 +32,34 @@ const useStyles = makeStyles({
     "& td:last-child": {
       borderTopRightRadius: "10px",
       borderBottomRightRadius: "10px"
-    }
+    },
+    position: "relative"
+    // backgroundColor: "rgba(0, 0, 0, .5)"
   },
   table: {
     minWidth: "22%",
     borderCollapse: "separate",
-    borderSpacing: "0px 10px",
+    borderSpacing: "0px 3px",
     "& .MuiTableCell-body": {
       padding: "2px"
     }
+  },
+  overlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(255, 255, 0, 0.012)",
+    zIndex: 2000
+  },
+  overlaycontent: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    zIndex: 2000
   }
 })
 
@@ -54,11 +72,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
   "& th": {
     fontSize: { lg: "24px", sm: "16px" }
-  },
-  "&.MuiTableRow-root:hover": {
-    backgroundColor: "red"
-    //  borderColor: 'yellow',
   }
+  // "&.MuiTableRow-root:hover": {
+  //   backgroundColor: "red"
+  //   //  borderColor: 'yellow',
+  // }
 }))
 
 export const UserProfile = () => {
@@ -214,8 +232,8 @@ export const UserProfile = () => {
   return (
     <>
       <ResponsiveAppBar />
-      <main style={{ background: "#0F0B18", height: "100%" }}>
-        <Grid sx={{ py: 5, height: "100%" }} maxWidth="xl">
+      <main style={{ background: "#0F0B18", height: "100%", overflow: "auto" }}>
+        <Grid sx={{ py: 5, height: "100%" }} container maxWidth="xl">
           <Grid
             m={0}
             container
@@ -231,7 +249,7 @@ export const UserProfile = () => {
                 width: "25%",
                 height: "77vh",
                 borderRadius: "20px",
-                border: "5px solid white"
+                border: "3px solid white"
               }}
             >
               <Typography
@@ -239,7 +257,7 @@ export const UserProfile = () => {
                 align="center"
                 color="white"
                 component="p"
-                sx={{ typography: { lg: "h4", sm: "body1" } }}
+                sx={{ typography: { lg: "h4", sm: "caption", sx: "caption" } }}
               >
                 Badges
               </Typography>
@@ -311,7 +329,7 @@ export const UserProfile = () => {
                 width: "25%",
                 height: "77vh",
                 borderRadius: "20px",
-                border: "5px solid white"
+                border: "3px solid white"
               }}
             >
               <Typography
@@ -319,14 +337,14 @@ export const UserProfile = () => {
                 align="center"
                 color="white"
                 component="p"
-                sx={{ typography: { lg: "h4", sm: "body1" } }}
+                sx={{ typography: { lg: "h4", sm: "caption" } }}
               >
                 Solved Problem
               </Typography>
               <Grid
                 container
                 direction="row"
-                justifyContent="center"
+                justifyContent="space-evenly"
                 alignItems="center"
                 sx={{
                   pl: 3,
@@ -369,24 +387,38 @@ export const UserProfile = () => {
                           return (
                             <>
                               <StyledTableRow
-                                hover
                                 tabIndex={-1}
-                                key={row}
                                 className={classes.root}
-                                sx={{ m: 5 }}
+                                sx={{
+                                  m: 5,
+                                  "&.MuiTableRow-root:hover": {
+                                    backgroundColor: row.solved ? "red" : null
+                                  }
+                                }}
                               >
                                 <TableCell
                                   key={row.id}
-                                  // width="5vw"
                                   align="center"
                                   sx={{
                                     mr: 2,
                                     borderBottom: "none",
                                     color: "white",
                                     justifyContent: "center",
-                                    fontSize: { lg: "18px", sm: "12px" }
+                                    fontSize: { lg: "18px", md: "12px" }
                                   }}
                                 >
+                                  {row.solved === false && (
+                                    <div className={classes.overlay}>
+                                      <div className={classes.overlaycontent}>
+                                        <img
+                                          src={lock}
+                                          alt="lock"
+                                          width={25}
+                                          height={25}
+                                        />
+                                      </div>
+                                    </div>
+                                  )}
                                   No. {row.problemNumber}
                                 </TableCell>
                                 <TableCell
@@ -395,7 +427,7 @@ export const UserProfile = () => {
                                   sx={{
                                     borderBottom: "none",
                                     color: "white",
-                                    fontSize: { lg: "18px", sm: "12px" }
+                                    fontSize: { lg: "14px", sm: "10px" }
                                   }}
                                 >
                                   <Button
@@ -407,7 +439,7 @@ export const UserProfile = () => {
                                       width: "7vw",
                                       height: "4vh",
                                       textTransform: "none",
-                                      fontSize: { lg: "18px", sm: "12px" },
+                                      fontSize: { lg: "15px", md: "12px" },
                                       borderRadius: "20px",
                                       // Type A
                                       background:
@@ -464,6 +496,7 @@ export const UserProfile = () => {
                                     {row.class}
                                   </Button>
                                 </TableCell>
+
                                 <TableCell
                                   key={row.id}
                                   width="5vw"
@@ -489,32 +522,6 @@ export const UserProfile = () => {
                                   </Stack>
                                 </TableCell>
                               </StyledTableRow>
-                              <div
-                                style={{
-                                  position: "relative",
-                                  top: "-50%",
-                                  left: 0
-                                }}
-                              >
-                                <div
-                                  style={{
-                                    position: "absolute",
-                                    top: "50%",
-                                    left: "50%",
-                                    transform: "translate(-50%, -50%)"
-                                  }}
-                                ></div>
-                                <div
-                                  style={{
-                                    position: "absolute",
-                                    top: 0,
-                                    left: 0,
-                                    right: 0,
-                                    bottom: 0,
-                                    backgroundColor: "rgba(0, 0, 0, 0.3)"
-                                  }}
-                                />
-                              </div>
                             </>
                           )
                         })}
@@ -532,7 +539,7 @@ export const UserProfile = () => {
                 width: "25%",
                 height: "77vh",
                 borderRadius: "20px",
-                border: "5px solid white"
+                border: "3px solid white"
               }}
             >
               <Typography
@@ -540,7 +547,7 @@ export const UserProfile = () => {
                 align="center"
                 color="white"
                 component="p"
-                sx={{ typography: { lg: "h4", sm: "body1" } }}
+                sx={{ typography: { lg: "h4", sm: "caption" } }}
               >
                 User Info
               </Typography>

@@ -187,7 +187,10 @@ export const ProblemList = () => {
 
   return (
     <>
-      <Container style={{ flexDirection: "column" }}>
+      <Container
+        style={{ flexDirection: "column", height: "100%", overflow: "auto" }}
+        maxWidth="xl"
+      >
         <Stack
           direction="row"
           justifyContent="center"
@@ -219,6 +222,7 @@ export const ProblemList = () => {
             // width: "95%",
             overflow: "hidden",
             backgroundColor: "#1C1B29"
+            // overflow: "hidden"
           }}
         >
           <Grid
@@ -256,7 +260,7 @@ export const ProblemList = () => {
                         borderBottom: "5px solid white"
                       }}
                     >
-                      <Button
+                      {/* <Button
                         aria-controls={open ? "basic-menu" : undefined}
                         aria-haspopup="true"
                         aria-expanded={open ? "true" : undefined}
@@ -264,20 +268,8 @@ export const ProblemList = () => {
                         endIcon={<KeyboardArrowDownIcon />}
                       >
                         Tag
-                      </Button>
-                      <Menu
-                        id="basic-menu"
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
-                        MenuListProps={{
-                          "aria-labelledby": "basic-button"
-                        }}
-                      >
-                        <MenuItem onClick={handleClose}>Profile</MenuItem>
-                        <MenuItem onClick={handleClose}>My account</MenuItem>
-                        <MenuItem onClick={handleClose}>Logout</MenuItem>
-                      </Menu>
+                      </Button> */}
+                      Tag
                     </TableCell>
                     <TableCell
                       key="tag"
@@ -301,7 +293,7 @@ export const ProblemList = () => {
                         borderBottom: "5px solid white"
                       }}
                     >
-                      <Button
+                      {/* <Button
                         aria-controls={open ? "basic-menu" : undefined}
                         aria-haspopup="true"
                         aria-expanded={open ? "true" : undefined}
@@ -309,20 +301,8 @@ export const ProblemList = () => {
                         endIcon={<KeyboardArrowDownIcon />}
                       >
                         Difficulty
-                      </Button>
-                      <Menu
-                        // id="basic-menu"
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
-                        MenuListProps={{
-                          "aria-labelledby": "basic-button"
-                        }}
-                      >
-                        <MenuItem onClick={handleClose}>Level 1</MenuItem>
-                        <MenuItem onClick={handleClose}>Level 2</MenuItem>
-                        <MenuItem onClick={handleClose}>Level 3</MenuItem>
-                      </Menu>
+                      </Button> */}
+                      Difficulty
                     </TableCell>
                     <TableCell
                       key="status"
@@ -531,7 +511,9 @@ export const ProblemList = () => {
               }}
               defaultPage={1}
               page={page}
-              size="large"
+              size="medium"
+              // { {lg: "large", sm: "small"} }
+
               // varient="'outlined'"
               onChange={handleChange}
             />

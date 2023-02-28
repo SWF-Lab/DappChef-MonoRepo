@@ -82,7 +82,7 @@ export const MemberInfo = () => {
       <main style={{ background: "#0F0B18", height: "100%" }}>
         {/* Hero unit */}
         <Container
-          sx={{ pt: 1, px: 2, height: "100%" }}
+          sx={{ pt: 1, px: 2, height: "100%", overflow: "auto" }}
           maxWidth="xl"
           disableGutters
         >
@@ -99,7 +99,7 @@ export const MemberInfo = () => {
                 px: 4,
                 width: "95%",
                 borderRadius: "20px",
-                border: "5px solid white"
+                border: "3px solid white"
               }}
             >
               <Stack
@@ -229,7 +229,7 @@ export const MemberInfo = () => {
                   height: "29vh",
                   maxWidth: 345,
                   borderRadius: "20px",
-                  border: "5px solid white"
+                  border: "3px solid white"
                 }}
                 onClick={() => {
                   window.open(card.link)
@@ -256,7 +256,7 @@ export const MemberInfo = () => {
                       }}
                       style={Style}
                       component="img"
-                      image="https://yt3.googleusercontent.com/ytc/AL5GRJVcbQPZqImGvAtqEnJQXQflyc1TJIVfQvuNbPZ0=s900-c-k-c0x00ffffff-no-rj"
+                      image="https://thumbor.4gamers.com.tw/M2uWlienrNyWxunZA_qeLDWcTN4=/adaptive-fit-in/1200x1200/filters:no_upscale():extract_cover():format(jpeg):quality(85)/https%3A%2F%2Fugc-media.4gamers.com.tw%2Fpuku-prod-zh%2Fanonymous-story%2F67db9224-8f8f-43ff-a18a-0f52a01d514a.jpg"
                       alt="green iguana"
                     />
                     <CardContent sx={{ px: 1, pt: 0.5, pb: 0 }}>

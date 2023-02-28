@@ -13,6 +13,7 @@ import { Footer } from "../../components/Footer"
 import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
 import Stack from "@mui/material/Stack"
+import Ads from "../../components/Ads.tsx"
 import star from "../../components/Img/DappChef-Asset-star.png"
 
 export const ProblemsInterface = () => {
@@ -108,7 +109,7 @@ export const ProblemsInterface = () => {
                         m: 1,
                         width: "100%",
                         borderRadius: "15px",
-                        border: "5px solid white"
+                        border: "3px solid white"
                       }}
                     >
                       <Grid
@@ -286,7 +287,7 @@ export const ProblemsInterface = () => {
                         mb: 2,
                         width: "100%",
                         borderRadius: "15px",
-                        border: "5px solid white"
+                        border: "3px solid white"
                       }}
                     >
                       <Typography
@@ -296,7 +297,7 @@ export const ProblemsInterface = () => {
                         component="p"
                         sx={{ typography: { lg: "h4", sm: "body1" } }}
                       >
-                        Ads
+                        <Ads />
                       </Typography>
                     </Paper>
                     <CodeEditor {...{ code, problemsInfo }} />
