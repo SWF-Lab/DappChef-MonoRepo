@@ -289,40 +289,50 @@ export const JudgeInterface = (judgeObject: any) => {
     return true
   }
 
+  /* ALU 替代的 */
   const handleMint = async () => {
     setMinting(true)
     await sleep(5000)
-    const result = await api.getResponse(
-      requestParams.problemSolverAddr,
-      requestParams.problemNumber,
-      requestParams.problemSolvedTimestamp,
-      requestParams.difficulty,
-      requestParams.class
-    )
-    console.log(result)
-
-    /** ---------------------------------------------------------------------------
-     * Setting up the basic ethers object
-     * --------------------------------------------------------------------------- */
-
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
-    await provider
-      .send("wallet_switchEthereumChain", [{ chainId: "0x5" }])
-      .catch((e) => console.log(e))
-    const wallet = provider.getSigner()
-
-    const RewardContract = new ethers.Contract(
-      process.env.REWARD_CONTRACT_ADDR as string,
-      REWARD_ABI,
-      wallet
-    )
-
-    await RewardContract.mint()
-
     setAccepted(false)
     setMinting(false)
-    // navigate("/")
+    navigate("/")
   }
+  /* ALU 原本寫的 */
+
+  // const handleMint = async () => {
+  //   setMinting(true)
+  //   await sleep(5000)
+  //   const result = await api.getResponse(
+  //     requestParams.problemSolverAddr,
+  //     requestParams.problemNumber,
+  //     requestParams.problemSolvedTimestamp,
+  //     requestParams.difficulty,
+  //     requestParams.class
+  //   )
+  //   console.log(result)
+
+  //   /** ---------------------------------------------------------------------------
+  //    * Setting up the basic ethers object
+  //    * --------------------------------------------------------------------------- */
+
+  //   const provider = new ethers.providers.Web3Provider(window.ethereum)
+  //   await provider
+  //     .send("wallet_switchEthereumChain", [{ chainId: "0x5" }])
+  //     .catch((e) => console.log(e))
+  //   const wallet = provider.getSigner()
+
+  //   const RewardContract = new ethers.Contract(
+  //     process.env.REWARD_CONTRACT_ADDR as string,
+  //     REWARD_ABI,
+  //     wallet
+  //   )
+
+  //   await RewardContract.mint()
+
+  //   setAccepted(false)
+  //   setMinting(false)
+  //   // navigate("/")
+  // }
 
   const sleep = (milliseconds: number) => {
     return new Promise((resolve) => setTimeout(resolve, milliseconds))

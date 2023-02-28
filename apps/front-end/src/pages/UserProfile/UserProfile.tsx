@@ -21,7 +21,7 @@ import { styled } from "@mui/material/styles"
 // import Typography from "@mui/material/Typography"
 import TableCell, { tableCellClasses } from "@mui/material/TableCell"
 import TableContainer from "@mui/material/TableContainer"
-import TableHead from "@mui/material/TableHead"
+import star from "../../components/Img/DappChef-Asset-star.png"
 import Button from "@mui/material/Button"
 
 const useStyles = makeStyles({
@@ -40,7 +40,7 @@ const useStyles = makeStyles({
     borderCollapse: "separate",
     borderSpacing: "0px 10px",
     "& .MuiTableCell-body": {
-      padding: "3px 16px"
+      padding: "2px"
     }
   }
 })
@@ -56,18 +56,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     fontSize: { lg: "24px", sm: "16px" }
   },
   "&.MuiTableRow-root:hover": {
-    backgroundColor: "red",
+    backgroundColor: "red"
     //  borderColor: 'yellow',
-    borderBottom: "5px solid white",
-    borderBottomWidth: "5px",
-    borderBottomStyle: "solid",
-    borderBottomColor: "white"
-  },
-  "&:hover": {
-    borderBottom: "5px solid white",
-    borderBottomWidth: "5px",
-    borderBottomStyle: "solid",
-    borderBottomColor: "white"
   }
 }))
 
@@ -340,7 +330,6 @@ export const UserProfile = () => {
                 alignItems="center"
                 sx={{
                   pl: 3,
-
                   mt: 4,
                   height: "60vh",
                   overflow: "auto",
@@ -358,75 +347,181 @@ export const UserProfile = () => {
                 }}
                 spacing={2}
               >
-                <TableContainer>
-                  <Table
-                    stickyHeader
-                    aria-label="sticky table"
-                    className={classes.table}
+                {loading ? (
+                  <Typography
+                    variant="h6"
+                    align="center"
+                    color="white"
+                    component="p"
                   >
-                    <TableBody>
-                      {problemList.map((row) => {
-                        return (
-                          <StyledTableRow
-                            hover
-                            tabIndex={-1}
-                            key={row}
-                            className={classes.root}
-                          >
-                            <TableCell
-                              key={row.id}
-                              // width="5vw"
-                              align="center"
-                              sx={{
-                                borderBottom: "none",
-                                color: "white",
-                                justifyContent: "center",
-                                fontSize: { lg: "18px", sm: "12px" }
-                              }}
-                            >
-                              No. {row.problemNumber}
-                            </TableCell>
-                            <TableCell
-                              key={row.id}
-                              sx={{
-                                borderBottom: "none",
-                                color: "white",
-                                fontSize: { lg: "18px", sm: "12px" }
-                              }}
-                            >
-                              <Button
-                                //  disabled
-                                sx={{
-                                  color: "white",
-                                  width: "8vw",
-                                  height: "4vh",
-                                  fontSize: { lg: "16px", sm: "12px" },
-                                  borderRadius: "20px",
-                                  cursor: "auto",
-                                  background:
-                                    "linear-gradient(90deg, #43E97B 0%, #38F9D7 100%)"
+                    Loading...
+                  </Typography>
+                ) : (
+                  <TableContainer>
+                    <Table
+                      stickyHeader
+                      aria-label="sticky table"
+                      className={classes.table}
+                    >
+                      <TableBody>
+                        {problemList.map((row) => {
+                          console.log(row)
+                          return (
+                            <>
+                              <StyledTableRow
+                                hover
+                                tabIndex={-1}
+                                key={row}
+                                className={classes.root}
+                                sx={{ m: 5 }}
+                              >
+                                <TableCell
+                                  key={row.id}
+                                  // width="5vw"
+                                  align="center"
+                                  sx={{
+                                    mr: 2,
+                                    borderBottom: "none",
+                                    color: "white",
+                                    justifyContent: "center",
+                                    fontSize: { lg: "18px", sm: "12px" }
+                                  }}
+                                >
+                                  No. {row.problemNumber}
+                                </TableCell>
+                                <TableCell
+                                  key={row.id}
+                                  align="center"
+                                  sx={{
+                                    borderBottom: "none",
+                                    color: "white",
+                                    fontSize: { lg: "18px", sm: "12px" }
+                                  }}
+                                >
+                                  <Button
+                                    sx={{
+                                      "&:hover": {
+                                        cursor: "default"
+                                      },
+                                      color: "white",
+                                      width: "7vw",
+                                      height: "4vh",
+                                      textTransform: "none",
+                                      fontSize: { lg: "18px", sm: "12px" },
+                                      borderRadius: "20px",
+                                      // Type A
+                                      background:
+                                        "linear-gradient(90deg, #43E97B 0%, #38F9D7 100%)",
+                                      // Type B
+                                      ...(row.class === "Token" && {
+                                        background:
+                                          "linear-gradient(90deg, #F78CA0 0%, #F9748F 19%, #FD868C 60%)"
+                                      }),
+                                      // Type C
+                                      ...(row.class === "DeFi" && {
+                                        background:
+                                          "linear-gradient(90deg, #3B41C5 0%, #988DC4 100%)"
+                                      }),
+                                      // Type D
+                                      ...(row.class === "Design_Pattern" && {
+                                        background:
+                                          "linear-gradient(90deg, #A3BDED 0%, #6991C7 100%)"
+                                      }),
+                                      // Type E
+                                      ...(row.class === "Company" && {
+                                        background:
+                                          "linear-gradient(90deg, #FF5858 0%, #F09819 100%)"
+                                      }),
+                                      // Type F
+                                      ...(row.class === "DSA" && {
+                                        background:
+                                          "linear-gradient(90deg, #4481EB 0%, #04BEFE 100%)"
+                                      }),
+                                      // Type G
+                                      ...(row.class === "Gas_Optim" && {
+                                        background:
+                                          "linear-gradient(90deg, #F093FB 0%, #F5576C 100%)"
+                                      }),
+                                      ...(row.class === "Cryptgraphy" && {
+                                        background:
+                                          "linear-gradient(90deg, #F9D423 24.48%, #EB8B8C 100%)"
+                                      }),
+                                      // Type H
+                                      ...(row.class === "EVM" && {
+                                        background:
+                                          "linear-gradient(90deg, #8CB72B 0%, #96E6A1 100%)"
+                                      }),
+                                      // Type H
+                                      ...(row.class === "Scalability" && {
+                                        background:
+                                          "linear-gradient(90deg, #3179A4 0%, #80D0C7 100%)"
+                                      }),
+                                      ...(row.class === "undefined" && {
+                                        background: "red"
+                                      })
+                                    }}
+                                  >
+                                    {row.class}
+                                  </Button>
+                                </TableCell>
+                                <TableCell
+                                  key={row.id}
+                                  width="5vw"
+                                  align="center"
+                                  sx={{
+                                    borderBottom: "none",
+                                    color: "white",
+                                    p: 0
+                                  }}
+                                >
+                                  <Stack
+                                    direction="row"
+                                    justifyContent="center"
+                                    alignItems="center"
+                                  >
+                                    <img
+                                      src={star}
+                                      alt="star"
+                                      width={25}
+                                      height={25}
+                                    />
+                                    {row.difficulty}
+                                  </Stack>
+                                </TableCell>
+                              </StyledTableRow>
+                              <div
+                                style={{
+                                  position: "relative",
+                                  top: "-50%",
+                                  left: 0
                                 }}
                               >
-                                Type A
-                              </Button>
-                            </TableCell>
-                            <TableCell
-                              key={row.id}
-                              width="5vw"
-                              // align={column.align}
-                              sx={{
-                                borderBottom: "none",
-                                color: "white"
-                              }}
-                            >
-                              {"star"}
-                            </TableCell>
-                          </StyledTableRow>
-                        )
-                      })}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
+                                <div
+                                  style={{
+                                    position: "absolute",
+                                    top: "50%",
+                                    left: "50%",
+                                    transform: "translate(-50%, -50%)"
+                                  }}
+                                ></div>
+                                <div
+                                  style={{
+                                    position: "absolute",
+                                    top: 0,
+                                    left: 0,
+                                    right: 0,
+                                    bottom: 0,
+                                    backgroundColor: "rgba(0, 0, 0, 0.3)"
+                                  }}
+                                />
+                              </div>
+                            </>
+                          )
+                        })}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                )}
               </Grid>
             </Paper>
             <Paper

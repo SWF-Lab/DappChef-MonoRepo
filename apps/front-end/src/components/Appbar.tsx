@@ -14,7 +14,8 @@ import Stack from "@mui/material/Stack"
 import logo from "./Img/logo transparent_white.png"
 // import { Theme, makeStyles } from "@material-ui/core/styles";
 import { useHook } from "../pages/useHooks"
-const settings = ["LightingMode", "Logout"]
+// const settings = ["LightingMode", "Logout"]
+const settings = ["Logout"]
 
 export const ResponsiveAppBar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
@@ -41,10 +42,7 @@ export const ResponsiveAppBar = () => {
           <Stack
             spacing={1}
             sx={{
-              p: 2,
-              ":hover": {
-                cursor: { cursorPointer: "pointer", bgcolor: "#0000ff" }
-              }
+              p: 2
             }}
             onClick={toMain}
           >
@@ -86,6 +84,8 @@ export const ResponsiveAppBar = () => {
                 background: "#0F0B18"
               }
             }}
+            target="_blank"
+            href="https://chihaolu.gitbook.io/dappchef/frequently-infomation/faq"
           >
             FAQ
           </Button>
@@ -180,6 +180,8 @@ export const ResponsiveAppBar = () => {
                   background: "#0F0B18"
                 }
               }}
+              target="_blank"
+              href="https://etherscan.io/address/0x189c92f28047c979ca2d17c13e3a12963eb1b8b4"
             >
               CheerUsUp
             </Button>

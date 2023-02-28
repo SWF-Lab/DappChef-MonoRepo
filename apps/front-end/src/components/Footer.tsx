@@ -31,6 +31,8 @@ export const Footer = () => {
               color: "black"
             }
           }}
+          target="_blank"
+          href="https://swflab-official.web.app/"
         >
           SWFLab
         </Button>
@@ -63,6 +65,8 @@ export const Footer = () => {
                 color: "black"
               }
             }}
+            target="_blank"
+            href="https://github.com/SWF-Lab/DappChef"
           >
             Github
           </Button>
@@ -80,6 +84,7 @@ export const Footer = () => {
                 color: "black"
               }
             }}
+            // target="_blank" href="https://hackmd.io/AzWycmkkT3Wn7ZkPtVQyQg"
           >
             OpenSea
           </Button>
@@ -96,6 +101,8 @@ export const Footer = () => {
                 color: "black"
               }
             }}
+            target="_blank"
+            href="https://twitter.com/DappChef"
           >
             Twitter
           </Button>
