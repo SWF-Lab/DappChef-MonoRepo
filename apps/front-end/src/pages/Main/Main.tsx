@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export const Main = () => {
+  
   const { account } = useHook()
   const classes = useStyles()
   const imageStyle = {
