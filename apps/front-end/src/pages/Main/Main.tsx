@@ -21,8 +21,9 @@ import Ads from "../../components/Ads.tsx"
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    height: "100vh",
+    height: "100%",
     position: "relative",
+    background: "#0F0B18",
 
     "& video": {
       objectFit: "cover"
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
     left: 0,
     width: "100%",
     height: "100%"
+    // backgroundColor:","
   },
   title: {
     paddingBottom: theme.spacing(4)
@@ -69,8 +71,8 @@ export const Main = () => {
               playing
               loop
               muted
-              width="100%"
-              height="100%"
+              width="100vw"
+              height="150vh"
             />
             <div className={classes.overlay}>
               <Box
@@ -79,7 +81,7 @@ export const Main = () => {
                 flexDirection="row"
                 justifyContent="center"
                 alignItems="flex-end"
-                sx={{ pb: 5 }}
+                sx={{ pb: 15 }}
               >
                 <img
                   src={start}
@@ -99,8 +101,10 @@ export const Main = () => {
               url={BeforeLoginVideo}
               playing
               muted
-              width="100%"
-              height="100%"
+              width="100vw"
+              height="100vh"
+              // width="100%"
+              // height="100%"
             />
             <div className={classes.overlay}>
               <Box
@@ -109,7 +113,7 @@ export const Main = () => {
                 flexDirection="row"
                 justifyContent="flex-end"
                 alignItems="flex-end"
-                sx={{ px: 11, pb: 5 }}
+                sx={{ px: 20, pb: 15 }}
               >
                 <img
                   src={start}
@@ -125,16 +129,17 @@ export const Main = () => {
           </section>
         )}
         {/* </Container> */}
-        <Grid sx={{ mt: 2 }}>
+        <Grid sx={{ mt: 2, mb: 7 }}>
           <Ads />
         </Grid>
         <Container>
-          <Grid sx={{ py: 15 }}>
+          <Grid>
             <ProblemList />
           </Grid>
         </Container>
-
-        <TotalMarquee />
+        <Grid direction="column" justifyContent="center" alignItems="center">
+          <TotalMarquee />
+        </Grid>
       </main>
       <Footer />
     </>

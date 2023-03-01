@@ -52,12 +52,18 @@ const useStyles = makeStyles({
     bottom: 0,
     width: "100%",
     height: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: "rgba(255, 255, 0, 0.012)",
     zIndex: 2000
   },
   overlaycontent: {
     width: "100%",
     height: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     zIndex: 2000
   }
@@ -73,10 +79,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "& th": {
     fontSize: { lg: "24px", sm: "16px" }
   }
-  // "&.MuiTableRow-root:hover": {
-  //   backgroundColor: "red"
-  //   //  borderColor: 'yellow',
-  // }
 }))
 
 export const UserProfile = () => {
@@ -242,7 +244,7 @@ export const UserProfile = () => {
             alignItems="flex-start"
           >
             <Paper
-              style={{ backgroundColor: "black" }}
+              style={{ backgroundColor: "#0F0B18" }}
               sx={{
                 py: 2,
 
@@ -322,7 +324,7 @@ export const UserProfile = () => {
               </Grid>
             </Paper>
             <Paper
-              style={{ backgroundColor: "black" }}
+              style={{ backgroundColor: "#0F0B18" }}
               sx={{
                 py: 2,
 
@@ -392,13 +394,16 @@ export const UserProfile = () => {
                                 sx={{
                                   m: 5,
                                   "&.MuiTableRow-root:hover": {
-                                    backgroundColor: row.solved ? "red" : null
+                                    backgroundColor: row.solved
+                                      ? "#0F0B18"
+                                      : null
                                   }
                                 }}
                               >
                                 <TableCell
                                   key={row.id}
                                   align="center"
+                                  style={{ width: "10%" }}
                                   sx={{
                                     mr: 2,
                                     borderBottom: "none",
@@ -424,6 +429,7 @@ export const UserProfile = () => {
                                 <TableCell
                                   key={row.id}
                                   align="center"
+                                  style={{ width: "10%" }}
                                   sx={{
                                     borderBottom: "none",
                                     color: "white",
@@ -499,7 +505,8 @@ export const UserProfile = () => {
 
                                 <TableCell
                                   key={row.id}
-                                  width="5vw"
+                                  // width="5vw"
+                                  style={{ width: "10%" }}
                                   align="center"
                                   sx={{
                                     borderBottom: "none",
@@ -532,7 +539,7 @@ export const UserProfile = () => {
               </Grid>
             </Paper>
             <Paper
-              style={{ backgroundColor: "black" }}
+              style={{ backgroundColor: "#0F0B18" }}
               sx={{
                 py: 2,
                 px: 4,

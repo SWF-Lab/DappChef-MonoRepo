@@ -61,7 +61,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     fontSize: { lg: "24px", sm: "16px" }
   },
   "&.MuiTableRow-root:hover": {
-    backgroundColor: "red"
+    // backgroundColor: "red"
   }
 }))
 

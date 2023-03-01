@@ -57,7 +57,7 @@ const cards = [
     link: "https://www.linkedin.com/in/%E5%AE%87%E7%A5%A5-%E9%83%AD-268371205/"
   },
   {
-    name: "theywh",
+    name: "theyhw",
     title: "Restaurant Manager",
     link: "https://www.linkedin.com/in/theyhw//"
   },
@@ -152,10 +152,11 @@ export const MemberInfo = () => {
                       component="p"
                       sx={{ typography: { lg: "subtitle1", sm: "caption" } }}
                     >
-                      We’re researching Web3 by researching everthing about
+                      We are researching Web3 by researching everthing about
                       Blockchain and developing DApp on Ethereum. Check out
                       Medium Publication to follow the latest posts, or Official
-                      Website to overview the fantastic projects we done before.
+                      Website to overview the fantastic projects we have done
+                      before.
                     </Typography>
                     <Typography
                       variant="subtitle1"

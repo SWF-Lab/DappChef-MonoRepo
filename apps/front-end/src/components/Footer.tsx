@@ -2,14 +2,15 @@ import Typography from "@mui/material/Typography"
 import Container from "@mui/material/Container"
 import Button from "@mui/material/Button"
 import Stack from "@mui/material/Stack"
+import { Dimensions } from "react-native"
 // import { Theme, makeStyles } from "@material-ui/core/styles";
 
 export const Footer = () => {
   return (
     <Container
-      maxWidth="xl"
+      maxWidth={false}
       sx={{ p: 2, background: "#dcdcdc", height: "100%", overflow: "auto" }}
-      component="footer"
+      // component="footer"
     >
       <Stack
         direction="row"
