@@ -21,9 +21,13 @@ import TableHead from "@mui/material/TableHead"
 import Pagination from "@mui/material/Pagination"
 import TableRow, { tableRowClasses } from "@mui/material/TableRow"
 import Button from "@mui/material/Button"
+import Menu from "@mui/material/Menu"
+import MenuItem from "@mui/material/MenuItem"
 import question from "../../components/Img/question.png"
 import trytry from "../../components/Img/Try.png"
 import lock from "../../components/Img/Lock.png"
+import star from "../../components/Img/DappChef-Asset-star.png"
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
 
 const useStyles = makeStyles({
   root: {
@@ -57,34 +61,23 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     fontSize: { lg: "24px", sm: "16px" }
   },
   "&.MuiTableRow-root:hover": {
-    backgroundColor: "red",
-    //  borderColor: 'yellow',
-    borderBottom: "5px solid white",
-    borderBottomWidth: "5px",
-    borderBottomStyle: "solid",
-    borderBottomColor: "white"
-  },
-  "&:hover": {
-    borderBottom: "5px solid white",
-    borderBottomWidth: "5px",
-    borderBottomStyle: "solid",
-    borderBottomColor: "white"
+    // backgroundColor: "red"
   }
 }))
 
-const columns: readonly Column[] = [
-  { id: "tag", label: "Tag", align: "center" },
-  { id: "title", label: "Title", minWidth: 350 },
-  {
-    id: "difficulty",
-    label: "Difficulty"
-  },
-  {
-    id: "status",
-    label: "Status",
-    align: "center"
-  }
-]
+// const columns: readonly Column[] = [
+//   { id: "tag", label: "Tag ▼", align: "center" },
+//   { id: "title", label: "Title", minWidth: 350 },
+//   {
+//     id: "difficulty",
+//     label: "Difficulty ▼"
+//   },
+//   {
+//     id: "status",
+//     label: "Status",
+//     align: "center"
+//   }
+// ]
 
 /*------------------------------------------------------ */
 export const ProblemList = () => {
@@ -179,6 +172,14 @@ export const ProblemList = () => {
   /*front end */
   const [page, setPage] = React.useState(1)
   const classes = useStyles()
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value)
@@ -186,7 +187,10 @@ export const ProblemList = () => {
 
   return (
     <>
-      <Container style={{ flexDirection: "column" }}>
+      <Container
+        style={{ flexDirection: "column", height: "100%", overflow: "auto" }}
+        maxWidth="xl"
+      >
         <Stack
           direction="row"
           justifyContent="center"
@@ -218,6 +222,7 @@ export const ProblemList = () => {
             // width: "95%",
             overflow: "hidden",
             backgroundColor: "#1C1B29"
+            // overflow: "hidden"
           }}
         >
           <Grid
@@ -246,19 +251,71 @@ export const ProblemList = () => {
                       }
                     }}
                   >
-                    {columns.map((column) => (
-                      <TableCell
-                        key={column.id}
-                        align={column.align}
-                        sx={{
-                          backgroundColor: "#1C1B29",
-                          color: "white",
-                          borderBottom: "5px solid white"
-                        }}
+                    <TableCell
+                      key="tag"
+                      align="center"
+                      sx={{
+                        backgroundColor: "#1C1B29",
+                        color: "white",
+                        borderBottom: "5px solid white"
+                      }}
+                    >
+                      {/* <Button
+                        aria-controls={open ? "basic-menu" : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? "true" : undefined}
+                        onClick={handleClick}
+                        endIcon={<KeyboardArrowDownIcon />}
                       >
-                        {column.label}
-                      </TableCell>
-                    ))}
+                        Tag
+                      </Button> */}
+                      Tag
+                    </TableCell>
+                    <TableCell
+                      key="tag"
+                      align="flex-start"
+                      minWidth="350"
+                      sx={{
+                        backgroundColor: "#1C1B29",
+                        color: "white",
+                        borderBottom: "5px solid white"
+                      }}
+                    >
+                      Title
+                    </TableCell>
+
+                    <TableCell
+                      key="tag"
+                      align="center"
+                      sx={{
+                        backgroundColor: "#1C1B29",
+                        color: "white",
+                        borderBottom: "5px solid white"
+                      }}
+                    >
+                      {/* <Button
+                        aria-controls={open ? "basic-menu" : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? "true" : undefined}
+                        onClick={handleClick}
+                        endIcon={<KeyboardArrowDownIcon />}
+                      >
+                        Difficulty
+                      </Button> */}
+                      Difficulty
+                    </TableCell>
+                    <TableCell
+                      key="status"
+                      align="center"
+                      minWidth="350"
+                      sx={{
+                        backgroundColor: "#1C1B29",
+                        color: "white",
+                        borderBottom: "5px solid white"
+                      }}
+                    >
+                      Status
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -285,13 +342,7 @@ export const ProblemList = () => {
                           sx={{
                             borderBottom: "none",
                             color: "white",
-                            justifyContent: "center",
-                            "&:hover": {
-                              borderBottom: "5px solid white",
-                              borderBottomWidth: "5px",
-                              borderBottomStyle: "solid",
-                              borderBottomColor: "white"
-                            }
+                            justifyContent: "center"
                           }}
                         >
                           <Button
@@ -299,14 +350,59 @@ export const ProblemList = () => {
                               color: "white",
                               width: "8vw",
                               height: "4vh",
+                              textTransform: "none",
                               fontSize: { lg: "16px", sm: "12px" },
                               borderRadius: "20px",
-
+                              // Type A
                               background:
-                                "linear-gradient(90deg, #43E97B 0%, #38F9D7 100%)"
+                                "linear-gradient(90deg, #43E97B 0%, #38F9D7 100%)",
+                              // Type B
+                              ...(row.class === "Token" && {
+                                background:
+                                  "linear-gradient(90deg, #F78CA0 0%, #F9748F 19%, #FD868C 60%)"
+                              }),
+                              // Type C
+                              ...(row.class === "DeFi" && {
+                                background:
+                                  "linear-gradient(90deg, #3B41C5 0%, #988DC4 100%)"
+                              }),
+                              // Type D
+                              ...(row.class === "Design_Pattern" && {
+                                background:
+                                  "linear-gradient(90deg, #A3BDED 0%, #6991C7 100%)"
+                              }),
+                              // Type E
+                              ...(row.class === "Company" && {
+                                background:
+                                  "linear-gradient(90deg, #FF5858 0%, #F09819 100%)"
+                              }),
+                              // Type F
+                              ...(row.class === "DSA" && {
+                                background:
+                                  "linear-gradient(90deg, #4481EB 0%, #04BEFE 100%)"
+                              }),
+                              // Type G
+                              ...(row.class === "Gas_Optim" && {
+                                background:
+                                  "linear-gradient(90deg, #F093FB 0%, #F5576C 100%)"
+                              }),
+                              ...(row.class === "Cryptgraphy" && {
+                                background:
+                                  "linear-gradient(90deg, #F9D423 24.48%, #EB8B8C 100%)"
+                              }),
+                              // Type H
+                              ...(row.class === "EVM" && {
+                                background:
+                                  "linear-gradient(90deg, #8CB72B 0%, #96E6A1 100%)"
+                              }),
+                              // Type H
+                              ...(row.class === "Scalability" && {
+                                background:
+                                  "linear-gradient(90deg, #3179A4 0%, #80D0C7 100%)"
+                              })
                             }}
                           >
-                            Type A
+                            {row.class}
                           </Button>
                         </TableCell>
                         <TableCell
@@ -332,7 +428,47 @@ export const ProblemList = () => {
                             color: "white"
                           }}
                         >
-                          {"star"}
+                          {row.difficulty === 1 && (
+                            <img src={star} alt="star" width={25} height={25} />
+                          )}
+                          {row.difficulty === 2 && (
+                            <>
+                              <img
+                                src={star}
+                                alt="star"
+                                width={25}
+                                height={25}
+                              />
+                              <img
+                                src={star}
+                                alt="star"
+                                width={25}
+                                height={25}
+                              />
+                            </>
+                          )}
+                          {row.difficulty === 3 && (
+                            <>
+                              <img
+                                src={star}
+                                alt="star"
+                                width={25}
+                                height={25}
+                              />
+                              <img
+                                src={star}
+                                alt="star"
+                                width={25}
+                                height={25}
+                              />
+                              <img
+                                src={star}
+                                alt="star"
+                                width={25}
+                                height={25}
+                              />
+                            </>
+                          )}
                         </TableCell>
                         <TableCell
                           key={row.id}
@@ -357,11 +493,28 @@ export const ProblemList = () => {
               </Table>
             </TableContainer>
             <Pagination
-              count={Math.floor(problemList.length / 10)}
-              sx={{ button: { color: "#ffffff" } }}
+              shape="rounded"
+              count={Math.floor(problemList.length / 10) + 1}
+              sx={{
+                mt: 2,
+                button: {
+                  color: "#000000",
+                  backgroundColor: "white",
+                  "&:hover": {
+                    backgroundColor: "darkgray"
+                  }
+                },
+                "& .Mui-selected": {
+                  color: "#ffffff",
+                  backgroundColor: "white"
+                }
+              }}
               defaultPage={1}
               page={page}
-              size="large"
+              size="medium"
+              // { {lg: "large", sm: "small"} }
+
+              // varient="'outlined'"
               onChange={handleChange}
             />
           </Grid>

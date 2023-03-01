@@ -59,12 +59,13 @@ Used to collect a Token for a registered User.
 ```javascript
 import axios from "axios"
 
-const getResponse = (psa, pn, psts, n) => {
+const getResponse = (psa, pn, psts, difficulty, cla) => {
   let data = {
     problemSolverAddr: String(psa),
     problemNumber: String(pn),
     problemSolvedTimestamp: psts,
-    nonce: String(n)
+    difficulty: difficulty,
+    class: String(cla)
   }
 
   return axios.post(process.env.BACKEND_API_URL + "getCID", data, {

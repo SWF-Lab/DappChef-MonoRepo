@@ -14,7 +14,8 @@ import Stack from "@mui/material/Stack"
 import logo from "./Img/logo transparent_white.png"
 // import { Theme, makeStyles } from "@material-ui/core/styles";
 import { useHook } from "../pages/useHooks"
-const settings = ["LightingMode", "Logout"]
+// const settings = ["LightingMode", "Logout"]
+const settings = ["ChangeAccount"]
 
 export const ResponsiveAppBar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
@@ -30,21 +31,33 @@ export const ResponsiveAppBar = () => {
     setAnchorElUser(null)
   }
 
+  const disconnect = async () => {
+    try {
+      await window.ethereum.request({
+        method: "wallet_requestPermissions",
+        params: [
+          {
+            eth_accounts: {}
+          }
+        ]
+      })
+    } catch (e: any) {
+      console.log(e)
+    }
+  }
+
   const imageStyle = {
     cursor: "pointer"
   }
 
   return (
     <AppBar position="sticky" style={{ background: "#0F0B18" }}>
-      <Container maxWidth="xl" xs={{ height: "100%" }}>
+      <Container maxWidth="xl" xs={{ height: "100%", overflow: "hidden" }}>
         <Toolbar disableGutters>
           <Stack
             spacing={1}
             sx={{
-              p: 2,
-              ":hover": {
-                cursor: { cursorPointer: "pointer", bgcolor: "#0000ff" }
-              }
+              p: 2
             }}
             onClick={toMain}
           >
@@ -59,7 +72,7 @@ export const ResponsiveAppBar = () => {
           {/* <AdbIcon sx={{ mr: 1 }} /> */}
           <Button
             sx={{
-              m: 2,
+              m: { lg: 2, sm: 0 },
               color: "white",
               display: "block",
               textTransform: "none",
@@ -76,7 +89,7 @@ export const ResponsiveAppBar = () => {
           </Button>
           <Button
             sx={{
-              m: 2,
+              m: { lg: 2, sm: 0 },
               color: "white",
               display: "block",
               textTransform: "none",
@@ -86,6 +99,8 @@ export const ResponsiveAppBar = () => {
                 background: "#0F0B18"
               }
             }}
+            target="_blank"
+            href="https://chihaolu.gitbook.io/dappchef/frequently-infomation/faq"
           >
             FAQ
           </Button>
@@ -96,10 +111,7 @@ export const ResponsiveAppBar = () => {
               <>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/2.jpg"
-                    />
+                    <Avatar alt="Remy Sharp" />
                   </IconButton>
                 </Tooltip>
                 <Menu
@@ -122,7 +134,7 @@ export const ResponsiveAppBar = () => {
                     <MenuItem
                       sx={{ fontSize: { lg: "24px", sm: "14px" } }}
                       key={setting}
-                      onClick={handleCloseUserMenu}
+                      onClick={disconnect}
                     >
                       <Typography textAlign="center">{setting}</Typography>
                     </MenuItem>
@@ -130,7 +142,7 @@ export const ResponsiveAppBar = () => {
                 </Menu>
                 <Button
                   sx={{
-                    m: 2,
+                    m: { lg: 2, sm: 0 },
                     color: "white",
                     display: "block",
                     textTransform: "none",
@@ -149,10 +161,10 @@ export const ResponsiveAppBar = () => {
               <Button
                 // variant="outlined"
                 sx={{
-                  m: 2,
+                  m: { lg: 2, sm: 0 },
                   color: "white",
                   borderColor: "white",
-                  border: "5px solid",
+                  border: "3px solid",
                   borderRadius: "15px",
                   display: "block",
                   textTransform: "none",
@@ -170,7 +182,7 @@ export const ResponsiveAppBar = () => {
             )}
             <Button
               sx={{
-                m: 2,
+                m: { lg: 2, sm: 0 },
                 color: "white",
                 display: "block",
                 textTransform: "none",
@@ -180,6 +192,8 @@ export const ResponsiveAppBar = () => {
                   background: "#0F0B18"
                 }
               }}
+              target="_blank"
+              href="https://etherscan.io/address/0x189c92f28047c979ca2d17c13e3a12963eb1b8b4"
             >
               CheerUsUp
             </Button>

@@ -10,6 +10,7 @@ import Textarea from "@mui/joy/Textarea"
 import TextareaAutosize from "@mui/base/TextareaAutosize"
 import Button from "@mui/material/Button"
 import Grid from "@mui/material/Grid"
+import { MintModal } from "./Modal"
 
 export const JudgeInterface = (judgeObject: any) => {
   const problemInfo = judgeObject.problemsInfo
@@ -36,15 +37,13 @@ export const JudgeInterface = (judgeObject: any) => {
     setJudging(true)
     setAccepted(false)
 
-    // console.log(ABI)
-    // console.log(Bytecode)
-    // console.log(problemInfo)
-
-    const _return = await judge(problemInfo, "0x" + Bytecode, ABI)
-    if (_return) {
-      setAccepted(true)
-    } else {
-      setAccepted(false)
+    try {
+      const _return = await judge(problemInfo, "0x" + Bytecode, ABI)
+      if (_return) {
+        setAccepted(true)
+      }
+    } catch (e: any) {
+      setMessage(e)
     }
 
     setJudging(false)
@@ -291,7 +290,6 @@ export const JudgeInterface = (judgeObject: any) => {
 
   const handleMint = async () => {
     setMinting(true)
-    await sleep(5000)
     const result = await api.getResponse(
       requestParams.problemSolverAddr,
       requestParams.problemNumber,
@@ -312,20 +310,34 @@ export const JudgeInterface = (judgeObject: any) => {
     const wallet = provider.getSigner()
 
     const RewardContract = new ethers.Contract(
-      process.env.REWARD_CONTRACT_ADDR as string,
+      process.env.REWARDS_CONTRACT_ADDR as string,
       REWARD_ABI,
       wallet
     )
 
-    await RewardContract.mint()
+    /**
+     *  address _solver,
+        uint256 _problemNumber,
+        uint256 _timestamp,
+        address _approverKeyAddr,
+        uint8 _approverIndex,
+        bytes memory _signature,
+        string memory _tokenURI
+     */
+    const _return = await RewardContract.mint(
+      requestParams.problemSolverAddr,
+      requestParams.problemNumber,
+      requestParams.problemSolvedTimestamp,
+      process.env.SERVER_KEY_ARRR as string,
+      0,
+      result.data.signsignature,
+      result.data.cid
+    )
+    await _return.wait()
 
     setAccepted(false)
     setMinting(false)
     // navigate("/")
-  }
-
-  const sleep = (milliseconds: number) => {
-    return new Promise((resolve) => setTimeout(resolve, milliseconds))
   }
 
   return (
@@ -341,7 +353,7 @@ export const JudgeInterface = (judgeObject: any) => {
           style={{
             color: "white",
             backgroundColor: "#1C1B29",
-            border: "5px solid white",
+            border: "3px solid white",
             borderRadius: "15px",
             width: "83%",
             height: "20vh",
@@ -372,13 +384,9 @@ export const JudgeInterface = (judgeObject: any) => {
           {judging ? "Judging..." : "Judge"}
         </Button>
         {accepted && (
-          <button
-            className="resource flex"
-            onClick={handleMint}
-            disabled={minting}
-          >
-            {minting ? "Minting..." : "Mint"}
-          </button>
+          <>
+            <MintModal mintfunction={handleMint} />
+          </>
         )}
       </Grid>
     </>

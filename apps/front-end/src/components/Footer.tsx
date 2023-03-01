@@ -2,13 +2,14 @@ import Typography from "@mui/material/Typography"
 import Container from "@mui/material/Container"
 import Button from "@mui/material/Button"
 import Stack from "@mui/material/Stack"
+import { Dimensions } from "react-native"
 // import { Theme, makeStyles } from "@material-ui/core/styles";
 
 export const Footer = () => {
   return (
     <Container
-      sx={{ p: 2, m: 0, background: "#dcdcdc" }}
-      maxWidth="xl"
+      maxWidth={false}
+      sx={{ p: 2, background: "#dcdcdc", height: "100%", overflow: "auto" }}
       // component="footer"
     >
       <Stack
@@ -20,7 +21,7 @@ export const Footer = () => {
         <Button
           sx={{
             color: "white",
-            width: "150px",
+            width: { lg: "150px", sm: "100px" },
             height: "45px",
             fontSize: { lg: "24px", sm: "12px" },
             borderRadius: "8px",
@@ -31,6 +32,8 @@ export const Footer = () => {
               color: "black"
             }
           }}
+          target="_blank"
+          href="https://swflab-official.web.app/"
         >
           SWFLab
         </Button>
@@ -38,7 +41,7 @@ export const Footer = () => {
           direction="row"
           justifyContent="flex-end"
           alignItems="center"
-          spacing={6}
+          spacing={{ lg: 6, sm: 4 }}
         >
           <Typography
             variant="subtitle1"
@@ -51,9 +54,9 @@ export const Footer = () => {
           </Typography>
           <Button
             sx={{
-              ml: 15,
+              ml: { lg: 15, sm: 2 },
               color: "white",
-              width: "150px",
+              width: { lg: "150px", sm: "100px" },
               height: "45px",
               fontSize: { lg: "24px", sm: "12px" },
               borderRadius: "8px",
@@ -63,6 +66,8 @@ export const Footer = () => {
                 color: "black"
               }
             }}
+            target="_blank"
+            href="https://github.com/SWF-Lab/DappChef"
           >
             Github
           </Button>
@@ -70,7 +75,7 @@ export const Footer = () => {
           <Button
             sx={{
               color: "white",
-              width: "150px",
+              width: { lg: "150px", sm: "100px" },
               height: "45px",
               fontSize: { lg: "24px", sm: "12px" },
               borderRadius: "8px",
@@ -80,13 +85,14 @@ export const Footer = () => {
                 color: "black"
               }
             }}
+            // target="_blank" href="https://hackmd.io/AzWycmkkT3Wn7ZkPtVQyQg"
           >
             OpenSea
           </Button>
           <Button
             sx={{
               color: "white",
-              width: "150px",
+              width: { lg: "150px", sm: "100px" },
               height: "45px",
               fontSize: { lg: "24px", sm: "14px" },
               borderRadius: "8px",
@@ -96,6 +102,8 @@ export const Footer = () => {
                 color: "black"
               }
             }}
+            target="_blank"
+            href="https://twitter.com/DappChef"
           >
             Twitter
           </Button>

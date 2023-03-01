@@ -58,6 +58,25 @@
         "anonymous": false,
         "inputs": [
             {
+                "indexed": false,
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "SetOwner",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
                 "indexed": true,
                 "internalType": "address",
                 "name": "from",
@@ -77,6 +96,25 @@
             }
         ],
         "name": "Transfer",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "name": "TransferStatus",
         "type": "event"
     },
     {
@@ -214,25 +252,6 @@
     {
         "inputs": [
             {
-                "internalType": "uint256",
-                "name": "_input",
-                "type": "uint256"
-            }
-        ],
-        "name": "getHash",
-        "outputs": [
-            {
-                "internalType": "bytes32",
-                "name": "",
-                "type": "bytes32"
-            }
-        ],
-        "stateMutability": "pure",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
                 "internalType": "address",
                 "name": "_solver",
                 "type": "address"
@@ -267,6 +286,19 @@
             }
         ],
         "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getNowTotal",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -385,49 +417,6 @@
         "type": "function"
     },
     {
-        "inputs": [
-            {
-                "internalType": "address[]",
-                "name": "_solver",
-                "type": "address[]"
-            },
-            {
-                "internalType": "uint256[]",
-                "name": "_problemNumber",
-                "type": "uint256[]"
-            },
-            {
-                "internalType": "uint256[]",
-                "name": "_timestamp",
-                "type": "uint256[]"
-            },
-            {
-                "internalType": "address[]",
-                "name": "_approverKeyAddr",
-                "type": "address[]"
-            },
-            {
-                "internalType": "uint8[]",
-                "name": "_approverIndex",
-                "type": "uint8[]"
-            },
-            {
-                "internalType": "bytes[]",
-                "name": "_signature",
-                "type": "bytes[]"
-            },
-            {
-                "internalType": "string[]",
-                "name": "_tokenURI",
-                "type": "string[]"
-            }
-        ],
-        "name": "mintInBatch",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
         "inputs": [],
         "name": "name",
         "outputs": [
@@ -435,19 +424,6 @@
                 "internalType": "string",
                 "name": "",
                 "type": "string"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "nowTotal",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
             }
         ],
         "stateMutability": "view",
@@ -574,6 +550,19 @@
             }
         ],
         "name": "setIsAcceptedToTransfer",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_nowTotal",
+                "type": "uint256"
+            }
+        ],
+        "name": "setNowTotal",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
