@@ -10,7 +10,7 @@ import Textarea from "@mui/joy/Textarea"
 import TextareaAutosize from "@mui/base/TextareaAutosize"
 import Button from "@mui/material/Button"
 import Grid from "@mui/material/Grid"
-import { MintModal } from "./Modal.tsx"
+import { MintModal } from "./Modal"
 
 export const JudgeInterface = (judgeObject: any) => {
   const problemInfo = judgeObject.problemsInfo
@@ -37,15 +37,13 @@ export const JudgeInterface = (judgeObject: any) => {
     setJudging(true)
     setAccepted(false)
 
-    // console.log(ABI)
-    // console.log(Bytecode)
-    // console.log(problemInfo)
-
-    const _return = await judge(problemInfo, "0x" + Bytecode, ABI)
-    if (_return) {
-      setAccepted(true)
-    } else {
-      setAccepted(false)
+    try {
+      const _return = await judge(problemInfo, "0x" + Bytecode, ABI)
+      if (_return) {
+        setAccepted(true)
+      }
+    } catch (e: any) {
+      setMessage(e)
     }
 
     setJudging(false)
@@ -290,53 +288,56 @@ export const JudgeInterface = (judgeObject: any) => {
     return true
   }
 
-  /* ALU 替代的 */
   const handleMint = async () => {
     setMinting(true)
-    await sleep(5000)
+    const result = await api.getResponse(
+      requestParams.problemSolverAddr,
+      requestParams.problemNumber,
+      requestParams.problemSolvedTimestamp,
+      requestParams.difficulty,
+      requestParams.class
+    )
+    console.log(result)
+
+    /** ---------------------------------------------------------------------------
+     * Setting up the basic ethers object
+     * --------------------------------------------------------------------------- */
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    await provider
+      .send("wallet_switchEthereumChain", [{ chainId: "0x5" }])
+      .catch((e) => console.log(e))
+    const wallet = provider.getSigner()
+
+    const RewardContract = new ethers.Contract(
+      process.env.REWARDS_CONTRACT_ADDR as string,
+      REWARD_ABI,
+      wallet
+    )
+
+    /**
+     *  address _solver,
+        uint256 _problemNumber,
+        uint256 _timestamp,
+        address _approverKeyAddr,
+        uint8 _approverIndex,
+        bytes memory _signature,
+        string memory _tokenURI
+     */
+    const _return = await RewardContract.mint(
+      requestParams.problemSolverAddr,
+      requestParams.problemNumber,
+      requestParams.problemSolvedTimestamp,
+      process.env.SERVER_KEY_ARRR as string,
+      0,
+      result.data.signsignature,
+      result.data.cid
+    )
+    await _return.wait()
+
     setAccepted(false)
     setMinting(false)
-    navigate("/")
-  }
-  /* ALU 原本寫的 */
-
-  // const handleMint = async () => {
-  //   setMinting(true)
-  //   await sleep(5000)
-  //   const result = await api.getResponse(
-  //     requestParams.problemSolverAddr,
-  //     requestParams.problemNumber,
-  //     requestParams.problemSolvedTimestamp,
-  //     requestParams.difficulty,
-  //     requestParams.class
-  //   )
-  //   console.log(result)
-
-  //   /** ---------------------------------------------------------------------------
-  //    * Setting up the basic ethers object
-  //    * --------------------------------------------------------------------------- */
-
-  //   const provider = new ethers.providers.Web3Provider(window.ethereum)
-  //   await provider
-  //     .send("wallet_switchEthereumChain", [{ chainId: "0x5" }])
-  //     .catch((e) => console.log(e))
-  //   const wallet = provider.getSigner()
-
-  //   const RewardContract = new ethers.Contract(
-  //     process.env.REWARD_CONTRACT_ADDR as string,
-  //     REWARD_ABI,
-  //     wallet
-  //   )
-
-  //   await RewardContract.mint()
-
-  //   setAccepted(false)
-  //   setMinting(false)
-  //   // navigate("/")
-  // }
-
-  const sleep = (milliseconds: number) => {
-    return new Promise((resolve) => setTimeout(resolve, milliseconds))
+    // navigate("/")
   }
 
   return (
@@ -384,13 +385,6 @@ export const JudgeInterface = (judgeObject: any) => {
         </Button>
         {accepted && (
           <>
-            {/* <button
-              className="resource flex"
-              onClick={handleMint}
-              disabled={minting}
-            >
-              {minting ? "Minting..." : "Mint"}
-            </button> */}
             <MintModal mintfunction={handleMint} />
           </>
         )}

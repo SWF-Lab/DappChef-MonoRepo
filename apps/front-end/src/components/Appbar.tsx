@@ -15,7 +15,7 @@ import logo from "./Img/logo transparent_white.png"
 // import { Theme, makeStyles } from "@material-ui/core/styles";
 import { useHook } from "../pages/useHooks"
 // const settings = ["LightingMode", "Logout"]
-const settings = ["Logout"]
+const settings = ["ChangeAccount"]
 
 export const ResponsiveAppBar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
@@ -29,6 +29,21 @@ export const ResponsiveAppBar = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
+  }
+
+  const disconnect = async () => {
+    try {
+      await window.ethereum.request({
+        method: "wallet_requestPermissions",
+        params: [
+          {
+            eth_accounts: {}
+          }
+        ]
+      })
+    } catch (e: any) {
+      console.log(e)
+    }
   }
 
   const imageStyle = {
@@ -119,7 +134,7 @@ export const ResponsiveAppBar = () => {
                     <MenuItem
                       sx={{ fontSize: { lg: "24px", sm: "14px" } }}
                       key={setting}
-                      onClick={handleCloseUserMenu}
+                      onClick={disconnect}
                     >
                       <Typography textAlign="center">{setting}</Typography>
                     </MenuItem>

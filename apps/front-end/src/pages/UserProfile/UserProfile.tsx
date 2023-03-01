@@ -97,6 +97,12 @@ export const UserProfile = () => {
   const [problemList, setProblemList] = useState<any>([]) // 所有的題目
   const [loading, setLoading] = useState(true)
 
+  useEffect(() => {
+    window.ethereum.on("accountsChanged", function (accounts: any) {
+      if (accounts.length > 0) setAccount(accounts[0])
+    })
+  }, [])
+
   async function getTokenInfoOfUser() {
     /** --------------------------------------------------------
      * Setting up the basic ethers object
@@ -152,15 +158,25 @@ export const UserProfile = () => {
       const TargetAccount_TargetProblem_TokenURI =
         await RewardNFTContract.tokenURI(TargetAccount_TargetProblem_TokenID)
 
-      const problemsResponse = await fetch(TargetAccount_TargetProblem_TokenURI)
-      const data = await problemsResponse.json()
-      const imageCID = data.image.toString()
+      console.log(TargetAccount_TargetProblem_TokenURI)
 
-      const imageResponse = await fetch(imageCID)
-      const image = await imageResponse.blob()
+      try {
+        const problemsResponse = await fetch(
+          "https://nftstorage.link/ipfs/" + TargetAccount_TargetProblem_TokenURI
+        )
+        console.log(problemsResponse)
+        const data = await problemsResponse.json()
+        const imageCID = data.image.toString()
 
-      setNFTImageList((nftImageList) => [...nftImageList, image])
-      console.log(image)
+        const imageResponse = await fetch(imageCID)
+        const image = await imageResponse.blob()
+
+        setNFTImageList((nftImageList) => [...nftImageList, image])
+        // console.log(image)
+      } catch (e: any) {
+        console.log(e)
+        continue
+      }
     }
 
     /**  --------------------------------------------------------
@@ -194,7 +210,7 @@ export const UserProfile = () => {
       }
     })
     setProblemList(pList)
-    console.log(pList)
+    // console.log(pList)
 
     /**  --------------------------------------------------------
      * Get User Statistics
@@ -385,7 +401,7 @@ export const UserProfile = () => {
                     >
                       <TableBody>
                         {problemList.map((row) => {
-                          console.log(row)
+                          // console.log(row)
                           return (
                             <>
                               <StyledTableRow
