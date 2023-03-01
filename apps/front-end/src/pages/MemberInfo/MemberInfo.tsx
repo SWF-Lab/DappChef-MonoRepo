@@ -38,7 +38,7 @@ const cards = [
   {
     name: "Dino",
     title: "Smart Contract Cook",
-    link: "https://medium.com/@chen_yanlong"
+    link: "https://www.linkedin.com/in/yan-long-chen-253134231/"
   },
   { name: "cookSen", title: "Full-Stack Cook", link: "https://senchao.xyz/" },
   {
@@ -62,7 +62,11 @@ const cards = [
     link: "https://www.linkedin.com/in/theyhw//"
   },
   { name: "qqai", title: "Pastry Cook", link: "https://medium.com/@qqai" },
-  { name: "Miipro", title: "Pastry Cook", link: "" }
+  {
+    name: "Miipro",
+    title: "Pastry Cook",
+    link: "https://www.behance.net/CHUYUU"
+  }
 ]
 
 export const MemberInfo = () => {
