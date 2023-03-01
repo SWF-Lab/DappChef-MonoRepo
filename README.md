@@ -15,7 +15,7 @@
   - **Main Website**
   - **User Profile**
   - **Answer Interface**
-  - [**Online-Compiler & Problem Solver**
+  - **Online-Compiler & Problem Solver**
 - [`Back-End`](./apps/back-end)
   - **Signing Server**
 
@@ -23,7 +23,7 @@
 
 - [Project Plan](https://docs.google.com/spreadsheets/d/1JHpkHeemQ1i-WCXACzaRqulWoGvU9uJ2xneoW05S42A/edit?usp=sharing)
 - [Problems Database](https://github.com/SWF-Lab/DappChef-ProblemsDB)
-- [Reward Contract Address(Goerli): `0xaFAD4dC9C0f1D05bcB6a2dfa5123bbd27284C8d3`](https://goerli.etherscan.io/address/0xaFAD4dC9C0f1D05bcB6a2dfa5123bbd27284C8d3)
+- [Reward Contract Address(Goerli): `0x82190FC78Ebd3776c1a61BEAB45C34cEC66bA36f`](https://goerli.etherscan.io/address/0x82190FC78Ebd3776c1a61BEAB45C34cEC66bA36f)
 - [Deployer Contract Address(Goerli): `0x70D71426fC44759f11a5Ffd5472459259267Ed83`](https://goerli.etherscan.io/address/0x70D71426fC44759f11a5Ffd5472459259267Ed83)
 
 ## 🛠 Start Your Journey

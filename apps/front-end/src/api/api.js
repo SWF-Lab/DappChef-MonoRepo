@@ -9,17 +9,12 @@ const getResponse = (psa, pn, psts, difficulty, cla) => {
     class: String(cla)
   }
 
-  return axios
-    .post(process.env.BACKEND_API_URL + "getCID", data, {
-      auth: {
-        username: process.env.BACKEND_USERNAME,
-        password: process.env.BACKEND_PASSWORD
-      }
-    })
-    .then((response) => {
-      console.log(response)
-      return Object.assign({}, response.data)
-    })
+  return axios.post(process.env.BACKEND_API_URL + "getCID", data, {
+    auth: {
+      username: process.env.BACKEND_USERNAME,
+      password: process.env.BACKEND_PASSWORD
+    }
+  })
 }
 
 export default { getResponse }

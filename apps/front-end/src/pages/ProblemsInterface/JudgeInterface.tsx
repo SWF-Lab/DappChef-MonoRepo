@@ -315,15 +315,6 @@ export const JudgeInterface = (judgeObject: any) => {
       wallet
     )
 
-    /**
-     *  address _solver,
-        uint256 _problemNumber,
-        uint256 _timestamp,
-        address _approverKeyAddr,
-        uint8 _approverIndex,
-        bytes memory _signature,
-        string memory _tokenURI
-     */
     const _return = await RewardContract.mint(
       requestParams.problemSolverAddr,
       requestParams.problemNumber,
@@ -337,7 +328,7 @@ export const JudgeInterface = (judgeObject: any) => {
 
     setAccepted(false)
     setMinting(false)
-    // navigate("/")
+    navigate("/")
   }
 
   return (
