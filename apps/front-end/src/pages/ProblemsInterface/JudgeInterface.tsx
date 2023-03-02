@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import DEPLOYER_ABI from "../../../contract-artifacts/deployerABI.json"
 import REWARD_ABI from "../../../contract-artifacts/rewardABI.json"
 import api from "../../api/api"
+import { uploadMetadataToIPFS } from "../../api/upload"
 
 //front end
 import Textarea from "@mui/joy/Textarea"
@@ -290,45 +291,59 @@ export const JudgeInterface = (judgeObject: any) => {
 
   const handleMint = async () => {
     setMinting(true)
-    const result = await api.getResponse(
-      requestParams.problemSolverAddr,
-      requestParams.problemNumber,
-      requestParams.problemSolvedTimestamp,
-      requestParams.difficulty,
-      requestParams.class
-    )
-    console.log(result)
+    try {
+      const result = await api.getResponse(
+        requestParams.problemSolverAddr,
+        requestParams.problemNumber,
+        requestParams.problemSolvedTimestamp,
+        requestParams.difficulty,
+        requestParams.class
+      )
+      console.log(result)
 
-    /** ---------------------------------------------------------------------------
-     * Setting up the basic ethers object
-     * --------------------------------------------------------------------------- */
+      /** ---------------------------------------------------------------------------
+       * Setting up the basic ethers object
+       * --------------------------------------------------------------------------- */
 
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
-    await provider
-      .send("wallet_switchEthereumChain", [{ chainId: "0x5" }])
-      .catch((e) => console.log(e))
-    const wallet = provider.getSigner()
+      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      await provider
+        .send("wallet_switchEthereumChain", [{ chainId: "0x5" }])
+        .catch((e) => console.log(e))
+      const wallet = provider.getSigner()
 
-    const RewardContract = new ethers.Contract(
-      process.env.REWARDS_CONTRACT_ADDR as string,
-      REWARD_ABI,
-      wallet
-    )
+      const RewardContract = new ethers.Contract(
+        process.env.REWARDS_CONTRACT_ADDR as string,
+        REWARD_ABI,
+        wallet
+      )
 
-    const _return = await RewardContract.mint(
-      requestParams.problemSolverAddr,
-      requestParams.problemNumber,
-      requestParams.problemSolvedTimestamp,
-      process.env.SERVER_KEY_ARRR as string,
-      0,
-      result.data.signsignature,
-      result.data.cid
-    )
-    await _return.wait()
+      const cid = await uploadMetadataToIPFS(
+        requestParams.problemSolverAddr,
+        requestParams.problemNumber,
+        requestParams.problemSolvedTimestamp,
+        requestParams.difficulty,
+        requestParams.class
+      )
+      console.log(cid)
 
-    setAccepted(false)
-    setMinting(false)
-    navigate("/")
+      const _return = await RewardContract.mint(
+        requestParams.problemSolverAddr,
+        requestParams.problemNumber,
+        requestParams.problemSolvedTimestamp,
+        process.env.SERVER_KEY_ARRR as string,
+        0,
+        result.data.signsignature,
+        cid
+      )
+      await _return.wait()
+
+      setAccepted(false)
+      setMinting(false)
+      navigate("/")
+    } catch (e: any) {
+      console.log(e)
+      setMinting(false)
+    }
   }
 
   return (

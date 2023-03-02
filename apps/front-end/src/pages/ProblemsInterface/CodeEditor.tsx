@@ -2,7 +2,6 @@ import { useCallback, useState, useEffect } from "react"
 import { ethers } from "ethers"
 import styled from "styled-components"
 import { Editor } from "../../components/Editor"
-// import { solidityCompiler } from "@agnostico/browser-solidity-compiler"
 import { solidityCompiler } from "../../api/compiler"
 import { JudgeInterface } from "./JudgeInterface"
 

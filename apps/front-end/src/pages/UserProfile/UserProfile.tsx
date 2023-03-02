@@ -146,7 +146,6 @@ export const UserProfile = () => {
     const temp = solvingProb.map(Number)
 
     for (let i = 0; i < nSolvingProb; i++) {
-      console.log(solvingProb[i].toNumber())
       // Get the Target Problem TokenID of the User
       const TargetAccount_TargetProblem_TokenID =
         await RewardNFTContract.getTokenID(
@@ -158,21 +157,41 @@ export const UserProfile = () => {
       const TargetAccount_TargetProblem_TokenURI =
         await RewardNFTContract.tokenURI(TargetAccount_TargetProblem_TokenID)
 
-      console.log(TargetAccount_TargetProblem_TokenURI)
-
       try {
         const problemsResponse = await fetch(
           "https://nftstorage.link/ipfs/" + TargetAccount_TargetProblem_TokenURI
         )
-        console.log(problemsResponse)
         const data = await problemsResponse.json()
+        console.log(data)
         const imageCID = data.image.toString()
 
-        const imageResponse = await fetch(imageCID)
-        const image = await imageResponse.blob()
+        const gateway = [
+          "https://ipfs.io/ipfs/",
+          "https://gateway.ipfs.io/ipfs/",
+          "https://gateway.pinata.cloud/ipfs/",
+          "https://cloudflare-ipfs.com/ipfs/"
+        ]
 
-        setNFTImageList((nftImageList) => [...nftImageList, image])
-        // console.log(image)
+        try {
+          const imageResponse = await fetch(imageCID)
+          const image = await imageResponse.blob()
+          setNFTImageList((nftImageList) => [...nftImageList, image])
+        } catch {
+          for (let i = 0; i < gateway.length; i++) {
+            try {
+              const newImageCID = imageCID.replace(
+                "https://nftstorage.link/ipfs/",
+                gateway[i]
+              )
+              const imageResponse = await fetch(newImageCID)
+              const image = await imageResponse.blob()
+              setNFTImageList((nftImageList) => [...nftImageList, image])
+              break
+            } catch {
+              continue
+            }
+          }
+        }
       } catch (e: any) {
         console.log(e)
         continue

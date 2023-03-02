@@ -17,9 +17,11 @@ const HookProvider = (props) => {
   const onboarding: any = useRef()
 
   useEffect(() => {
-    window.ethereum.on("accountsChanged", function (accounts: any) {
-      if (accounts.length > 0) setAccount(accounts[0])
-    })
+    if (window.ethereum) {
+      window.ethereum.on("accountsChanged", function (accounts: any) {
+        if (accounts.length > 0) setAccount(accounts[0])
+      })
+    }
   }, [])
 
   const onClickConnect = () => {
@@ -30,6 +32,7 @@ const HookProvider = (props) => {
       onboarding.current.startOnboarding()
       return
     }
+
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any")
 
     provider
