@@ -9,6 +9,8 @@
 
 ## 📜 Usage
 
+### [Live Demo](https://dapp-chef-mono-repo.vercel.app/)
+
 ### Core Functionality
 
 - [`Front-End`](./apps/front-end)
