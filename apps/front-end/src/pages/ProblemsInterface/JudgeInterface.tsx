@@ -150,7 +150,7 @@ export const JudgeInterface = (judgeObject: any) => {
           const eventTopics = log.args.slice(0, indexedValue.length).toString()
           // Pass the non-index event for special target
           const eventData =
-            nonIndexedValue.length == 0
+            nonIndexedValue.length != 0
               ? log.args
                   .slice(
                     indexedValue.length,
