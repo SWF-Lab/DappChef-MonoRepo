@@ -100,6 +100,7 @@ export const UserProfile = () => {
   useEffect(() => {
     window.ethereum.on("accountsChanged", function (accounts: any) {
       if (accounts.length > 0) setAccount(accounts[0])
+      getTokenInfoOfUser()
     })
   }, [])
 
