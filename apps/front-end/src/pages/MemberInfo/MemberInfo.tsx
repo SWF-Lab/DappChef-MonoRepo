@@ -83,15 +83,20 @@ export const MemberInfo = () => {
       // onClickConnect={onClickConnect}
       // toUserProfile={toUserProfile}
       />
-      <main style={{ background: "#0F0B18", height: "100%" }}>
+      <main style={{ background: "#0F0B18", height: "100vh" }}>
         {/* Hero unit */}
         <Container
-          sx={{ pt: 1, px: 2, height: "100%", overflow: "auto" }}
-          maxWidth="xl"
+          sx={{
+            pt: 1,
+            px: 2,
+            height: "100%"
+            // overflow: "auto"
+          }}
+          maxWidth={false}
           disableGutters
         >
           <Grid
-            container
+            // container
             direction="row"
             justifyContent="center"
             alignItems="center"
@@ -210,15 +215,15 @@ export const MemberInfo = () => {
               </Stack>
             </Card>
           </Grid>
-        </Container>
-        <Container
+          {/* </Container> */}
+          {/* <Container
           sx={{ px: 2, pt: 4, height: "100%" }}
           disableGutters
           maxWidth="xl"
-        >
+        > */}
           {/* End hero unit */}
           <Grid
-            sx={{ pt: 2, pb: 4, m: -2, height: "100%" }}
+            sx={{ pt: 2, pb: 4, m: -2, height: "80vh" }}
             container
             direction="row"
             justifyContent="center"

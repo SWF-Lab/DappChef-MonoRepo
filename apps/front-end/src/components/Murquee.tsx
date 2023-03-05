@@ -12,7 +12,7 @@ export const TotalMarquee = () => {
         direction="column"
         justifyContent="space-around"
         alignItems="center"
-        maxWidth="xl"
+        // maxWidth="xl"
       >
         <Typography
           variant="h4"
@@ -45,7 +45,7 @@ export const TotalMarquee = () => {
               background="#1C1B29"
               height="15vh"
               width="98%"
-              duration={8000}
+              duration={12000}
               pauseOnHover={true}
             >
               <img src={logo} alt="logo" width={48} height={48} />
@@ -86,7 +86,7 @@ export const TotalMarquee = () => {
               background="#1C1B29"
               height="15vh"
               width="98%"
-              duration={8000}
+              duration={12000}
               pauseOnHover={true}
             >
               <img src={logo} alt="logo" width={48} height={48} />

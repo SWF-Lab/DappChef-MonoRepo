@@ -188,8 +188,8 @@ export const ProblemList = () => {
   return (
     <>
       <Container
-        style={{ flexDirection: "column", height: "100%", overflow: "auto" }}
-        maxWidth="xl"
+        style={{ flexDirection: "column", overflow: "auto" }}
+        // maxWidth="xl"
       >
         <Stack
           direction="row"
