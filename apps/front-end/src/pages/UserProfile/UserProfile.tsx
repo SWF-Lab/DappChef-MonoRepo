@@ -270,14 +270,14 @@ export const UserProfile = () => {
   return (
     <>
       <ResponsiveAppBar />
-      <main style={{ background: "#0F0B18", height: "100%", overflow: "auto" }}>
-        <Grid sx={{ py: 5, height: "100%" }} container maxWidth="xl">
+      <main style={{ background: "#0F0B18", height: "100vh" }}>
+        <Grid sx={{ py: 5, height: "100%" }} container>
           <Grid
             m={0}
             container
             direction="row"
             justifyContent="space-evenly"
-            alignItems="flex-start"
+            alignItems="center"
           >
             <Paper
               style={{ backgroundColor: "#0F0B18" }}

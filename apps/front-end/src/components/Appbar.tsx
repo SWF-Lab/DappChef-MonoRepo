@@ -52,7 +52,7 @@ export const ResponsiveAppBar = () => {
 
   return (
     <AppBar position="sticky" style={{ background: "#0F0B18" }}>
-      <Container maxWidth="xl" xs={{ height: "100%", overflow: "hidden" }}>
+      <Container maxWidth={false} xs={{ height: "100%", overflow: "hidden" }}>
         <Toolbar disableGutters>
           <Stack
             spacing={1}
