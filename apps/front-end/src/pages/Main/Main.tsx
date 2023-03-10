@@ -13,16 +13,18 @@ import styled from "styled-components"
 import Box from "@material-ui/core/Box"
 import ReactPlayer from "react-player"
 import BeforeLoginVideo from "../../components/Img/DappChef_v3_BeforeLogin.mp4"
-import LoginVideo from "../../components/Img/DappChef_v3_login.mp4"
+import LoginVideo from "../../components/Img/DappChef_v8_login.mp4"
 import start from "../../components/Img/Start.png"
 import { makeStyles } from "@material-ui/core/styles"
 import Ads from "../../components/Ads.tsx"
+import { Dune } from "./Dune.tsx"
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     height: "100%",
     position: "relative",
+    display: "flex",
     background: "#0F0B18",
     alignItems: "center",
     justifyContent: "center",
@@ -75,11 +77,14 @@ export const Main = () => {
           <section className={classes.root}>
             <ReactPlayer
               url={LoginVideo}
+              // url={test}
               playing
               loop
               muted
-              width="100%"
-              height="100%"
+              // width="100%"
+              // height="100%"
+              width="97vw"
+              height="100vh"
             />
             <div className={classes.overlay}>
               <Box
@@ -108,9 +113,11 @@ export const Main = () => {
               url={BeforeLoginVideo}
               playing
               muted
+              // width="100%"
+              // height="100%"
               // width="95vw"
               // height="100vh"
-              width="100vw"
+              width="97vw"
               height="100vh"
             />
             <div className={classes.overlay}>
@@ -135,21 +142,20 @@ export const Main = () => {
             </div>
           </section>
         )}
-        {/* </Container> */}
-        <Grid sx={{ mt: 2, mb: 7 }}>
+
+        <Grid
+          sx={{ mt: 2, mb: 7, justifyContent: "center", alignItems: "center" }}
+          width="700px"
+          direction="row"
+        >
           <Ads />
         </Grid>
-        {/* <Container> */}
+        <Dune />
         <Grid>
           <ProblemList />
         </Grid>
-        {/* </Container > */}
-        {/* <Grid direction="column" justifyContent="center" alignItems="center"
-        sx={{ pt: 1, px: 2, width: "100%", 
-        // overflow: "auto" 
-      }}> */}
+
         <TotalMarquee />
-        {/* </Grid> */}
       </main>
       <Footer />
     </>

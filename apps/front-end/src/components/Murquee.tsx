@@ -43,7 +43,7 @@ export const TotalMarquee = () => {
             <Marquee
               reverse={false}
               background="#1C1B29"
-              height="15vh"
+              height="18vh"
               width="98%"
               duration={12000}
               pauseOnHover={true}
@@ -84,7 +84,7 @@ export const TotalMarquee = () => {
             <Marquee
               reverse={false}
               background="#1C1B29"
-              height="15vh"
+              height="13vh"
               width="98%"
               duration={12000}
               pauseOnHover={true}

@@ -13,7 +13,7 @@ import Paper from "@mui/material/Paper"
 import Table from "@mui/material/Table"
 import TableBody from "@mui/material/TableBody"
 import Grid from "@mui/material/Grid"
-import { styled } from "@mui/material/styles"
+import { styled, alpha } from "@mui/material/styles"
 import Typography from "@mui/material/Typography"
 import TableCell, { tableCellClasses } from "@mui/material/TableCell"
 import TableContainer from "@mui/material/TableContainer"
@@ -21,13 +21,14 @@ import TableHead from "@mui/material/TableHead"
 import Pagination from "@mui/material/Pagination"
 import TableRow, { tableRowClasses } from "@mui/material/TableRow"
 import Button from "@mui/material/Button"
-import Menu from "@mui/material/Menu"
-import MenuItem from "@mui/material/MenuItem"
 import question from "../../components/Img/question.png"
 import trytry from "../../components/Img/Try.png"
 import lock from "../../components/Img/Lock.png"
+import solved from "../../components/Img/Solved.png"
 import star from "../../components/Img/DappChef-Asset-star.png"
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
+/** */
+import Menu, { MenuProps } from "@mui/material/Menu"
+import MenuItem from "@mui/material/MenuItem"
 
 const useStyles = makeStyles({
   root: {
@@ -41,7 +42,7 @@ const useStyles = makeStyles({
     }
   },
   table: {
-    minWidth: 650,
+    // minWidth: 650,
     borderCollapse: "separate",
     borderSpacing: "0px 10px",
     "& .MuiTableCell-body": {
@@ -61,23 +62,70 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     fontSize: { lg: "24px", sm: "16px" }
   },
   "&.MuiTableRow-root:hover": {
-    // backgroundColor: "red"
+    backgroundColor: "#2D5798"
+  }
+}))
+const HideRow = styled(TableRow)(({ theme }) => ({
+  "&": {
+    backgroundColor: "#1C1B29"
+  },
+  "& th": {
+    fontSize: { lg: "24px", sm: "16px" }
   }
 }))
 
-// const columns: readonly Column[] = [
-//   { id: "tag", label: "Tag ▼", align: "center" },
-//   { id: "title", label: "Title", minWidth: 350 },
-//   {
-//     id: "difficulty",
-//     label: "Difficulty ▼"
-//   },
-//   {
-//     id: "status",
-//     label: "Status",
-//     align: "center"
-//   }
-// ]
+const StyledMenu = styled((props: MenuProps) => (
+  <Menu
+    elevation={0}
+    anchorOrigin={{
+      vertical: "bottom",
+      horizontal: "center"
+    }}
+    transformOrigin={{
+      vertical: "top",
+      horizontal: "center"
+    }}
+    {...props}
+  />
+))(({ theme }) => ({
+  "& .MuiPaper-root": {
+    borderRadius: 6,
+    // marginTop: theme.spacing(1),
+    // minWidth: 180,
+    color: "black",
+    boxShadow:
+      "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
+    "& .MuiMenuItem-root": {
+      "&:active": {
+        backgroundColor: alpha(
+          theme.palette.primary.main,
+          theme.palette.action.selectedOpacity
+        )
+      }
+    }
+  }
+}))
+
+const tagRow = [
+  "Reset",
+  "Beginner",
+  "Token",
+  "DeFi",
+  "Design_Pattern",
+  "Company",
+  "DSA",
+  "Gas_Optim",
+  "Cryptgraphy",
+  "EVM",
+  "Scalability"
+]
+
+const difficultRow = [
+  { name: "Reset", value: 0 },
+  { name: "Easy", value: 1 },
+  { name: "Medium", value: 2 },
+  { name: "Hard", value: 3 }
+]
 
 /*------------------------------------------------------ */
 export const ProblemList = () => {
@@ -88,6 +136,7 @@ export const ProblemList = () => {
   const [account, setAccount] = useState("")
   const [problemsInfo, setProblemsInfo] = useState([])
   const [problemList, setProblemList] = useState<any>([])
+  const [originalList, setOriginalList] = useState<any>([])
 
   async function getTokenInfoOfUser() {
     /** --------------------------------------------------------
@@ -163,6 +212,7 @@ export const ProblemList = () => {
       }
     })
     setProblemList(pList)
+    setOriginalList(pList)
   }
 
   useEffect(() => {
@@ -170,34 +220,93 @@ export const ProblemList = () => {
   }, [])
 
   /*front end */
+
+  /*---------------Filter---------------*/
+
+  const filtertag = () => {}
+
+  /*---------------Page---------------*/
   const [page, setPage] = React.useState(1)
   const classes = useStyles()
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-  const open = Boolean(anchorEl)
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget)
-  }
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
-
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value)
   }
 
+  /*---------------Menu 1---------------*/
+
+  const [anchorElTag, setAnchorElTag] = React.useState<null | HTMLElement>(null)
+  const openTag = Boolean(anchorElTag)
+  const handleClickTag = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElTag(event.currentTarget)
+  }
+  // filter function
+  const handleCloseTag = (event) => {
+    const { myValue } = event.currentTarget.dataset
+
+    if (tagRow.includes(myValue)) {
+      if (myValue === "Reset") {
+        setProblemList(originalList)
+      } else {
+        var newArray = originalList.filter(function (el) {
+          return el.class === myValue
+        })
+        // console.log(newArray);
+        setProblemList(newArray)
+        setPage(1)
+      }
+    }
+    setAnchorElTag(null)
+  }
+
+  /*---------------Menu 2---------------*/
+  const [anchorElDiff, setAnchorElDiff] = React.useState<null | HTMLElement>(
+    null
+  )
+  const openDiff = Boolean(anchorElDiff)
+  const handleClickDiff = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElDiff(event.currentTarget)
+  }
+  const handleCloseDiff = (event) => {
+    const { myValue } = event.currentTarget.dataset
+    var numvalue = parseInt(myValue)
+    console.log("~~~~", numvalue)
+    if ([0, 1, 2, 3].includes(numvalue)) {
+      console.log("QAQ", numvalue)
+      if (numvalue === 0) {
+        setProblemList(originalList)
+      } else {
+        console.log("CHANGE", numvalue)
+        var newArray = originalList.filter(function (el) {
+          return el.difficulty === numvalue
+        })
+
+        setProblemList(newArray)
+        setPage(1)
+      }
+    }
+    setAnchorElDiff(null)
+  }
+
+  // const [emptyarray, setEmptyArray] = new Array(10)
+  const emptyarray = Array(10).fill("")
+  const emptyRows = page > 0 ? Math.max(0, page * 10 - problemList.length) : 0
+
+  console.log(emptyRows, emptyarray)
+
   return (
     <>
       <Container
-        style={{ flexDirection: "column", overflow: "auto" }}
-        // maxWidth="xl"
+        style={{ flexDirection: "column", overflow: "visible" }}
+        // maxWidth={false}
       >
         <Stack
           direction="row"
           justifyContent="center"
           alignItems="center"
+          style={{ width: "100%" }}
           sx={{ m: -3, zIndex: "fab" }}
         >
-          <img src={question} alt="Question" />
+          <img src={question} height="4%" width="4%" alt="Question" />
 
           <Typography
             variant="h4"
@@ -208,13 +317,15 @@ export const ProblemList = () => {
           >
             Problems
           </Typography>
-          <img src={question} alt="Question" />
+          <img src={question} height="4%" width="4%" alt="Question" />
         </Stack>
 
         <Paper
+          style={{ width: "80vw" }}
           component={Stack}
           direction="column"
-          justifyContent="center"
+          justifyContent="flex-start"
+          // alignItems="flex-start"
           sx={{
             pt: 0,
             pb: 2,
@@ -232,7 +343,7 @@ export const ProblemList = () => {
             justifyContent="space-evenly"
             alignItems="flex-start"
           >
-            <TableContainer>
+            <TableContainer style={{ width: "100%" }}>
               <Table
                 stickyHeader
                 aria-label="sticky table"
@@ -254,27 +365,44 @@ export const ProblemList = () => {
                     <TableCell
                       key="tag"
                       align="center"
+                      justifyContent="center"
+                      onClick={handleClickTag}
+                      style={{ cursor: "pointer" }}
                       sx={{
                         backgroundColor: "#1C1B29",
                         color: "white",
                         borderBottom: "5px solid white"
                       }}
                     >
-                      {/* <Button
-                        aria-controls={open ? "basic-menu" : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={open ? "true" : undefined}
-                        onClick={handleClick}
-                        endIcon={<KeyboardArrowDownIcon />}
-                      >
-                        Tag
-                      </Button> */}
-                      Tag
+                      Tag▼
                     </TableCell>
+                    {/*Menu*/}
+                    <StyledMenu
+                      id="demo-customized-menu"
+                      MenuListProps={{
+                        "aria-labelledby": "demo-customized-button"
+                      }}
+                      anchorEl={anchorElTag}
+                      open={openTag}
+                      onClose={handleCloseTag}
+                    >
+                      {tagRow.map((row) => (
+                        <MenuItem
+                          key={row}
+                          // onClick={(e) => clicked(item, popupState)}
+                          onClick={handleCloseTag}
+                          data-my-value={row}
+                          // value={123}
+                        >
+                          {row === "Design_Pattern" ? "Design" : row}
+                        </MenuItem>
+                      ))}
+                    </StyledMenu>
+                    {/*Menu*/}
                     <TableCell
-                      key="tag"
+                      key="title"
                       align="flex-start"
-                      minWidth="350"
+                      // minWidth=""
                       sx={{
                         backgroundColor: "#1C1B29",
                         color: "white",
@@ -285,29 +413,43 @@ export const ProblemList = () => {
                     </TableCell>
 
                     <TableCell
-                      key="tag"
+                      key="Difficulty"
                       align="center"
+                      style={{ cursor: "pointer" }}
+                      onClick={handleClickDiff}
                       sx={{
                         backgroundColor: "#1C1B29",
                         color: "white",
                         borderBottom: "5px solid white"
                       }}
                     >
-                      {/* <Button
-                        aria-controls={open ? "basic-menu" : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={open ? "true" : undefined}
-                        onClick={handleClick}
-                        endIcon={<KeyboardArrowDownIcon />}
-                      >
-                        Difficulty
-                      </Button> */}
-                      Difficulty
+                      Difficulty▼
                     </TableCell>
+                    {/*Menu*/}
+                    <StyledMenu
+                      id="demo-customized-menu"
+                      MenuListProps={{
+                        "aria-labelledby": "demo-customized-button"
+                      }}
+                      anchorEl={anchorElDiff}
+                      open={openDiff}
+                      onClose={handleCloseDiff}
+                    >
+                      {difficultRow.map((row) => (
+                        <MenuItem
+                          key={row.name}
+                          onClick={handleCloseDiff}
+                          data-my-value={row.value}
+                        >
+                          {row.name}
+                        </MenuItem>
+                      ))}
+                    </StyledMenu>
+                    {/*Menu*/}
                     <TableCell
                       key="status"
                       align="center"
-                      minWidth="350"
+                      // minWidth="350"
                       sx={{
                         backgroundColor: "#1C1B29",
                         color: "white",
@@ -320,6 +462,7 @@ export const ProblemList = () => {
                 </TableHead>
                 <TableBody>
                   {problemList.slice(page * 10 - 10, page * 10).map((row) => {
+                    // console.log(problemList)
                     return (
                       <StyledTableRow
                         hover
@@ -330,14 +473,18 @@ export const ProblemList = () => {
                             ? { cursor: "pointer" }
                             : { cursor: "not-allowed" }
                         }
+                        style={{ height: "10px" }}
                         className={classes.root}
-                        onClick={() =>
-                          account ? navigate("/" + row.problemNumber) : null
-                        }
+                        onClick={() => {
+                          if (account) {
+                            navigate("/" + row.problemNumber)
+                            window.scrollTo(0, 0)
+                          }
+                        }}
                       >
                         <TableCell
                           key={row.id}
-                          width="5vw"
+                          width="20%"
                           align="center"
                           sx={{
                             borderBottom: "none",
@@ -348,14 +495,14 @@ export const ProblemList = () => {
                           <Button
                             sx={{
                               color: "white",
-                              width: "8vw",
-                              height: "4vh",
+                              width: "60%",
+                              height: "3.5vh",
                               textTransform: "none",
                               fontSize: { lg: "16px", sm: "12px" },
                               borderRadius: "20px",
                               // Type A
                               background:
-                                "linear-gradient(90deg, #43E97B 0%, #38F9D7 100%)",
+                                "linear-gradient(90deg, #8ADABB 0%, #3CBA92 50.52%, #0BA360 100%)",
                               // Type B
                               ...(row.class === "Token" && {
                                 background:
@@ -402,17 +549,20 @@ export const ProblemList = () => {
                               })
                             }}
                           >
-                            {row.class}
+                            {row.class === "Design_Pattern"
+                              ? "Design"
+                              : row.class}
                           </Button>
                         </TableCell>
                         <TableCell
                           key={row.id}
-                          style={{ width: "90vh" }}
+                          width="50%"
+                          // style={{ width: "60%" }}
                           // align={column.align}
                           sx={{
                             borderBottom: "none",
                             color: "white",
-                            width: "50vw",
+                            // width: "30vw",
 
                             fontSize: { lg: "18px", sm: "12px" }
                           }}
@@ -421,8 +571,8 @@ export const ProblemList = () => {
                         </TableCell>
                         <TableCell
                           key={row.id}
-                          width="5vw"
-                          // align={column.align}
+                          width="15%"
+                          // style={{ width: "5%" }}
                           sx={{
                             borderBottom: "none",
                             color: "white"
@@ -472,23 +622,62 @@ export const ProblemList = () => {
                         </TableCell>
                         <TableCell
                           key={row.id}
-                          width="5vw"
+                          width="15%"
                           align="center"
+                          justifyContent="center"
                           sx={{
-                            justifyContent: "center",
+                            // justifyContent: "center",
                             borderBottom: "none",
                             color: "white"
                           }}
                         >
-                          {account ? (
-                            <img src={trytry} alt="Try" />
-                          ) : (
-                            <img src={lock} alt="Question" />
-                          )}
+                          <Stack
+                            direction="row"
+                            justifyContent="center"
+                            alignItems="center"
+                            // sx={{ height: "3.5vh"}}
+                          >
+                            {account === "" ? (
+                              <img
+                                width="80%"
+                                // height="3.5vh"
+                                src={lock}
+                                alt="solved"
+                              />
+                            ) : row.solved ? (
+                              <img
+                                width="80%"
+                                height="50%"
+                                src={solved}
+                                alt="solved"
+                              />
+                            ) : (
+                              // <img src={lock} alt="Question" />
+                              <img width="80%" src={trytry} alt="Try" />
+                            )}
+                          </Stack>
                         </TableCell>
                       </StyledTableRow>
                     )
                   })}
+
+                  {emptyRows > 0 &&
+                    emptyarray.slice(0, emptyRows).map((row) => {
+                      return (
+                        <HideRow
+                          key={row}
+                          className={classes.root}
+                          style={{ height: "5.12vh" }}
+                        >
+                          <TableCell
+                            colSpan={5}
+                            sx={{
+                              borderBottom: "none"
+                            }}
+                          ></TableCell>
+                        </HideRow>
+                      )
+                    })}
                 </TableBody>
               </Table>
             </TableContainer>

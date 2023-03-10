@@ -1,14 +1,27 @@
 import React from "react"
+import Grid from "@mui/material/Grid"
 import { Slide } from "react-slideshow-image"
 import "react-slideshow-image/dist/styles.css"
 import styled from "styled-components"
 
+// const Adscontainer = styled.div`
+// display: 'flex',
+// align-items: 'center',
+// justify-content: 'center',
+// backgroundSize: 'cover',
+// direction: "row",
+// width: 70vw,
+// height: '400px'
+// `
 const Adscontainer = styled.div`
-display: 'flex',
-alignItems: 'center',
-justifyContent: 'center',
-backgroundSize: 'cover',
-height: '400px'
+  display: flex;
+  align-items: space-around;
+  justify-content: center;
+  background-size: cover;
+  direction: row;
+  width: 70vw;
+  height: 80px;
+  gap: 20px;
 `
 
 const divStyle = {
@@ -16,7 +29,8 @@ const divStyle = {
   alignItems: "center",
   justifyContent: "center",
   backgroundSize: "cover",
-  height: "20vh"
+  height: "160px",
+  width: "980px"
 }
 
 export const Slideshow = () => {
@@ -35,10 +49,27 @@ export const Slideshow = () => {
   ]
 
   return (
+    // <Grid  container
+    // direction="column"
+    // justifyContent="center"
+    // alignItems="center"
+    // sx={{width: "80%", height:"20%"}}
+    // >
     <Slide>
       <Adscontainer>
         <div
-          style={{ ...divStyle, backgroundImage: `url(${images[0]})` }}
+          style={{
+            ...divStyle,
+            backgroundImage: `url(${images[0]})`,
+            width: "50%"
+          }}
+        ></div>
+        <div
+          style={{
+            ...divStyle,
+            backgroundImage: `url(${images[1]})`,
+            width: "50%"
+          }}
         ></div>
       </Adscontainer>
       <div>
@@ -52,6 +83,7 @@ export const Slideshow = () => {
         ></div>
       </div>
     </Slide>
+    // </Grid>
   )
 }
 

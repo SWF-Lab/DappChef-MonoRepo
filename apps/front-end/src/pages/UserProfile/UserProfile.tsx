@@ -19,9 +19,15 @@ import TableBody from "@mui/material/TableBody"
 import { styled } from "@mui/material/styles"
 import TableCell, { tableCellClasses } from "@mui/material/TableCell"
 import TableContainer from "@mui/material/TableContainer"
+import LinearProgress from "@mui/material/LinearProgress"
+import Box from "@mui/material/Box"
 import star from "../../components/Img/DappChef-Asset-star.png"
 import Button from "@mui/material/Button"
 import lock from "../../components/Img/DappChef-Asset-lock-2.png"
+import egg from "../../components/Img/egg.png"
+import { CircularStatic } from "./CircleProgressBar"
+import { LinearBar } from "./LinearProgressBar"
+import { LinearBarText } from "./LinearBarText"
 
 const useStyles = makeStyles({
   root: {
@@ -267,6 +273,39 @@ export const UserProfile = () => {
    * -------------------------------------------------------- */
   const classes = useStyles()
 
+  console.log(statistics)
+
+  /* Fake Data */
+  const allAC = { totalEasy: 33, totalMedium: 14, totalHard: 4 }
+
+  const [easypercent, setEasypercentt] = useState(true)
+  const [mediumpercent, setMediumpercent] = useState(true)
+  const [hardpercent, setHardpercent] = useState(true)
+
+  const changeEasypercent = () => {
+    if (easypercent) {
+      setEasypercentt(false)
+    } else {
+      setEasypercentt(true)
+    }
+  }
+
+  const changeMediumpercent = () => {
+    if (mediumpercent) {
+      setMediumpercent(false)
+    } else {
+      setMediumpercent(true)
+    }
+  }
+
+  const changeHardpercent = () => {
+    if (hardpercent) {
+      setHardpercent(false)
+    } else {
+      setHardpercent(true)
+    }
+  }
+
   return (
     <>
       <ResponsiveAppBar />
@@ -324,14 +363,31 @@ export const UserProfile = () => {
                 spacing={2}
               >
                 {loading ? (
-                  <Typography
-                    variant="h6"
-                    align="center"
-                    color="white"
-                    component="p"
+                  <Stack
+                    direction="column"
+                    justifyContent="center"
+                    alignItems="center"
+                    sx={{ width: "20vw" }}
                   >
-                    Loading...
-                  </Typography>
+                    <Typography
+                      variant="h6"
+                      align="center"
+                      color="white"
+                      component="p"
+                    >
+                      Loading...
+                    </Typography>
+                    <Box sx={{ width: "30%", my: 3 }}>
+                      <LinearProgress
+                        sx={{
+                          backgroundColor: `rgb(255, 255, 255,0.4)`,
+                          "& .MuiLinearProgress-bar": {
+                            backgroundColor: `rgb(255, 255, 255)`
+                          }
+                        }}
+                      />
+                    </Box>
+                  </Stack>
                 ) : (
                   <>
                     {nftImageList.map((image, i) => (
@@ -404,14 +460,31 @@ export const UserProfile = () => {
                 spacing={2}
               >
                 {loading ? (
-                  <Typography
-                    variant="h6"
-                    align="center"
-                    color="white"
-                    component="p"
+                  <Stack
+                    direction="column"
+                    justifyContent="center"
+                    alignItems="center"
+                    sx={{ width: "20vw" }}
                   >
-                    Loading...
-                  </Typography>
+                    <Typography
+                      variant="h6"
+                      align="center"
+                      color="white"
+                      component="p"
+                    >
+                      Loading...
+                    </Typography>
+                    <Box sx={{ width: "30%", my: 3 }}>
+                      <LinearProgress
+                        sx={{
+                          backgroundColor: `rgb(255, 255, 255,0.4)`,
+                          "& .MuiLinearProgress-bar": {
+                            backgroundColor: `rgb(255, 255, 255)`
+                          }
+                        }}
+                      />
+                    </Box>
+                  </Stack>
                 ) : (
                   <TableContainer>
                     <Table
@@ -445,7 +518,11 @@ export const UserProfile = () => {
                                     borderBottom: "none",
                                     color: "white",
                                     justifyContent: "center",
-                                    fontSize: { lg: "18px", md: "12px" }
+                                    fontSize: {
+                                      lg: "18px",
+                                      md: "10px",
+                                      xs: "10px"
+                                    }
                                   }}
                                 >
                                   {row.solved === false && (
@@ -485,7 +562,7 @@ export const UserProfile = () => {
                                       borderRadius: "20px",
                                       // Type A
                                       background:
-                                        "linear-gradient(90deg, #43E97B 0%, #38F9D7 100%)",
+                                        "linear-gradient(90deg, #8ADABB 0%, #3CBA92 50.52%, #0BA360 100%)",
                                       // Type B
                                       ...(row.class === "Token" && {
                                         background:
@@ -535,7 +612,9 @@ export const UserProfile = () => {
                                       })
                                     }}
                                   >
-                                    {row.class}
+                                    {row.class === "Design_Pattern"
+                                      ? "Design"
+                                      : row.class}
                                   </Button>
                                 </TableCell>
 
@@ -577,6 +656,11 @@ export const UserProfile = () => {
             <Paper
               style={{ backgroundColor: "#0F0B18" }}
               sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                gap: "1rem",
                 py: 2,
                 px: 4,
                 width: "25%",
@@ -594,20 +678,20 @@ export const UserProfile = () => {
               >
                 User Info
               </Typography>
-
               <Stack
                 direction="row"
-                justifyContent="center"
-                alignItems="center"
-                spacing={2}
-                sx={{ mt: 2 }}
+                sx={{ width: "34%", height: "22%", m: 1 }}
+                justifyContent="flex-start"
+                alignItems="flex-start"
+                xs={10}
+                sm={4}
               >
                 <img
                   alt="acdf"
                   style={{ borderRadius: "50%" }}
-                  src="http://cdn.shopify.com/s/files/1/0577/1254/1891/collections/CqG1bnp9Gy89e1Hl.jpg?v=1666354550"
-                  width="50%"
-                  height="50%"
+                  src={egg}
+                  width="100%"
+                  height="100%"
                 />
               </Stack>
 
@@ -615,10 +699,176 @@ export const UserProfile = () => {
                 align="center"
                 variant="h5"
                 style={{ color: "white" }}
-                sx={{ mt: 2, typography: { lg: "h5", sm: "body2" } }}
+                sx={{ typography: { lg: "h5", sm: "body2" } }}
               >
                 {account.substring(0, 5)}...{account.slice(-5)}
               </Typography>
+              <Paper
+                style={{ backgroundColor: "#0F0B18", color: "#FFFFFF" }}
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "90%",
+                  height: "10%",
+                  border: "3px solid white"
+                }}
+              >
+                <Typography
+                  align="center"
+                  color="white"
+                  component="p"
+                  sx={{ typography: { lg: "h5", sm: "caption" } }}
+                >
+                  Answer Record
+                </Typography>
+              </Paper>
+              <Paper
+                style={{ backgroundColor: "#0F0B18" }}
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
+                  alignItems: "flex-start",
+                  px: 1.5,
+                  py: 1,
+                  width: "100%",
+                  height: "35%",
+                  borderRadius: "20px",
+                  border: "3px solid white"
+                }}
+              >
+                {/* <Stack
+                  flexDirection="column"
+                  justifyContent="flex-start"
+                  alignItems="flex-start"
+                  spacing={2}
+                > */}
+                {loading ? (
+                  <Stack
+                    direction="column"
+                    justifyContent="center"
+                    alignItems="center"
+                    sx={{ width: "100%", mt: 5 }}
+                  >
+                    <Typography
+                      variant="h6"
+                      align="center"
+                      color="white"
+                      component="p"
+                    >
+                      Loading...
+                    </Typography>
+                    <Box sx={{ width: "30%", my: 3 }}>
+                      <LinearProgress
+                        sx={{
+                          backgroundColor: `rgb(255, 255, 255,0.4)`,
+                          "& .MuiLinearProgress-bar": {
+                            backgroundColor: `rgb(255, 255, 255)`
+                          }
+                        }}
+                      />
+                    </Box>
+                  </Stack>
+                ) : (
+                  //   <Stack
+                  //   direction="column"
+                  //   justifyContent="flex-start"
+                  //   alignItems="flex-start"
+                  //   // sx={{ width: "10%" , mt:5}}
+                  // >
+                  <>
+                    <Typography
+                      align="center"
+                      color="white"
+                      component="p"
+                      // onClick={myFunction}
+                      sx={{
+                        typography: {
+                          lg: "subtitle1",
+                          sm: "caption",
+                          xs: "caption"
+                        }
+                        // mb: 0.5
+                      }}
+                    >
+                      Solved Data
+                    </Typography>
+                    <Stack
+                      direction="row"
+                      // justifyContent="center"
+                      justifyContent="flex-start"
+                      alignItems="center"
+                      spacing={2}
+                    >
+                      <CircularStatic
+                        totalAC={statistics.totalAC}
+                        totalProblem={problemList.length}
+                      />
+                      <Stack
+                        direction="column"
+                        justifyContent="flex-start"
+                        alignItems="flex-start"
+                        // spacing={2}
+                      >
+                        <Stack
+                          direction="column"
+                          justifyContent="space-between"
+                          alignItems="center"
+                          sx={{ width: "10vw" }}
+                        >
+                          {/** 11111111111111111111 */}
+                          <LinearBarText
+                            difficulty="1"
+                            totalAC={statistics.totalEasyAC}
+                            totalProblem={allAC.totalEasy}
+                            percent={easypercent}
+                            changepercent={changeEasypercent}
+                          />
+                          <LinearBar
+                            clr="41, 204, 106"
+                            totalAC={statistics.totalEasyAC}
+                            totalProblem={allAC.totalEasy}
+                          />
+                          {/** 22222222222222222222 */}
+                          <LinearBarText
+                            difficulty="2"
+                            totalAC={statistics.totalMediumAC}
+                            totalProblem={allAC.totalMedium}
+                            percent={mediumpercent}
+                            changepercent={changeMediumpercent}
+                          />
+                          <LinearBar
+                            clr="204, 158, 41"
+                            totalAC={statistics.totalMediumAC}
+                            totalProblem={allAC.totalMedium}
+                          />
+                          {/** 33333333333333333333333 */}
+                          <LinearBarText
+                            difficulty="3"
+                            totalAC={statistics.totalHardAC}
+                            totalProblem={allAC.totalHard}
+                            percent={hardpercent}
+                            changepercent={changeHardpercent}
+                          />
+                          <LinearBar
+                            clr="235, 109, 55"
+                            totalAC={statistics.totalHardAC}
+                            totalProblem={allAC.totalHard}
+                          />
+                        </Stack>
+                      </Stack>
+                    </Stack>
+                  </>
+                  // </Stack>
+                )}
+                {/* totalHardAC,
+      totalMediumAC: totalMediumAC,
+      totalEasyAC: totalEasyAC*/}
+              </Paper>
+
+              {/* </Paper> */}
+              {/* </Grid> */}
             </Paper>
           </Grid>
         </Grid>

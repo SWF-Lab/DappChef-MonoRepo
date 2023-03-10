@@ -14,6 +14,7 @@ import Stack from "@mui/material/Stack"
 import logo from "./Img/logo transparent_white.png"
 // import { Theme, makeStyles } from "@material-ui/core/styles";
 import { useHook } from "../pages/useHooks"
+import egg from "./Img/egg.png"
 // const settings = ["LightingMode", "Logout"]
 const settings = ["ChangeAccount"]
 
@@ -111,7 +112,7 @@ export const ResponsiveAppBar = () => {
               <>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" />
+                    <Avatar alt="Remy Sharp" src={egg} />
                   </IconButton>
                 </Tooltip>
                 <Menu

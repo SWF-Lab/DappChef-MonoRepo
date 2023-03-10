@@ -4,6 +4,7 @@ import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
 import Modal from "@mui/material/Modal"
 import Stack from "@mui/material/Stack"
+import LinearProgress from "@mui/material/LinearProgress"
 
 const style = {
   position: "absolute" as "absolute",
@@ -19,10 +20,11 @@ const style = {
   pb: 2,
   flexDirection: "column",
   justifyContent: "center",
+  alignItems: "center",
   borderRadius: 2
 }
 
-export const MintModal = ({ mintfunction }) => {
+export const MintModal = ({ mintfunction, minting }) => {
   const [open, setOpen] = React.useState(true)
   // const handleOpen = () => setOpen(true)
   // const handleClose = () => setOpen(false)
@@ -37,70 +39,98 @@ export const MintModal = ({ mintfunction }) => {
         aria-describedby="modal-modal-description"
       >
         <Box display="flex" sx={style}>
-          <Typography
-            id="modal-modal-title"
-            variant="h6"
-            component="h2"
-            color="white"
-            style={{ textAlign: "center" }}
-          >
-            Congratulations!
-          </Typography>
-          <Typography
-            id="modal-modal-title"
-            variant="h6"
-            component="h2"
-            color="white"
-            style={{ textAlign: "center" }}
-          >
-            Do you want to Mint?
-          </Typography>
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            sx={{ mt: 2 }}
-          >
-            <Button
-              sx={{
-                color: "black",
-                width: "10vw",
-                height: "4vh",
-                fontSize: { lg: "20px", sm: "14px" },
-                borderRadius: "20px",
-                textTransform: "none",
-                background: "#FFFFFF",
-                ":hover": {
-                  background: "black",
-                  color: "#FFFFFF"
-                }
-              }}
-              onClick={() => {
-                setOpen(false)
-              }}
-            >
-              Skip
-            </Button>
-            <Button
-              sx={{
-                color: "white",
-                width: "10vw",
-                height: "4vh",
-                fontSize: { lg: "20px", sm: "14px" },
-                borderRadius: "20px",
-                textTransform: "none",
-                background:
-                  "linear-gradient(90deg, #B8CBB8 0%, #B8CBB8 0%, #B465DA 0%, #CF6CC9 33%, #EE609C 66%, #EE609C 100%)",
-                ":hover": {
-                  background: "black",
-                  color: "#FFFFFF"
-                }
-              }}
-              onClick={mintfunction}
-            >
-              Yes
-            </Button>
-          </Stack>
+          {minting === 1 ? (
+            <>
+              <Typography
+                id="modal-modal-title"
+                variant="h6"
+                component="h2"
+                color="white"
+                style={{ textAlign: "center" }}
+              >
+                Minting...
+              </Typography>
+              <Box sx={{ width: "30%", my: 3 }}>
+                <LinearProgress
+                  sx={{
+                    backgroundColor: `rgb(255, 255, 255,0.4)`,
+                    "& .MuiLinearProgress-bar": {
+                      backgroundColor: `rgb(255, 255, 255)`
+                    }
+                  }}
+                />
+              </Box>
+            </>
+          ) : (
+            <>
+              <Typography
+                id="modal-modal-title"
+                variant="h6"
+                component="h2"
+                color="white"
+                style={{ textAlign: "center" }}
+              >
+                Congratulations!
+              </Typography>
+              <Typography
+                id="modal-modal-title"
+                variant="h6"
+                component="h2"
+                color="white"
+                style={{ textAlign: "center" }}
+              >
+                Do you want to Mint?
+              </Typography>
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                sx={{ mt: 2 }}
+              >
+                <Button
+                  sx={{
+                    m: 1,
+                    color: "black",
+                    width: "10vw",
+                    height: "4vh",
+                    fontSize: { lg: "20px", sm: "14px" },
+                    borderRadius: "20px",
+                    textTransform: "none",
+                    background: "#FFFFFF",
+                    ":hover": {
+                      background: "black",
+                      color: "#FFFFFF"
+                    }
+                  }}
+                  onClick={() => {
+                    setOpen(false)
+                  }}
+                >
+                  Skip
+                </Button>
+                <Button
+                  sx={{
+                    m: 1,
+                    color: "white",
+                    width: "10vw",
+                    height: "4vh",
+                    fontSize: { lg: "20px", sm: "14px" },
+                    borderRadius: "20px",
+                    textTransform: "none",
+                    background:
+                      "linear-gradient(90deg, #B8CBB8 0%, #B8CBB8 0%, #B465DA 0%, #CF6CC9 33%, #EE609C 66%, #EE609C 100%)",
+                    ":hover": {
+                      background: "black",
+                      color: "#FFFFFF"
+                    }
+                  }}
+                  onClick={mintfunction}
+                >
+                  Yes
+                </Button>
+              </Stack>
+            </>
+          )}
         </Box>
       </Modal>
     </>

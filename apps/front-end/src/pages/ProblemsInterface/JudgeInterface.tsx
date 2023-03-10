@@ -33,7 +33,7 @@ export const JudgeInterface = (judgeObject: any) => {
     difficulty: 0,
     class: ""
   })
-  const [minting, setMinting] = useState(false)
+  const [minting, setMinting] = useState(0)
   const handleJudge = async () => {
     setJudging(true)
     setAccepted(false)
@@ -290,7 +290,7 @@ export const JudgeInterface = (judgeObject: any) => {
   }
 
   const handleMint = async () => {
-    setMinting(true)
+    setMinting(1)
     try {
       const result = await api.getResponse(
         requestParams.problemSolverAddr,
@@ -338,11 +338,11 @@ export const JudgeInterface = (judgeObject: any) => {
       await _return.wait()
 
       setAccepted(false)
-      setMinting(false)
+      setMinting(2)
       navigate("/")
     } catch (e: any) {
       console.log(e)
-      setMinting(false)
+      setMinting(1)
     }
   }
 
@@ -391,7 +391,7 @@ export const JudgeInterface = (judgeObject: any) => {
         </Button>
         {accepted && (
           <>
-            <MintModal mintfunction={handleMint} />
+            <MintModal mintfunction={handleMint} minting={minting} />
           </>
         )}
       </Grid>
