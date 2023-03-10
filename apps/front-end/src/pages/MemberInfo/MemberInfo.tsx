@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography"
 import Container from "@mui/material/Container"
 import GitHubIcon from "@mui/icons-material/GitHub"
 import LinkedInIcon from "@mui/icons-material/LinkedIn"
+import Box from "@mui/material/Box"
 // import MenuBookIcon from "@mui/icons-material/MenuBook"
 
 import { CardActionArea } from "@mui/material"
@@ -18,6 +19,7 @@ import { Footer } from "../../components/Footer"
 import medium from "../../components/Img/medium.png"
 import linkedin from "../../components/Img/LI-In-Bug.png"
 import github from "../../components/Img/github-mark-white.png"
+import swf from "../../components/Img/swf.png"
 
 const cards = [
   {
@@ -78,18 +80,21 @@ export const MemberInfo = () => {
 
   return (
     <>
-      <ResponsiveAppBar
-      // account={account}
-      // onClickConnect={onClickConnect}
-      // toUserProfile={toUserProfile}
-      />
-      <main style={{ background: "#0F0B18", height: "100vh" }}>
+      {/* <div style={{height:2000}}> */}
+      <ResponsiveAppBar />
+      <main
+        style={{
+          background: "#0F0B18",
+          height: "100%"
+          // overflow: "auto"
+        }}
+      >
         {/* Hero unit */}
         <Container
           sx={{
             pt: 1,
-            px: 2,
-            height: "100%"
+            px: 2
+            // height: "100%"
             // overflow: "auto"
           }}
           maxWidth={false}
@@ -102,7 +107,7 @@ export const MemberInfo = () => {
             alignItems="center"
           >
             <Card
-              style={{ backgroundColor: "black" }}
+              style={{ backgroundColor: "#0F0B18" }}
               sx={{
                 py: 2,
                 px: 4,
@@ -121,17 +126,32 @@ export const MemberInfo = () => {
                   justifyContent="flex-start"
                   alignItems="center"
                 >
-                  <CardMedia
-                    sx={{
-                      pt: 1.5,
-                      px: 1.5,
-                      borderRadius: "150px",
-                      width: "15%"
-                    }}
+                  <Box
                     component="img"
-                    image="https://p2.bahamut.com.tw/HOME/creationCover/97/0003913697_B.JPG"
-                    alt="green iguana"
+                    sx={{
+                      height: { xs: 100, xl: 150 },
+                      width: { xs: 100, xl: 150 },
+                      maxHeight: { xs: 233, md: 167 },
+                      maxWidth: { xs: 350, md: 250 },
+                      borderRadius: 150
+                    }}
+                    alt="The house from the offer."
+                    src={swf}
                   />
+                  {/* <img
+                    // sx={{
+                    //   pt: 1.5,
+                    //   px: 1.5,
+                    //   borderRadius: "350px",
+                    //   // width: "30",
+                    //   // height: "30"
+                    // }}
+                    width="30"
+                      height="30"
+                    // component="img"
+                    src={swf}
+                    alt="logo"
+                  /> */}
                   <Stack
                     direction="column"
                     justifyContent="center"
@@ -145,32 +165,12 @@ export const MemberInfo = () => {
                       align="flex-start"
                       color="white"
                       component="p"
-                      sx={{ typography: { lg: "subtitle1", sm: "caption" } }}
+                      sx={{ typography: { lg: "subtitle1", md: "caption" } }}
                     >
-                      Hello, we are swfLAB, a Blockchain DApp Development &
-                      Solution Team from Taiwan!
-                    </Typography>
-                    <Typography
-                      variant="subtitle1"
-                      align="flex-start"
-                      color="white"
-                      component="p"
-                      sx={{ typography: { lg: "subtitle1", sm: "caption" } }}
-                    >
-                      We are researching Web3 by researching everthing about
-                      Blockchain and developing DApp on Ethereum. Check out
-                      Medium Publication to follow the latest posts, or Official
-                      Website to overview the fantastic projects we have done
-                      before.
-                    </Typography>
-                    <Typography
-                      variant="subtitle1"
-                      align="flex-start"
-                      color="white"
-                      component="p"
-                      sx={{ typography: { lg: "subtitle1", sm: "caption" } }}
-                    >
-                      Thank you 💜
+                      Hello, we are SWF Lab, a Blockchain DApp Development &
+                      Solution Team from Taiwan! We are researching Web3 by
+                      researching everthing about Blockchain and developing DApp
+                      on Ethereum.
                     </Typography>
                   </Stack>
                 </Stack>
@@ -253,9 +253,7 @@ export const MemberInfo = () => {
                   alignItems="center"
                   spacing={0}
                 >
-                  <CardActionArea
-                  // href={card.link}
-                  >
+                  <CardActionArea>
                     <CardMedia
                       sx={{
                         pt: 1.5,
@@ -296,6 +294,7 @@ export const MemberInfo = () => {
         </Container>
       </main>
       <Footer />
+      {/* </div> */}
     </>
   )
 }

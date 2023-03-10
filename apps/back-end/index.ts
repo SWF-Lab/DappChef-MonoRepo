@@ -89,34 +89,35 @@ async function generateMetadata(
   classes: String
 ) {
   const approverKeyAddr = process.env.SERVER_KEY_ARRR as string
-  let img_cid = await getImageCID(probNum)
-  let temp = {
-    name: "DappChef Rewards NFT #" + probNum,
-    description:
-      "DappChef is a Ethereum Smart Contract Development Learning platform. Solve the coding problem, then you can mint the Reward NFT!",
-    solver: probSolAddr,
-    approver: approverKeyAddr,
-    problemSolvedTimestamp: probSolTime,
-    attributes: [
-      {
-        display_type: "number",
-        trait_type: "problemNumber",
-        value: probNum
-      },
-      {
-        trait_type: "difficulty",
-        value: difficulty
-      },
-      {
-        trait_type: "class",
-        value: classes
-      }
-    ],
-    image: "ipfs://" + img_cid + "/" + probNum
-  }
+  // let img_cid = await getImageCID(probNum)
+  // let temp = {
+  //   name: "DappChef Rewards NFT #" + probNum,
+  //   description:
+  //     "DappChef is a Ethereum Smart Contract Development Learning platform. Solve the coding problem, then you can mint the Reward NFT!",
+  //   solver: probSolAddr,
+  //   approver: approverKeyAddr,
+  //   problemSolvedTimestamp: probSolTime,
+  //   attributes: [
+  //     {
+  //       display_type: "number",
+  //       trait_type: "problemNumber",
+  //       value: probNum
+  //     },
+  //     {
+  //       trait_type: "difficulty",
+  //       value: difficulty
+  //     },
+  //     {
+  //       trait_type: "class",
+  //       value: classes
+  //     }
+  //   ],
+  //   image: "ipfs://" + img_cid + "/" + probNum
+  // }
+  let cid = "lkjlkj"
 
-  let cid = await uploadMetadataToIPFS(temp)
   return {
+    // let cid = await uploadMetadataToIPFS(temp)
     signsignature: sign,
     cid: cid
   }

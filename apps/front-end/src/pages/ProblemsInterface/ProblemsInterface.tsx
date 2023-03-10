@@ -15,6 +15,8 @@ import Button from "@mui/material/Button"
 import Stack from "@mui/material/Stack"
 import Ads from "../../components/Ads.tsx"
 import star from "../../components/Img/DappChef-Asset-star.png"
+import LinearProgress from "@mui/material/LinearProgress"
+import Box from "@mui/material/Box"
 
 export const ProblemsInterface = () => {
   const { probNum } = useParams<{ probNum: string | undefined }>()
@@ -90,15 +92,27 @@ export const ProblemsInterface = () => {
                 sx={{ m: 0 }}
               >
                 {loading ? (
-                  <Typography
-                    variant="h4"
-                    align="center"
-                    color="white"
-                    component="p"
-                    sx={{ typography: { lg: "h4", sm: "body1" } }}
-                  >
-                    Loading...
-                  </Typography>
+                  <>
+                    <Typography
+                      variant="h4"
+                      align="center"
+                      color="white"
+                      component="p"
+                      sx={{ typography: { lg: "h4", sm: "body1" } }}
+                    >
+                      Loading...
+                    </Typography>
+                    <Box sx={{ width: "30%", my: 3 }}>
+                      <LinearProgress
+                        sx={{
+                          backgroundColor: `rgb(255, 255, 255,0.4)`,
+                          "& .MuiLinearProgress-bar": {
+                            backgroundColor: `rgb(255, 255, 255)`
+                          }
+                        }}
+                      />
+                    </Box>
+                  </>
                 ) : (
                   <>
                     <Paper
@@ -117,13 +131,14 @@ export const ProblemsInterface = () => {
                         direction="row"
                         justifyContent="space-between"
                         alignItems="flex-start"
+                        // spacing={2}
                       >
                         <Stack
                           direction="column"
                           justifyContent="flex-start"
                           alignItems="flex-start"
                           spacing={3}
-                          sx={{ width: "70%" }}
+                          sx={{ width: "75%" }}
                         >
                           <Stack
                             direction="row"
@@ -148,13 +163,13 @@ export const ProblemsInterface = () => {
                                 },
                                 color: "white",
                                 width: "10vw",
-                                height: "6vh",
+                                height: "3.5vh",
                                 textTransform: "none",
                                 fontSize: { lg: "20px", sm: "14px" },
                                 borderRadius: "20px",
                                 // Type A
                                 background:
-                                  "linear-gradient(90deg, #43E97B 0%, #38F9D7 100%)",
+                                  "linear-gradient(90deg, #8ADABB 0%, #3CBA92 50.52%, #0BA360 100%)",
                                 // Type B
                                 ...(problemsInfo.attributes[1].value ===
                                   "Token" && {
@@ -210,7 +225,11 @@ export const ProblemsInterface = () => {
                                 })
                               }}
                             >
-                              {problemsInfo.attributes[1].value}
+                              {problemsInfo.attributes[1].value ===
+                              "Design_Pattern"
+                                ? "Design"
+                                : problemsInfo.attributes[1].value}
+                              {/* {problemsInfo.attributes[1].value} */}
                             </Button>
                             {problemsInfo.attributes[0].value === 1 && (
                               <img
@@ -258,6 +277,27 @@ export const ProblemsInterface = () => {
                                 />
                               </>
                             )}
+                            <Button
+                              sx={{
+                                "&:hover": {
+                                  cursor: "default"
+                                },
+                                color: "white",
+                                width: "12vw",
+                                height: "3.5vh",
+                                textTransform: "none",
+                                fontSize: { lg: "20px", sm: "14px" },
+                                borderRadius: "20px",
+                                // Type A
+                                background:
+                                  "linear-gradient(90deg, #16D9E3 0%, #30C7EC 56.25%, #46AEF7 100%)"
+                              }}
+                              target="_blank"
+                              href="https://github.com/SWF-Lab/DappChef/discussions"
+                            >
+                              {" "}
+                              Discussion
+                            </Button>
                           </Stack>
                           <Typography
                             variant="h4"
@@ -268,6 +308,32 @@ export const ProblemsInterface = () => {
                           >
                             {problemsInfo?.description}
                           </Typography>
+                        </Stack>
+                        <Stack
+                          direction="row"
+                          justifyContent="flex-start"
+                          alignItems="center"
+                          spacing={5}
+                          // sx={{ width: "50%" }}
+                        >
+                          {/* <Button
+                              sx={{
+                                "&:hover": {
+                                  cursor: "default"
+                                },
+                                color: "white",
+                                width: "12vw",
+                                height: "3.5vh",
+                                textTransform: "none",
+                                fontSize: { lg: "20px", sm: "14px" },
+                                borderRadius: "20px",
+                                // Type A
+                                background: "linear-gradient(90deg, #16D9E3 0%, #30C7EC 56.25%, #46AEF7 100%)",
+                                
+                              }}
+                              target="_blank"
+                              href="https://github.com/SWF-Lab/DappChef/discussions"
+                            > Discussion</Button> */}
                         </Stack>
                         <img
                           alt="acdf"
