@@ -20,8 +20,9 @@ export const CircularStatic = ({ totalAC, totalProblem }) => {
   }
 
   return (
-    <Box sx={{ position: "relative", display: "inline-flex", pt: 3 }}>
+    <Box sx={{ position: "relative", display: "inline-flex", pt: 1.5 }}>
       <CircularProgress
+        // value={100}
         value={(totalAC / totalProblem) * 100}
         variant="determinate"
         size={90}
@@ -37,7 +38,7 @@ export const CircularStatic = ({ totalAC, totalProblem }) => {
       />
       <Box
         sx={{
-          pt: 3,
+          pt: 1.5,
           top: 0,
           left: 0,
           bottom: 0,

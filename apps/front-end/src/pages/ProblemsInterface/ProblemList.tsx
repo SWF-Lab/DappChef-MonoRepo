@@ -65,17 +65,25 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     backgroundColor: "#2D5798"
   }
 }))
+const HideRow = styled(TableRow)(({ theme }) => ({
+  "&": {
+    backgroundColor: "#1C1B29"
+  },
+  "& th": {
+    fontSize: { lg: "24px", sm: "16px" }
+  }
+}))
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
     elevation={0}
     anchorOrigin={{
       vertical: "bottom",
-      horizontal: "right"
+      horizontal: "center"
     }}
     transformOrigin={{
       vertical: "top",
-      horizontal: "right"
+      horizontal: "center"
     }}
     {...props}
   />
@@ -112,7 +120,12 @@ const tagRow = [
   "Scalability"
 ]
 
-const difficultRow = ["Reset", "Easy", "Medium", "Hard"]
+const difficultRow = [
+  { name: "Reset", value: 0 },
+  { name: "Easy", value: 1 },
+  { name: "Medium", value: 2 },
+  { name: "Hard", value: 3 }
+]
 
 /*------------------------------------------------------ */
 export const ProblemList = () => {
@@ -226,24 +239,60 @@ export const ProblemList = () => {
   const handleClickTag = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElTag(event.currentTarget)
   }
-  const handleCloseTag = () => {
-    console.log(e.target.value)
+  // filter function
+  const handleCloseTag = (event) => {
+    const { myValue } = event.currentTarget.dataset
+
+    if (tagRow.includes(myValue)) {
+      if (myValue === "Reset") {
+        setProblemList(originalList)
+      } else {
+        var newArray = originalList.filter(function (el) {
+          return el.class === myValue
+        })
+        // console.log(newArray);
+        setProblemList(newArray)
+        setPage(1)
+      }
+    }
     setAnchorElTag(null)
   }
 
   /*---------------Menu 2---------------*/
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-  const open = Boolean(anchorEl)
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget)
+  const [anchorElDiff, setAnchorElDiff] = React.useState<null | HTMLElement>(
+    null
+  )
+  const openDiff = Boolean(anchorElDiff)
+  const handleClickDiff = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElDiff(event.currentTarget)
   }
-  const handleClose = () => {
-    setAnchorEl(null)
+  const handleCloseDiff = (event) => {
+    const { myValue } = event.currentTarget.dataset
+    var numvalue = parseInt(myValue)
+    console.log("~~~~", numvalue)
+    if ([0, 1, 2, 3].includes(numvalue)) {
+      console.log("QAQ", numvalue)
+      if (numvalue === 0) {
+        setProblemList(originalList)
+      } else {
+        console.log("CHANGE", numvalue)
+        var newArray = originalList.filter(function (el) {
+          return el.difficulty === numvalue
+        })
+
+        setProblemList(newArray)
+        setPage(1)
+      }
+    }
+    setAnchorElDiff(null)
   }
 
+  // const [emptyarray, setEmptyArray] = new Array(10)
+  const emptyarray = Array(10).fill("")
   const emptyRows = page > 0 ? Math.max(0, page * 10 - problemList.length) : 0
 
-  console.log(emptyRows)
+  console.log(emptyRows, emptyarray)
+
   return (
     <>
       <Container
@@ -272,7 +321,7 @@ export const ProblemList = () => {
         </Stack>
 
         <Paper
-          // style={{  height: "70vh",}}
+          style={{ width: "80vw" }}
           component={Stack}
           direction="column"
           justifyContent="flex-start"
@@ -294,7 +343,7 @@ export const ProblemList = () => {
             justifyContent="space-evenly"
             alignItems="flex-start"
           >
-            <TableContainer>
+            <TableContainer style={{ width: "100%" }}>
               <Table
                 stickyHeader
                 aria-label="sticky table"
@@ -338,7 +387,13 @@ export const ProblemList = () => {
                       onClose={handleCloseTag}
                     >
                       {tagRow.map((row) => (
-                        <MenuItem key={row} onClick={handleCloseTag}>
+                        <MenuItem
+                          key={row}
+                          // onClick={(e) => clicked(item, popupState)}
+                          onClick={handleCloseTag}
+                          data-my-value={row}
+                          // value={123}
+                        >
                           {row === "Design_Pattern" ? "Design" : row}
                         </MenuItem>
                       ))}
@@ -361,7 +416,7 @@ export const ProblemList = () => {
                       key="Difficulty"
                       align="center"
                       style={{ cursor: "pointer" }}
-                      onClick={handleClick}
+                      onClick={handleClickDiff}
                       sx={{
                         backgroundColor: "#1C1B29",
                         color: "white",
@@ -376,13 +431,17 @@ export const ProblemList = () => {
                       MenuListProps={{
                         "aria-labelledby": "demo-customized-button"
                       }}
-                      anchorEl={anchorEl}
-                      open={open}
-                      onClose={handleClose}
+                      anchorEl={anchorElDiff}
+                      open={openDiff}
+                      onClose={handleCloseDiff}
                     >
                       {difficultRow.map((row) => (
-                        <MenuItem key={row} onClick={handleClose}>
-                          {row}
+                        <MenuItem
+                          key={row.name}
+                          onClick={handleCloseDiff}
+                          data-my-value={row.value}
+                        >
+                          {row.name}
                         </MenuItem>
                       ))}
                     </StyledMenu>
@@ -390,7 +449,7 @@ export const ProblemList = () => {
                     <TableCell
                       key="status"
                       align="center"
-                      minWidth="350"
+                      // minWidth="350"
                       sx={{
                         backgroundColor: "#1C1B29",
                         color: "white",
@@ -403,7 +462,7 @@ export const ProblemList = () => {
                 </TableHead>
                 <TableBody>
                   {problemList.slice(page * 10 - 10, page * 10).map((row) => {
-                    console.log(problemList)
+                    // console.log(problemList)
                     return (
                       <StyledTableRow
                         hover
@@ -414,14 +473,18 @@ export const ProblemList = () => {
                             ? { cursor: "pointer" }
                             : { cursor: "not-allowed" }
                         }
+                        style={{ height: "10px" }}
                         className={classes.root}
-                        onClick={() =>
-                          account ? navigate("/" + row.problemNumber) : null
-                        }
+                        onClick={() => {
+                          if (account) {
+                            navigate("/" + row.problemNumber)
+                            window.scrollTo(0, 0)
+                          }
+                        }}
                       >
                         <TableCell
                           key={row.id}
-                          width="5vw"
+                          width="20%"
                           align="center"
                           sx={{
                             borderBottom: "none",
@@ -432,7 +495,7 @@ export const ProblemList = () => {
                           <Button
                             sx={{
                               color: "white",
-                              width: "100%",
+                              width: "60%",
                               height: "3.5vh",
                               textTransform: "none",
                               fontSize: { lg: "16px", sm: "12px" },
@@ -493,7 +556,8 @@ export const ProblemList = () => {
                         </TableCell>
                         <TableCell
                           key={row.id}
-                          style={{ width: "90vh" }}
+                          width="50%"
+                          // style={{ width: "60%" }}
                           // align={column.align}
                           sx={{
                             borderBottom: "none",
@@ -507,8 +571,8 @@ export const ProblemList = () => {
                         </TableCell>
                         <TableCell
                           key={row.id}
-                          width="5vw"
-                          // align={column.align}
+                          width="15%"
+                          // style={{ width: "5%" }}
                           sx={{
                             borderBottom: "none",
                             color: "white"
@@ -558,7 +622,7 @@ export const ProblemList = () => {
                         </TableCell>
                         <TableCell
                           key={row.id}
-                          width="5vw"
+                          width="15%"
                           align="center"
                           justifyContent="center"
                           sx={{
@@ -571,24 +635,25 @@ export const ProblemList = () => {
                             direction="row"
                             justifyContent="center"
                             alignItems="center"
+                            // sx={{ height: "3.5vh"}}
                           >
                             {account === "" ? (
                               <img
-                                width="100%"
-                                hight="100%"
+                                width="80%"
+                                // height="3.5vh"
                                 src={lock}
                                 alt="solved"
                               />
                             ) : row.solved ? (
                               <img
-                                width="100%"
-                                hight="100%"
+                                width="80%"
+                                height="50%"
                                 src={solved}
                                 alt="solved"
                               />
                             ) : (
                               // <img src={lock} alt="Question" />
-                              <img width="100%" src={trytry} alt="Try" />
+                              <img width="80%" src={trytry} alt="Try" />
                             )}
                           </Stack>
                         </TableCell>
@@ -596,15 +661,23 @@ export const ProblemList = () => {
                     )
                   })}
 
-                  {emptyRows > 0 && (
-                    <TableRow
-                      style={{
-                        height: 3 * emptyRows
-                      }}
-                    >
-                      <TableCell colSpan={6} />
-                    </TableRow>
-                  )}
+                  {emptyRows > 0 &&
+                    emptyarray.slice(0, emptyRows).map((row) => {
+                      return (
+                        <HideRow
+                          key={row}
+                          className={classes.root}
+                          style={{ height: "5.12vh" }}
+                        >
+                          <TableCell
+                            colSpan={5}
+                            sx={{
+                              borderBottom: "none"
+                            }}
+                          ></TableCell>
+                        </HideRow>
+                      )
+                    })}
                 </TableBody>
               </Table>
             </TableContainer>

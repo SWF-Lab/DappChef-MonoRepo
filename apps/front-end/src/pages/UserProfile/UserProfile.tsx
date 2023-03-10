@@ -788,8 +788,8 @@ export const UserProfile = () => {
                           lg: "subtitle1",
                           sm: "caption",
                           xs: "caption"
-                        },
-                        mb: 0.5
+                        }
+                        // mb: 0.5
                       }}
                     >
                       Solved Data
