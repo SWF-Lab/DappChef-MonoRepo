@@ -17,6 +17,7 @@ export const JudgeInterface = (judgeObject: any) => {
   const problemInfo = judgeObject.problemsInfo
   const Bytecode = judgeObject.Bytecode
   const ABI = judgeObject.ABI
+  const solved = judgeObject.solved
 
   const navigate = useNavigate()
   const [message, setMessage] = useState("")
@@ -389,7 +390,7 @@ export const JudgeInterface = (judgeObject: any) => {
         >
           {judging ? "Judging..." : "Judge"}
         </Button>
-        {accepted && (
+        {accepted && !solved && (
           <>
             <MintModal mintfunction={handleMint} minting={minting} />
           </>

@@ -3,6 +3,8 @@ import { Container } from "./styles"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 import { CodeEditor } from "./CodeEditor"
+import { ethers } from "ethers"
+import REWARD_NFT_ABI from "../../../contract-artifacts/rewardABI.json"
 
 /* front end*/
 import Paper from "@mui/material/Paper"
@@ -17,20 +19,27 @@ import Ads from "../../components/Ads.tsx"
 import star from "../../components/Img/DappChef-Asset-star.png"
 import LinearProgress from "@mui/material/LinearProgress"
 import Box from "@mui/material/Box"
+import lock from "../../components/Img/DappChef-Asset-lock-2.png"
 
 export const ProblemsInterface = () => {
   const { probNum } = useParams<{ probNum: string | undefined }>()
   const [problemsInfo, setProblemsInfo] = useState<any>()
   const [code, setCode] = useState<string>("")
   const [loading, setLoading] = useState(true)
+  const [solved, setSolved] = useState(false)
+  const [nftImage, setNFTImage] = useState<Blob>() // 答對的題目的 NFT Image
 
   /** Problem Information Getter */
 
-  const RewardNFTAddress = process.env.REWARDS_CONTRACT_ADDR
+  const RewardNFTAddress = process.env.REWARDS_CONTRACT_ADDR as string
   const PROBLEMS_IPFS_CID = process.env.PROBLEMS_IPFS_CID as string
   const PROBLEMS_CODE_IPFS_CID = `${process.env.PROBLEMS_CODE_IPFS_CID}${probNum}.txt`
 
   async function getProblems() {
+    /**  --------------------------------------------------------
+     * Get Problem Info
+     * -------------------------------------------------------- */
+
     const problemsResponse = await fetch(PROBLEMS_IPFS_CID)
     const data = await problemsResponse.json()
     const target = data[probNum as string]
@@ -38,13 +47,88 @@ export const ProblemsInterface = () => {
 
     await axios.get(PROBLEMS_CODE_IPFS_CID).then((res) => {
       setCode(res.data.toString())
-      // console.log(res.data.toString())
       return res.data
     })
+
+    /** --------------------------------------------------------
+     * Setting up the basic ethers object
+     * -------------------------------------------------------- */
+    if (!(window as any).ethereum) {
+      return
+    }
+    await window.ethereum.enable()
+    const provider = new ethers.providers.Web3Provider(
+      (window as any).ethereum,
+      "any"
+    )
+    await provider
+      .send("wallet_switchEthereumChain", [{ chainId: "0x5" }])
+      .catch((e) => console.log(e))
+
+    provider.send("eth_requestAccounts", []).catch((e) => console.log(e))
+
+    const signer = provider.getSigner()
+
+    const RewardNFTContract = new ethers.Contract(
+      RewardNFTAddress,
+      REWARD_NFT_ABI,
+      signer
+    )
+
+    try {
+      const TargetAccountBalance = await RewardNFTContract.getSolvingStatus(
+        await signer.getAddress()
+      )
+      const len = TargetAccountBalance[0].toNumber()
+      let _solved = false
+      TargetAccountBalance[1].map((element: any, index: number) => {
+        if (index < len && element.toNumber() == probNum) {
+          setSolved(true)
+          _solved = true
+          console.log("This problem has been solved!")
+        }
+      })
+
+      if (!_solved) {
+        setLoading(false)
+        console.log("This problem has not been solved!")
+        return
+      }
+
+      /**  --------------------------------------------------------
+       * Get Problem Image
+       * -------------------------------------------------------- */
+
+      const TargetAccount_TargetProblem_TokenID =
+        await RewardNFTContract.getTokenID(await signer.getAddress(), probNum)
+
+      // Get the Target Problem TokenURI of the User
+      const TargetAccount_TargetProblem_TokenURI =
+        await RewardNFTContract.tokenURI(TargetAccount_TargetProblem_TokenID)
+
+      const tokenResponse = await fetch(
+        "https://nftstorage.link/ipfs/" + TargetAccount_TargetProblem_TokenURI
+      )
+      const token = await tokenResponse.json()
+      const imageCID = token.image.toString()
+      const imageResponse = await fetch(imageCID)
+      const image = await imageResponse.blob()
+      setNFTImage(image)
+    } catch (e: any) {
+      console.log(e)
+    }
+
     setLoading(false)
   }
 
   useEffect(() => {
+    const setLockImage = async () => {
+      const lock = await fetch("https://i.imgur.com/nQhWIQHs.png").then((r) =>
+        r.blob()
+      )
+      setNFTImage(lock)
+    }
+    setLockImage()
     getProblems()
   }, [probNum])
 
@@ -338,7 +422,7 @@ export const ProblemsInterface = () => {
                         <img
                           alt="acdf"
                           style={{ borderRadius: "50%" }}
-                          src="http://cdn.shopify.com/s/files/1/0577/1254/1891/collections/BbuhVewRthymtZ6p.jpg?v=1666354012"
+                          src={URL.createObjectURL(nftImage as Blob)}
                           width="15%"
                           height="15%"
                         />
@@ -366,7 +450,7 @@ export const ProblemsInterface = () => {
                         <Ads />
                       </Typography>
                     </Paper>
-                    <CodeEditor {...{ code, problemsInfo }} />
+                    <CodeEditor {...{ code, problemsInfo, solved }} />
                   </>
                 )}
               </Grid>

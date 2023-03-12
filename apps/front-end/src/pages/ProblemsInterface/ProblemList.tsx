@@ -250,7 +250,6 @@ export const ProblemList = () => {
         var newArray = originalList.filter(function (el) {
           return el.class === myValue
         })
-        // console.log(newArray);
         setProblemList(newArray)
         setPage(1)
       }
@@ -269,13 +268,10 @@ export const ProblemList = () => {
   const handleCloseDiff = (event) => {
     const { myValue } = event.currentTarget.dataset
     var numvalue = parseInt(myValue)
-    console.log("~~~~", numvalue)
     if ([0, 1, 2, 3].includes(numvalue)) {
-      console.log("QAQ", numvalue)
       if (numvalue === 0) {
         setProblemList(originalList)
       } else {
-        console.log("CHANGE", numvalue)
         var newArray = originalList.filter(function (el) {
           return el.difficulty === numvalue
         })
@@ -290,8 +286,6 @@ export const ProblemList = () => {
   // const [emptyarray, setEmptyArray] = new Array(10)
   const emptyarray = Array(10).fill("")
   const emptyRows = page > 0 ? Math.max(0, page * 10 - problemList.length) : 0
-
-  console.log(emptyRows, emptyarray)
 
   return (
     <>
@@ -462,7 +456,6 @@ export const ProblemList = () => {
                 </TableHead>
                 <TableBody>
                   {problemList.slice(page * 10 - 10, page * 10).map((row) => {
-                    // console.log(problemList)
                     return (
                       <StyledTableRow
                         hover

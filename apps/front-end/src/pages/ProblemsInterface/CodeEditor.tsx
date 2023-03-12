@@ -63,10 +63,12 @@ const EditorBottom = styled.div`
 
 export const CodeEditor = ({
   code,
-  problemsInfo
+  problemsInfo,
+  solved
 }: {
   code: string
   problemsInfo: any
+  solved: Boolean
 }) => {
   /** ---------------------------------------------------
    * Provider and Fetch the user wallet in browser(e.g. Metamask)
@@ -294,7 +296,9 @@ export const CodeEditor = ({
         </Button>
       </Grid>
 
-      {judgebtn && <JudgeInterface {...{ problemsInfo, Bytecode, ABI }} />}
+      {judgebtn && (
+        <JudgeInterface {...{ problemsInfo, Bytecode, ABI, solved }} />
+      )}
     </Grid>
   )
 }

@@ -98,7 +98,11 @@ export const UserProfile = () => {
     totalMediumAC: 0,
     totalEasyAC: 0
   }) // 答對的題目的題號們
-  const [allAC, setAllAC] = useState({ totalEasy: 0, totalMedium: 0, totalHard: 0 })
+  const [allAC, setAllAC] = useState({
+    totalEasy: 0,
+    totalMedium: 0,
+    totalHard: 0
+  })
   const [nftImageList, setNFTImageList] = useState<Blob[]>([]) // 答對的題目的 NFT Image
   const [problemsInfo, setProblemsInfo] = useState([]) // 所有的題目的資訊
   const [problemList, setProblemList] = useState<any>([]) // 所有的題目
@@ -151,7 +155,6 @@ export const UserProfile = () => {
     console.log(TargetAccountBalance)
     const nSolvingProb = TargetAccountBalance[0]
     const solvingProb = TargetAccountBalance[1]
-    const temp = solvingProb.map(Number)
 
     for (let i = 0; i < nSolvingProb; i++) {
       // Get the Target Problem TokenID of the User
@@ -259,7 +262,6 @@ export const UserProfile = () => {
       if (element.difficulty === 1) totalEasy += 1
       else if (element.difficulty === 2) totalMedium += 1
       else if (element.difficulty === 3) totalHard += 1
-      
     })
 
     setStatistics({
@@ -271,7 +273,7 @@ export const UserProfile = () => {
     setAllAC({
       totalEasy: totalEasy,
       totalMedium: totalMedium,
-      totalHard: totalHard,
+      totalHard: totalHard
     })
 
     setLoading(false)
@@ -289,7 +291,6 @@ export const UserProfile = () => {
   console.log(statistics)
 
   /* Fake Data */
-  
 
   const [easypercent, setEasypercentt] = useState(true)
   const [mediumpercent, setMediumpercent] = useState(true)
