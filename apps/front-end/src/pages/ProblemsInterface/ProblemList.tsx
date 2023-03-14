@@ -62,7 +62,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     fontSize: { lg: "24px", sm: "16px" }
   },
   "&.MuiTableRow-root:hover": {
-    backgroundColor: "#2D5798"
+    backgroundColor: "#2D5798",
+    cursor: "pointer"
   }
 }))
 const HideRow = styled(TableRow)(({ theme }) => ({

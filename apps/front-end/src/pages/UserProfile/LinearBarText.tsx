@@ -15,13 +15,13 @@ export const LinearBarText = ({
       direction="row"
       justifyContent="space-between"
       alignItems="center"
-      sx={{ width: "10vw" }}
+      sx={{ width: "100%" }}
     >
       <Typography
         align="center"
         color="white"
         component="p"
-        sx={{ typography: { lg: "subtitle1", sm: "caption" } }}
+        sx={{ typography: { lg: "caption", sm: "caption" } }}
       >
         Star {difficulty}
       </Typography>
@@ -30,7 +30,7 @@ export const LinearBarText = ({
         color="white"
         component="p"
         sx={{
-          typography: { lg: "subtitle1", sm: "caption", xs: "caption" },
+          typography: { lg: "caption", sm: "caption", xs: "caption" },
           "&:hover": {
             cursor: "pointer"
           }

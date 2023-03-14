@@ -17,6 +17,7 @@ import LoginVideo from "../../components/Img/DappChef_v8_login.mp4"
 import start from "../../components/Img/Start.png"
 import { makeStyles } from "@material-ui/core/styles"
 import Ads from "../../components/Ads.tsx"
+import { Ad } from "../../components/Ad.tsx"
 import { Dune } from "./Dune.tsx"
 
 const useStyles = makeStyles((theme) => ({
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     position: "relative",
     display: "flex",
-    background: "#0F0B18",
+    backgroundColor: "#0F0B18",
     alignItems: "center",
     justifyContent: "center",
     "& video": {
@@ -51,15 +52,28 @@ export const Main = () => {
   const imageStyle = {
     cursor: "pointer"
   }
-  const settings = {
-    dots: true,
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    speed: 1000,
-    autoplaySpeed: 1000,
-    cssEase: "linear"
+
+  /*要再整理 */
+  const scrolltoProblem = () => {
+    const width = window.innerWidth
+    const height = window.innerHeight
+
+    let scrollTop = height * 2.18
+    console.log(width, height, scrollTop)
+    // if (width >= 1280) {
+    //   scrollTop = height*2;
+    // } else if (width >= 1024) {
+    //   scrollTop = 1450;
+    // }  else {
+    //   scrollTop = 1000;
+    // }
+    window.scrollTo({ top: scrollTop, behavior: "smooth" })
+  }
+
+  const newwidth = () => {
+    let widthnow = window.innerWidth
+    console.log(widthnow)
+    return widthnow
   }
 
   return (
@@ -75,17 +89,17 @@ export const Main = () => {
         {/* <Container> */}
         {account ? (
           <section className={classes.root}>
-            <ReactPlayer
-              url={LoginVideo}
-              // url={test}
-              playing
-              loop
-              muted
-              // width="100%"
-              // height="100%"
-              width="97vw"
-              height="100vh"
-            />
+            <div style={{ width: "100%", backgroundColor: "red" }}>
+              <ReactPlayer
+                url={LoginVideo}
+                playing
+                loop
+                muted
+                style={{ objectFit: "cover", width: "100%", height: "100%" }}
+                width="100%"
+                height="100%"
+              />
+            </div>
             <div className={classes.overlay}>
               <Box
                 height="100%"
@@ -100,26 +114,22 @@ export const Main = () => {
                   width={"21%"}
                   style={imageStyle}
                   alt="start"
-                  onClick={() => {
-                    window.scrollTo({ top: 875, behavior: "smooth" })
-                  }}
+                  onClick={scrolltoProblem}
                 />
               </Box>
             </div>
           </section>
         ) : (
           <section className={classes.root}>
+            {/* <div style={{ width: '100%', height: '100vh' }}> */}
             <ReactPlayer
               url={BeforeLoginVideo}
               playing
               muted
-              // width="100%"
-              // height="100%"
-              // width="95vw"
-              // height="100vh"
-              width="97vw"
-              height="100vh"
+              width="100%"
+              height="100%"
             />
+            {/* </div> */}
             <div className={classes.overlay}>
               <Box
                 height="100%"
@@ -134,27 +144,18 @@ export const Main = () => {
                   width={"23%"}
                   style={imageStyle}
                   alt="start"
-                  onClick={() => {
-                    window.scrollTo({ top: 875, behavior: "smooth" })
-                  }}
+                  onClick={scrolltoProblem}
                 />
               </Box>
             </div>
           </section>
         )}
+        <Ads />
 
-        <Grid
-          sx={{ mt: 2, mb: 7, justifyContent: "center", alignItems: "center" }}
-          width="700px"
-          direction="row"
-        >
-          <Ads />
-        </Grid>
         <Dune />
         <Grid>
           <ProblemList />
         </Grid>
-
         <TotalMarquee />
       </main>
       <Footer />

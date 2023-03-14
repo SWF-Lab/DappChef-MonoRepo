@@ -9,9 +9,7 @@ import Box from "@material-ui/core/Box"
 import Grid from "@mui/material/Grid"
 import { styled } from "@mui/material/styles"
 import Typography from "@mui/material/Typography"
-import bg from "../../components/Img/Dune.png"
-import bg4 from "../../components/Img/Dune4.png"
-import test from "../../components/Img/test.png"
+import bg from "../../components/Img/Dune6.png"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,7 +51,7 @@ export const Dune = () => {
         <div
           className={classes.root}
           style={{
-            backgroundImage: `url(${bg4})`,
+            backgroundImage: `url(${bg})`,
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center"
@@ -78,7 +76,7 @@ export const Dune = () => {
               color="white"
               component="p"
               sx={{
-                typography: { lg: "h4", sm: "caption", sx: "caption" }
+                typography: { lg: "h4", md: "body1", sm: "caption" }
                 //   pb:3
               }}
             >
@@ -93,8 +91,8 @@ export const Dune = () => {
             >
               <Paper
                 style={{
-                  width: "220px",
-                  height: "220px",
+                  width: { lg: "220px", md: "150px", sm: "100px" },
+                  height: { lg: "220px", md: "150px", sm: "100px" },
                   backgroundColor: "white"
                 }}
                 sx={{
@@ -145,7 +143,7 @@ export const Dune = () => {
                 }}
               >
                 <iframe
-                  src="https://dune.com/embeds/2023317/3349515"
+                  src="https://dune.com/embeds/2023164/3349291"
                   height="100%"
                   width="100%"
                   style={{ border: "none" }}
@@ -171,7 +169,7 @@ export const Dune = () => {
                 }}
               >
                 <iframe
-                  src="https://dune.com/embeds/2023100/3349198"
+                  src="https://dune.com/embeds/2023125/3349229"
                   height="100%"
                   width="100%"
                   style={{ border: "none" }}

@@ -12,6 +12,7 @@ export const TotalMarquee = () => {
         direction="column"
         justifyContent="space-around"
         alignItems="center"
+        sx={{ mt: 5 }}
         // maxWidth="xl"
       >
         <Typography

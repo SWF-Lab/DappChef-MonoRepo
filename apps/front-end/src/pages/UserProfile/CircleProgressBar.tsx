@@ -5,9 +5,11 @@ import CircularProgress, {
 import Typography from "@mui/material/Typography"
 import Box from "@mui/material/Box"
 import { useState } from "react"
+import { useTheme } from "@mui/material/styles"
 
 export const CircularStatic = ({ totalAC, totalProblem }) => {
   console.log(totalAC, totalProblem)
+  const theme = useTheme()
 
   const [totalACpercent, setTotalACpercent] = useState(true)
   const changeTotalpercent = () => {

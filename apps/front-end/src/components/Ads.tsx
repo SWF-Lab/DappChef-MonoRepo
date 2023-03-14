@@ -3,34 +3,30 @@ import Grid from "@mui/material/Grid"
 import { Slide } from "react-slideshow-image"
 import "react-slideshow-image/dist/styles.css"
 import styled from "styled-components"
+import ads from "./Img/DappChef_Ad.png"
 
-// const Adscontainer = styled.div`
-// display: 'flex',
-// align-items: 'center',
-// justify-content: 'center',
-// backgroundSize: 'cover',
-// direction: "row",
-// width: 70vw,
-// height: '400px'
-// `
 const Adscontainer = styled.div`
   display: flex;
   align-items: space-around;
   justify-content: center;
   background-size: cover;
+  background-position: "center center";
   direction: row;
-  width: 70vw;
-  height: 80px;
+  width: 100vw;
+  height: 20vh;
   gap: 20px;
+  zindex: 1000;
 `
 
 const divStyle = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  // backgroundSize: "contain",
   backgroundSize: "cover",
-  height: "160px",
-  width: "980px"
+  backgroundPosition: "center",
+  height: "100%",
+  width: "100%"
 }
 
 export const Slideshow = () => {
@@ -42,48 +38,36 @@ export const Slideshow = () => {
     arrows: false
   }
 
-  const images = [
-    "https://preview.redd.it/318okbrv9d051.jpg?width=640&crop=smart&auto=webp&s=76cc4f21a34a9a619e8fe3be9bb4072e87247e85",
-    "https://ricedigital.co.uk/wp-content/uploads/2022/03/luxiemheader-850x480.jpg",
-    "https://i.ytimg.com/vi/1CuvyeGDN5Q/mqdefault.jpg"
-  ]
+  const images = [ads, ads, ads]
 
   return (
-    // <Grid  container
-    // direction="column"
-    // justifyContent="center"
-    // alignItems="center"
-    // sx={{width: "80%", height:"20%"}}
-    // >
     <Slide>
-      <Adscontainer>
-        <div
-          style={{
-            ...divStyle,
-            backgroundImage: `url(${images[0]})`,
-            width: "50%"
-          }}
-        ></div>
-        <div
-          style={{
-            ...divStyle,
-            backgroundImage: `url(${images[1]})`,
-            width: "50%"
-          }}
-        ></div>
-      </Adscontainer>
-      <div>
-        <div
-          style={{ ...divStyle, backgroundImage: `url(${images[1]})` }}
-        ></div>
-      </div>
-      <div className="each-slide-effect">
-        <div
-          style={{ ...divStyle, backgroundImage: `url(${images[2]})` }}
-        ></div>
-      </div>
+      {images.map((img) => {
+        return (
+          <Adscontainer>
+            {/* <div
+              style={{
+                ...divStyle,
+                backgroundImage: `url(${images[0]})`,
+                width: "100%"
+              }}
+            ></div> */}
+            <img
+              src={ads}
+              alt=""
+              style={{
+                height: "100%",
+                width: "100%",
+                objectFit: "contain no-repeat",
+                backgroundPosition: "center center",
+                aspectRatio: 16 / 9
+                // objectFit: "cover"
+              }}
+            />
+          </Adscontainer>
+        )
+      })}
     </Slide>
-    // </Grid>
   )
 }
 

@@ -20,6 +20,7 @@ import medium from "../../components/Img/medium.png"
 import linkedin from "../../components/Img/LI-In-Bug.png"
 import github from "../../components/Img/github-mark-white.png"
 import swf from "../../components/Img/swf.png"
+import shusi from "../../components/Img/shusi.png"
 
 const cards = [
   {
@@ -138,20 +139,7 @@ export const MemberInfo = () => {
                     alt="The house from the offer."
                     src={swf}
                   />
-                  {/* <img
-                    // sx={{
-                    //   pt: 1.5,
-                    //   px: 1.5,
-                    //   borderRadius: "350px",
-                    //   // width: "30",
-                    //   // height: "30"
-                    // }}
-                    width="30"
-                      height="30"
-                    // component="img"
-                    src={swf}
-                    alt="logo"
-                  /> */}
+
                   <Stack
                     direction="column"
                     justifyContent="center"
@@ -165,21 +153,28 @@ export const MemberInfo = () => {
                       align="flex-start"
                       color="white"
                       component="p"
-                      sx={{ typography: { lg: "subtitle1", md: "caption" } }}
+                      sx={{
+                        typography: {
+                          lg: "subtitle1",
+                          md: "caption",
+                          sm: "caption"
+                        }
+                      }}
                     >
                       Hello, we are SWF Lab, a Blockchain DApp Development &
-                      Solution Team from Taiwan! We are researching Web3 by
-                      researching everthing about Blockchain and developing DApp
-                      on Ethereum.
+                      Solution Team from Taiwan!
+                      <br />
+                      We are researching Web3 by researching everthing about
+                      Blockchain and developing DApp on Ethereum.
                     </Typography>
                   </Stack>
                 </Stack>
                 {/*logo*/}
                 <Stack
-                  direction="row"
+                  direction={{ md: "row", sm: "column" }}
                   justifyContent="flex-end"
                   alignItems="flex-end"
-                  spacing={7}
+                  spacing={{ md: 7, sm: 3 }}
                 >
                   <img
                     src={github}
@@ -264,7 +259,7 @@ export const MemberInfo = () => {
                       }}
                       style={Style}
                       component="img"
-                      image="https://thumbor.4gamers.com.tw/M2uWlienrNyWxunZA_qeLDWcTN4=/adaptive-fit-in/1200x1200/filters:no_upscale():extract_cover():format(jpeg):quality(85)/https%3A%2F%2Fugc-media.4gamers.com.tw%2Fpuku-prod-zh%2Fanonymous-story%2F67db9224-8f8f-43ff-a18a-0f52a01d514a.jpg"
+                      image={shusi}
                       alt="green iguana"
                     />
                     <CardContent sx={{ px: 1, pt: 0.5, pb: 0 }}>

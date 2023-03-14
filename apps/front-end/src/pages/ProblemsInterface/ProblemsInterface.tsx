@@ -186,11 +186,13 @@ export const ProblemsInterface = () => {
                     >
                       Loading...
                     </Typography>
-                    <Box sx={{ width: "30%", my: 3 }}>
+                    <Box sx={{ width: "20%", my: 3 }}>
                       <LinearProgress
                         sx={{
+                          borderRadius: 5,
                           backgroundColor: `rgb(255, 255, 255,0.4)`,
                           "& .MuiLinearProgress-bar": {
+                            borderRadius: 5,
                             backgroundColor: `rgb(255, 255, 255)`
                           }
                         }}
@@ -364,7 +366,8 @@ export const ProblemsInterface = () => {
                             <Button
                               sx={{
                                 "&:hover": {
-                                  cursor: "default"
+                                  cursor: "pointer",
+                                  color: "black"
                                 },
                                 color: "white",
                                 width: "12vw",
@@ -399,26 +402,7 @@ export const ProblemsInterface = () => {
                           alignItems="center"
                           spacing={5}
                           // sx={{ width: "50%" }}
-                        >
-                          {/* <Button
-                              sx={{
-                                "&:hover": {
-                                  cursor: "default"
-                                },
-                                color: "white",
-                                width: "12vw",
-                                height: "3.5vh",
-                                textTransform: "none",
-                                fontSize: { lg: "20px", sm: "14px" },
-                                borderRadius: "20px",
-                                // Type A
-                                background: "linear-gradient(90deg, #16D9E3 0%, #30C7EC 56.25%, #46AEF7 100%)",
-                                
-                              }}
-                              target="_blank"
-                              href="https://github.com/SWF-Lab/DappChef/discussions"
-                            > Discussion</Button> */}
-                        </Stack>
+                        ></Stack>
                         <img
                           alt="acdf"
                           style={{ borderRadius: "50%" }}
@@ -432,7 +416,6 @@ export const ProblemsInterface = () => {
                     <Paper
                       style={{ backgroundColor: "#1C1B29" }}
                       sx={{
-                        pt: 2,
                         m: 1,
                         mb: 2,
                         width: "100%",
@@ -440,15 +423,9 @@ export const ProblemsInterface = () => {
                         border: "3px solid white"
                       }}
                     >
-                      <Typography
-                        variant="h4"
-                        align="center"
-                        color="white"
-                        component="p"
-                        sx={{ typography: { lg: "h4", sm: "body1" } }}
-                      >
+                      <div style={{ borderRadius: "15px", overflow: "hidden" }}>
                         <Ads />
-                      </Typography>
+                      </div>
                     </Paper>
                     <CodeEditor {...{ code, problemsInfo, solved }} />
                   </>
