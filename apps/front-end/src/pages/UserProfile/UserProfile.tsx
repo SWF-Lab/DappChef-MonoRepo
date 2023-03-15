@@ -287,8 +287,8 @@ export const UserProfile = () => {
    * Front-end
    * -------------------------------------------------------- */
   const classes = useStyles()
-
-  console.log(statistics)
+  const largeWidth = window.innerWidth
+  console.log(largeWidth)
 
   /* Fake Data */
 
@@ -719,7 +719,7 @@ export const UserProfile = () => {
                 justifyContent="space-around"
                 alignItems="center"
                 wrap="nowrap"
-                // spacing={6}
+                // spacing={{lg:0, md:1, sm:1}}
                 // justifyContent="center"
                 // alignItems="space-evenly"
                 sx={{
@@ -776,7 +776,12 @@ export const UserProfile = () => {
                     alignItems: "center",
                     width: "19vw",
                     height: "10%",
-                    border: "3px solid white"
+                    m: { lg: 0, md: 1, sm: 1 },
+                    border: {
+                      lg: "3px solid white",
+                      md: "1px solid white",
+                      sm: "1px solid white"
+                    }
                   }}
                 >
                   <Typography
@@ -796,16 +801,20 @@ export const UserProfile = () => {
                     justifyContent: "space-evenly",
                     alignItems: {
                       lg: "flex-start",
-                      md: "center",
-                      sm: "center"
+                      md: "space-evenly",
+                      sm: "space-evenly"
                     },
-                    px: 2,
+                    px: { xl: 4, lg: 2 },
                     py: 1,
                     width: "19vw",
-                    height: { lg: "40%", md: "55%", sm: "55%" },
+                    height: { lg: "40%", md: "350px", sm: "400px" },
                     borderRadius: "20px",
-                    border: "3px solid white"
-                    // overflow: "hidden"
+                    border: {
+                      lg: "3px solid white",
+                      md: "1px solid white",
+                      sm: "1px solid white"
+                    }
+                    // overflow: "auto"
                   }}
                 >
                   {loading ? (
@@ -813,7 +822,7 @@ export const UserProfile = () => {
                       direction="column"
                       justifyContent="center"
                       alignItems="center"
-                      sx={{ width: "100%", mt: 5 }}
+                      sx={{ width: "100%", mt: 2 }}
                     >
                       <Typography
                         variant="subtitle1"
@@ -846,6 +855,7 @@ export const UserProfile = () => {
                         sx={{
                           textAlign: { lg: "left", md: "center" },
                           typography: {
+                            xl: "h6",
                             lg: "subtitle1",
                             sm: "caption",
                             xs: "caption"
@@ -860,12 +870,13 @@ export const UserProfile = () => {
                         // justifyContent="center"
                         justifyContent="flex-start"
                         alignItems="center"
-                        spacing={2}
+                        spacing={{ lg: 2, md: 0, sm: 0 }}
                         sx={{ width: "100%" }}
                       >
                         <CircularStatic
                           totalAC={statistics.totalAC}
                           totalProblem={problemList.length}
+                          // largeWidth={largeWidth}
                         />
                         <Stack
                           direction="column"
@@ -875,9 +886,17 @@ export const UserProfile = () => {
                         >
                           <Stack
                             direction="column"
-                            justifyContent="space-between"
+                            justifyContent="flex-start"
                             alignItems="center"
-                            sx={{ width: "100%" }}
+                            // sx={{ width: largeWidth >= 1300 ? '9vw' : '7vw' }}
+                            sx={{
+                              width: {
+                                xl: "9vw",
+                                lg: "8vw",
+                                md: "9vw",
+                                sm: "9vw"
+                              }
+                            }}
                           >
                             {/** 11111111111111111111 */}
                             <LinearBarText

@@ -5,11 +5,13 @@ import Stack from "@mui/material/Stack"
 import { makeStyles } from "@material-ui/core/styles"
 import * as React from "react"
 import Paper from "@mui/material/Paper"
-import Box from "@material-ui/core/Box"
+// import Box from "@material-ui/core/Box"
 import Grid from "@mui/material/Grid"
-import { styled } from "@mui/material/styles"
+// import { styled } from "@mui/material/styles"
 import Typography from "@mui/material/Typography"
 import bg from "../../components/Img/Dune6.png"
+
+import { useState, useEffect } from "react"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,9 +24,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     objectFit: "contain",
     padding: 30
-    // "& video": {
-    //   objectFit: "cover"
-    // }
   },
   overlay: {
     position: "absolute",
@@ -41,12 +40,22 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export const Dune = () => {
+  const [largeHeight, setLargeHeight] = useState(window.innerHeight)
+  useEffect(() => {
+    const handleResize = () => setLargeHeight(window.innerHeight)
+    window.addEventListener("resize", handleResize)
+
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
+
   const classes = useStyles()
   return (
     <>
       <Container
         maxWidth={false}
-        style={{ flexDirection: "row", overflow: "visible" }}
+        style={{ flexDirection: "row", overflow: "hidden" }}
       >
         <div
           className={classes.root}
@@ -60,15 +69,12 @@ export const Dune = () => {
         >
           {/* <div className={classes.overlay}> */}
           <Grid
-            height="80vh"
+            sx={{ height: { lg: "80vh", md: "70vh", sm: "60vh" } }}
             width="75%"
             display="flex"
             flexDirection="column"
-            justifyContent="space-between"
-            alignItems="flex-start"
-            // alignItems="center"
-            // spacing={7}
-            // sx={{ p: 15 }}
+            justifyContent="space-around"
+            alignItems={{ lg: "flex-start", md: "flex-start", sm: "center" }}
           >
             <Typography
               variant="h4"
@@ -76,7 +82,7 @@ export const Dune = () => {
               color="white"
               component="p"
               sx={{
-                typography: { lg: "h4", md: "body1", sm: "caption" }
+                typography: { xl: "h3", lg: "h4", md: "h6", sm: "caption" }
                 //   pb:3
               }}
             >
@@ -84,22 +90,30 @@ export const Dune = () => {
             </Typography>
             <Stack
               direction="row"
+              // direction={{ lg: "row", md: "row", sm: "column" }}
               justifyContent="space-around"
               alignItems="center"
-              spacing={5}
+              spacing={{ xl: 8, lg: 5, md: 2, sm: 1 }}
               // sx={{mt:5}}
             >
               <Paper
                 style={{
-                  width: { lg: "220px", md: "150px", sm: "100px" },
-                  height: { lg: "220px", md: "150px", sm: "100px" },
                   backgroundColor: "white"
                 }}
                 sx={{
-                  m: 1,
-
+                  // m: 1,
+                  width: { xl: "320px", lg: "220px", md: "150px", sm: "90px" },
+                  height: { xl: "320px", lg: "220px", md: "150px", sm: "90px" },
+                  // width: {  lg: "220px", md: "150px", sm: "90px" },
+                  // height: { lg: "220px", md: "150px", sm: "90px" },
                   borderRadius: "15px",
-                  border: "10px solid #D9D9D9"
+                  border: {
+                    xl: "13px solid #D9D9D9",
+                    lg: "10px solid #D9D9D9",
+                    md: "7px solid #D9D9D9",
+                    sm: "4px solid #D9D9D9"
+                  },
+                  display: largeHeight >= 300 ? "block" : "none"
                 }}
               >
                 <iframe
@@ -111,15 +125,20 @@ export const Dune = () => {
               </Paper>
               <Paper
                 style={{
-                  width: "220px",
-                  height: "220px",
                   backgroundColor: "white"
                 }}
                 sx={{
-                  m: 1,
-
+                  // m: 1,
+                  width: { xl: "320px", lg: "220px", md: "150px", sm: "90px" },
+                  height: { xl: "320px", lg: "220px", md: "150px", sm: "90px" },
                   borderRadius: "15px",
-                  border: "10px solid #D9D9D9"
+                  border: {
+                    xl: "13px solid #D9D9D9",
+                    lg: "10px solid #D9D9D9",
+                    md: "7px solid #D9D9D9",
+                    sm: "4px solid #D9D9D9"
+                  },
+                  display: largeHeight >= 300 ? "block" : "none"
                 }}
               >
                 <iframe
@@ -131,15 +150,20 @@ export const Dune = () => {
               </Paper>
               <Paper
                 style={{
-                  width: "220px",
-                  height: "220px",
                   backgroundColor: "white"
                 }}
                 sx={{
-                  m: 1,
-
+                  // m: 1,
+                  width: { xl: "320px", lg: "220px", md: "150px", sm: "90px" },
+                  height: { xl: "320px", lg: "220px", md: "150px", sm: "90px" },
                   borderRadius: "15px",
-                  border: "10px solid #D9D9D9"
+                  border: {
+                    xl: "13px solid #D9D9D9",
+                    lg: "10px solid #D9D9D9",
+                    md: "7px solid #D9D9D9",
+                    sm: "4px solid #D9D9D9"
+                  },
+                  display: largeHeight >= 300 ? "block" : "none"
                 }}
               >
                 <iframe
@@ -154,18 +178,28 @@ export const Dune = () => {
               flexDirection="row"
               justifyContent="space-around"
               alignItems="center"
+
               //   spacing={5}
             >
               <Paper
                 style={{
-                  width: "300px",
-                  height: "230px",
+                  // width: "300px",
+                  // height: "230px",
                   backgroundColor: "white"
                 }}
                 sx={{
-                  ml: { xl: 5, md: 0 },
+                  ml: { xl: 10, lg: 5, md: 2, sm: 1 },
+                  width: { xl: "400px", lg: "300px", md: "250px", sm: "170px" },
+                  // height: { lg: "230px", md: "170px", sm: "110px" },
+                  height: { xl: "320px", lg: "220px", md: "150px", sm: "90px" },
                   borderRadius: "15px",
-                  border: "10px solid #D9D9D9"
+                  border: {
+                    xl: "13px solid #D9D9D9",
+                    lg: "10px solid #D9D9D9",
+                    md: "7px solid #D9D9D9",
+                    sm: "4px solid #D9D9D9"
+                  },
+                  display: largeHeight >= 550 ? "block" : "none"
                 }}
               >
                 <iframe
@@ -177,14 +211,24 @@ export const Dune = () => {
               </Paper>
               <Paper
                 style={{
-                  width: "500px",
-                  height: "230px",
+                  // width: { lg: "500px", md: "400px", sm: "300px" },
+                  // width: "500px",
+                  // height: "230px",
                   backgroundColor: "white"
                 }}
                 sx={{
-                  ml: 5,
+                  ml: { xl: 10, lg: 5, md: 2, sm: 1 },
+                  width: { xl: "700px", lg: "500px", md: "350px", sm: "280px" },
+                  // height: { lg: "230px", md: "170px", sm: "110px" },
+                  height: { xl: "320px", lg: "220px", md: "150px", sm: "90px" },
                   borderRadius: "15px",
-                  border: "10px solid #D9D9D9"
+                  border: {
+                    xl: "13px solid #D9D9D9",
+                    lg: "10px solid #D9D9D9",
+                    md: "7px solid #D9D9D9",
+                    sm: "4px solid #D9D9D9"
+                  },
+                  display: largeHeight >= 550 ? "block" : "none"
                 }}
               >
                 <iframe

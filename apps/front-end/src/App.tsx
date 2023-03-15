@@ -10,6 +10,15 @@ import { PhoneError } from "./pages/PhoneError/phoneError.tsx"
 const theme = createTheme({
   typography: {
     fontFamily: ["Montserrat", "sans-serif"].join(",")
+  },
+  breakpoints: {
+    values: {
+      xs: 0, // 手機端
+      sm: 600, // 平板
+      md: 900, // 桌面
+      lg: 1250, // 大桌面
+      xl: 2000 // 超大桌面
+    }
   }
 })
 

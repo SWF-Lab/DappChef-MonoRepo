@@ -13,11 +13,10 @@ import styled from "styled-components"
 import Box from "@material-ui/core/Box"
 import ReactPlayer from "react-player"
 import BeforeLoginVideo from "../../components/Img/DappChef_v3_BeforeLogin.mp4"
-import LoginVideo from "../../components/Img/DappChef_v8_login.mp4"
+import LoginVideo from "../../components/Img/DappChef_v10_main.mp4"
 import start from "../../components/Img/Start.png"
 import { makeStyles } from "@material-ui/core/styles"
 import Ads from "../../components/Ads.tsx"
-import { Ad } from "../../components/Ad.tsx"
 import { Dune } from "./Dune.tsx"
 
 const useStyles = makeStyles((theme) => ({
@@ -58,7 +57,7 @@ export const Main = () => {
     const width = window.innerWidth
     const height = window.innerHeight
 
-    let scrollTop = height * 2.18
+    let scrollTop = height * 2.13
     console.log(width, height, scrollTop)
     // if (width >= 1280) {
     //   scrollTop = height*2;
@@ -89,7 +88,7 @@ export const Main = () => {
         {/* <Container> */}
         {account ? (
           <section className={classes.root}>
-            <div style={{ width: "100%", backgroundColor: "red" }}>
+            <div style={{ width: "100%", backgroundColor: "#0F0B18" }}>
               <ReactPlayer
                 url={LoginVideo}
                 playing
@@ -153,7 +152,9 @@ export const Main = () => {
         <Ads />
 
         <Dune />
-        <Grid>
+        <Grid
+        // sx={{mt:2}}
+        >
           <ProblemList />
         </Grid>
         <TotalMarquee />

@@ -13,7 +13,11 @@ export const LinearBarText = ({
   return (
     <Stack
       direction="row"
-      justifyContent="space-between"
+      justifyContent={{
+        lg: "space-between",
+        md: "space-between",
+        sm: "center"
+      }}
       alignItems="center"
       sx={{ width: "100%" }}
     >
@@ -21,7 +25,10 @@ export const LinearBarText = ({
         align="center"
         color="white"
         component="p"
-        sx={{ typography: { lg: "caption", sm: "caption" } }}
+        sx={{
+          typography: { lg: "caption", md: "overline", sm: "overline" },
+          display: { xs: "none", md: "block" }
+        }}
       >
         Star {difficulty}
       </Typography>
@@ -30,7 +37,7 @@ export const LinearBarText = ({
         color="white"
         component="p"
         sx={{
-          typography: { lg: "caption", sm: "caption", xs: "caption" },
+          typography: { lg: "caption", md: "overline", sm: "overline" },
           "&:hover": {
             cursor: "pointer"
           }
