@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper"
 import Grid from "@mui/material/Grid"
 // import { styled } from "@mui/material/styles"
 import Typography from "@mui/material/Typography"
-import bg from "../../components/Img/Dune6.png"
+import bg from "../../components/Img/Dune7.png"
 
 import { useState, useEffect } from "react"
 
