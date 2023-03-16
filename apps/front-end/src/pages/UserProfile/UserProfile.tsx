@@ -287,8 +287,8 @@ export const UserProfile = () => {
    * Front-end
    * -------------------------------------------------------- */
   const classes = useStyles()
-
-  console.log(statistics)
+  const largeWidth = window.innerWidth
+  console.log(largeWidth)
 
   /* Fake Data */
 
@@ -336,11 +336,12 @@ export const UserProfile = () => {
               style={{ backgroundColor: "#0F0B18" }}
               sx={{
                 py: 2,
-
+                pr: 0.5,
                 width: "25%",
                 height: "77vh",
                 borderRadius: "20px",
-                border: "3px solid white"
+                border: "3px solid white",
+                overflow: "hidden"
               }}
             >
               <Typography
@@ -363,7 +364,7 @@ export const UserProfile = () => {
                   height: "60vh",
                   overflow: "auto",
                   "&::-webkit-scrollbar": {
-                    width: 15
+                    width: 10
                   },
                   "&::-webkit-scrollbar-track": {
                     backgroundColor: "#323232",
@@ -384,18 +385,20 @@ export const UserProfile = () => {
                     sx={{ width: "20vw" }}
                   >
                     <Typography
-                      variant="h6"
+                      variant="subtitle1"
                       align="center"
                       color="white"
                       component="p"
                     >
                       Loading...
                     </Typography>
-                    <Box sx={{ width: "30%", my: 3 }}>
+                    <Box sx={{ width: "40%", my: 3 }}>
                       <LinearProgress
                         sx={{
+                          borderRadius: 5,
                           backgroundColor: `rgb(255, 255, 255,0.4)`,
                           "& .MuiLinearProgress-bar": {
+                            borderRadius: 5,
                             backgroundColor: `rgb(255, 255, 255)`
                           }
                         }}
@@ -408,7 +411,11 @@ export const UserProfile = () => {
                       <>
                         <Stack
                           direction="row"
-                          sx={{ width: "30%", height: "28%", m: 1 }}
+                          sx={{
+                            width: { lg: "120px", md: "80px", sm: "50px" },
+                            height: { lg: "120px", md: "80px", sm: "50px" },
+                            m: 1
+                          }}
                           justifyContent="flex-start"
                           alignItems="flex-start"
                           xs={10}
@@ -433,7 +440,8 @@ export const UserProfile = () => {
               style={{ backgroundColor: "#0F0B18" }}
               sx={{
                 py: 2,
-
+                pr: 0.5,
+                overflow: "hidden",
                 width: "25%",
                 height: "77vh",
                 borderRadius: "20px",
@@ -460,7 +468,7 @@ export const UserProfile = () => {
                   height: "60vh",
                   overflow: "auto",
                   "&::-webkit-scrollbar": {
-                    width: 15
+                    width: 10
                   },
                   "&::-webkit-scrollbar-track": {
                     backgroundColor: "#323232",
@@ -481,18 +489,20 @@ export const UserProfile = () => {
                     sx={{ width: "20vw" }}
                   >
                     <Typography
-                      variant="h6"
+                      variant="subtitle1"
                       align="center"
                       color="white"
                       component="p"
                     >
                       Loading...
                     </Typography>
-                    <Box sx={{ width: "30%", my: 3 }}>
+                    <Box sx={{ width: "40%", my: 3 }}>
                       <LinearProgress
                         sx={{
+                          borderRadius: 5,
                           backgroundColor: `rgb(255, 255, 255,0.4)`,
                           "& .MuiLinearProgress-bar": {
+                            borderRadius: 5,
                             backgroundColor: `rgb(255, 255, 255)`
                           }
                         }}
@@ -521,6 +531,11 @@ export const UserProfile = () => {
                                       ? "#0F0B18"
                                       : null
                                   }
+                                  // fontSize: {
+                                  //   lg: "18px",
+                                  //   md: "10px",
+                                  //   sm: "8px"
+                                  // }
                                 }}
                               >
                                 <TableCell
@@ -531,12 +546,12 @@ export const UserProfile = () => {
                                     mr: 2,
                                     borderBottom: "none",
                                     color: "white",
-                                    justifyContent: "center",
-                                    fontSize: {
-                                      lg: "18px",
-                                      md: "10px",
-                                      xs: "10px"
-                                    }
+                                    justifyContent: "center"
+                                    // fontSize: {
+                                    //   lg: "18px",
+                                    //   md: "10px",
+                                    //   sm: "8px"
+                                    // }
                                   }}
                                 >
                                   {row.solved === false && (
@@ -559,8 +574,7 @@ export const UserProfile = () => {
                                   style={{ width: "10%" }}
                                   sx={{
                                     borderBottom: "none",
-                                    color: "white",
-                                    fontSize: { lg: "14px", sm: "10px" }
+                                    color: "white"
                                   }}
                                 >
                                   <Button
@@ -572,7 +586,12 @@ export const UserProfile = () => {
                                       width: "7vw",
                                       height: "4vh",
                                       textTransform: "none",
-                                      fontSize: { lg: "15px", md: "12px" },
+                                      fontSize: {
+                                        lg: "16px",
+                                        md: "10px",
+                                        sm: "8px"
+                                      },
+                                      // fontSize: { lg: "15px", md: "12px" },
                                       borderRadius: "20px",
                                       // Type A
                                       background:
@@ -670,17 +689,19 @@ export const UserProfile = () => {
             <Paper
               style={{ backgroundColor: "#0F0B18" }}
               sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-start",
-                alignItems: "center",
-                gap: "1rem",
-                py: 2,
-                px: 4,
-                width: "25%",
+                // display: "flex",
+                // flexDirection: "column",
+                // justifyContent: "flex-start",
+                // alignItems: "center",
+                // gap: "1rem",
+                pt: 2,
+                pr: 0.5,
+                // px: 4,
+                width: "25vw",
                 height: "77vh",
                 borderRadius: "20px",
-                border: "3px solid white"
+                border: "3px solid white",
+                overflow: "hidden"
               }}
             >
               <Typography
@@ -692,197 +713,241 @@ export const UserProfile = () => {
               >
                 User Info
               </Typography>
-              <Stack
-                direction="row"
-                sx={{ width: "34%", height: "22%", m: 1 }}
-                justifyContent="flex-start"
-                alignItems="flex-start"
-                xs={10}
-                sm={4}
-              >
-                <img
-                  alt="acdf"
-                  style={{ borderRadius: "50%" }}
-                  src={egg}
-                  width="100%"
-                  height="100%"
-                />
-              </Stack>
-
-              <Typography
-                align="center"
-                variant="h5"
-                style={{ color: "white" }}
-                sx={{ typography: { lg: "h5", sm: "body2" } }}
-              >
-                {account.substring(0, 5)}...{account.slice(-5)}
-              </Typography>
-              <Paper
-                style={{ backgroundColor: "#0F0B18", color: "#FFFFFF" }}
+              <Grid
+                container
+                direction="column"
+                justifyContent="space-around"
+                alignItems="center"
+                wrap="nowrap"
+                // spacing={{lg:0, md:1, sm:1}}
+                // justifyContent="center"
+                // alignItems="space-evenly"
                 sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: "90%",
-                  height: "10%",
-                  border: "3px solid white"
+                  mt: 2,
+                  height: "63vh",
+                  overflow: "auto",
+                  "&::-webkit-scrollbar": {
+                    width: 10
+                  },
+                  "&::-webkit-scrollbar-track": {
+                    backgroundColor: "#323232",
+                    borderRadius: 2
+                  },
+                  "&::-webkit-scrollbar-thumb": {
+                    backgroundColor: "#D9D9D9",
+                    borderRadius: 2
+                  }
                 }}
               >
-                <Typography
-                  align="center"
-                  color="white"
-                  component="p"
-                  sx={{ typography: { lg: "h5", sm: "caption" } }}
-                >
-                  Answer Record
-                </Typography>
-              </Paper>
-              <Paper
-                style={{ backgroundColor: "#0F0B18" }}
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-start",
-                  alignItems: "flex-start",
-                  px: 1.5,
-                  py: 1,
-                  width: "100%",
-                  height: "35%",
-                  borderRadius: "20px",
-                  border: "3px solid white"
-                }}
-              >
-                {/* <Stack
-                  flexDirection="column"
+                <Stack
+                  direction="row"
+                  sx={{
+                    width: { lg: "140px", md: "90px", sm: "70px" },
+                    height: { lg: "140px", md: "90px", sm: "70px" },
+                    m: 1
+                  }}
                   justifyContent="flex-start"
                   alignItems="flex-start"
-                  spacing={2}
-                > */}
-                {loading ? (
-                  <Stack
-                    direction="column"
-                    justifyContent="center"
-                    alignItems="center"
-                    sx={{ width: "100%", mt: 5 }}
+                  xs={10}
+                  sm={4}
+                >
+                  <img
+                    alt="acdf"
+                    style={{ borderRadius: "50%" }}
+                    src={egg}
+                    width="100%"
+                    height="100%"
+                  />
+                </Stack>
+
+                <Typography
+                  align="center"
+                  variant="h5"
+                  style={{ color: "white" }}
+                  sx={{ typography: { lg: "h4", sm: "caption" } }}
+                >
+                  {account.substring(0, 5)}...{account.slice(-5)}
+                </Typography>
+                <Paper
+                  style={{ backgroundColor: "#0F0B18", color: "#FFFFFF" }}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "19vw",
+                    height: "10%",
+                    m: { lg: 0, md: 1, sm: 1 },
+                    border: {
+                      lg: "3px solid white",
+                      md: "1px solid white",
+                      sm: "1px solid white"
+                    }
+                  }}
+                >
+                  <Typography
+                    align="center"
+                    color="white"
+                    component="p"
+                    sx={{ typography: { lg: "h5", sm: "caption" } }}
                   >
-                    <Typography
-                      variant="h6"
-                      align="center"
-                      color="white"
-                      component="p"
-                    >
-                      Loading...
-                    </Typography>
-                    <Box sx={{ width: "30%", my: 3 }}>
-                      <LinearProgress
-                        sx={{
-                          backgroundColor: `rgb(255, 255, 255,0.4)`,
-                          "& .MuiLinearProgress-bar": {
-                            backgroundColor: `rgb(255, 255, 255)`
-                          }
-                        }}
-                      />
-                    </Box>
-                  </Stack>
-                ) : (
-                  //   <Stack
-                  //   direction="column"
-                  //   justifyContent="flex-start"
-                  //   alignItems="flex-start"
-                  //   // sx={{ width: "10%" , mt:5}}
-                  // >
-                  <>
-                    <Typography
-                      align="center"
-                      color="white"
-                      component="p"
-                      // onClick={myFunction}
-                      sx={{
-                        typography: {
-                          lg: "subtitle1",
-                          sm: "caption",
-                          xs: "caption"
-                        }
-                        // mb: 0.5
-                      }}
-                    >
-                      Solved Data
-                    </Typography>
+                    Answer Record
+                  </Typography>
+                </Paper>
+                <Paper
+                  style={{ backgroundColor: "#0F0B18" }}
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-evenly",
+                    alignItems: {
+                      lg: "flex-start",
+                      md: "space-evenly",
+                      sm: "space-evenly"
+                    },
+                    px: { xl: 4, lg: 2 },
+                    py: 1,
+                    width: "19vw",
+                    height: { lg: "40%", md: "350px", sm: "400px" },
+                    borderRadius: "20px",
+                    border: {
+                      lg: "3px solid white",
+                      md: "1px solid white",
+                      sm: "1px solid white"
+                    }
+                    // overflow: "auto"
+                  }}
+                >
+                  {loading ? (
                     <Stack
-                      direction="row"
-                      // justifyContent="center"
-                      justifyContent="flex-start"
+                      direction="column"
+                      justifyContent="center"
                       alignItems="center"
-                      spacing={2}
+                      sx={{ width: "100%", mt: 2 }}
                     >
-                      <CircularStatic
-                        totalAC={statistics.totalAC}
-                        totalProblem={problemList.length}
-                      />
-                      <Stack
-                        direction="column"
-                        justifyContent="flex-start"
-                        alignItems="flex-start"
-                        // spacing={2}
+                      <Typography
+                        variant="subtitle1"
+                        align="center"
+                        color="white"
+                        component="p"
                       >
+                        Loading...
+                      </Typography>
+                      <Box sx={{ width: "40%", my: 3 }}>
+                        <LinearProgress
+                          sx={{
+                            borderRadius: 5,
+                            backgroundColor: `rgb(255, 255, 255,0.4)`,
+                            "& .MuiLinearProgress-bar": {
+                              borderRadius: 5,
+                              backgroundColor: `rgb(255, 255, 255)`
+                            }
+                          }}
+                        />
+                      </Box>
+                    </Stack>
+                  ) : (
+                    <>
+                      <Typography
+                        align="center"
+                        color="white"
+                        component="p"
+                        // onClick={myFunction}
+                        sx={{
+                          textAlign: { lg: "left", md: "center" },
+                          typography: {
+                            xl: "h6",
+                            lg: "subtitle1",
+                            sm: "caption",
+                            xs: "caption"
+                          }
+                          // mb: 0.5
+                        }}
+                      >
+                        Solved Data
+                      </Typography>
+                      <Stack
+                        direction={{ lg: "row", md: "column" }}
+                        // justifyContent="center"
+                        justifyContent="flex-start"
+                        alignItems="center"
+                        spacing={{ lg: 2, md: 0, sm: 0 }}
+                        sx={{ width: "100%" }}
+                      >
+                        <CircularStatic
+                          totalAC={statistics.totalAC}
+                          totalProblem={problemList.length}
+                          // largeWidth={largeWidth}
+                        />
                         <Stack
                           direction="column"
-                          justifyContent="space-between"
-                          alignItems="center"
-                          sx={{ width: "10vw" }}
+                          justifyContent="flex-start"
+                          alignItems="flex-start"
+                          // spacing={2}
                         >
-                          {/** 11111111111111111111 */}
-                          <LinearBarText
-                            difficulty="1"
-                            totalAC={statistics.totalEasyAC}
-                            totalProblem={allAC.totalEasy}
-                            percent={easypercent}
-                            changepercent={changeEasypercent}
-                          />
-                          <LinearBar
-                            clr="41, 204, 106"
-                            totalAC={statistics.totalEasyAC}
-                            totalProblem={allAC.totalEasy}
-                          />
-                          {/** 22222222222222222222 */}
-                          <LinearBarText
-                            difficulty="2"
-                            totalAC={statistics.totalMediumAC}
-                            totalProblem={allAC.totalMedium}
-                            percent={mediumpercent}
-                            changepercent={changeMediumpercent}
-                          />
-                          <LinearBar
-                            clr="204, 158, 41"
-                            totalAC={statistics.totalMediumAC}
-                            totalProblem={allAC.totalMedium}
-                          />
-                          {/** 33333333333333333333333 */}
-                          <LinearBarText
-                            difficulty="3"
-                            totalAC={statistics.totalHardAC}
-                            totalProblem={allAC.totalHard}
-                            percent={hardpercent}
-                            changepercent={changeHardpercent}
-                          />
-                          <LinearBar
-                            clr="235, 109, 55"
-                            totalAC={statistics.totalHardAC}
-                            totalProblem={allAC.totalHard}
-                          />
+                          <Stack
+                            direction="column"
+                            justifyContent="flex-start"
+                            alignItems="center"
+                            // sx={{ width: largeWidth >= 1300 ? '9vw' : '7vw' }}
+                            sx={{
+                              width: {
+                                xl: "9vw",
+                                lg: "8vw",
+                                md: "9vw",
+                                sm: "9vw"
+                              }
+                            }}
+                          >
+                            {/** 11111111111111111111 */}
+                            <LinearBarText
+                              difficulty="1"
+                              totalAC={statistics.totalEasyAC}
+                              totalProblem={allAC.totalEasy}
+                              percent={easypercent}
+                              changepercent={changeEasypercent}
+                            />
+                            <LinearBar
+                              clr="41, 204, 106"
+                              totalAC={statistics.totalEasyAC}
+                              totalProblem={allAC.totalEasy}
+                            />
+                            {/** 22222222222222222222 */}
+                            <LinearBarText
+                              difficulty="2"
+                              totalAC={statistics.totalMediumAC}
+                              totalProblem={allAC.totalMedium}
+                              percent={mediumpercent}
+                              changepercent={changeMediumpercent}
+                            />
+                            <LinearBar
+                              clr="204, 158, 41"
+                              totalAC={statistics.totalMediumAC}
+                              totalProblem={allAC.totalMedium}
+                            />
+                            {/** 33333333333333333333333 */}
+                            <LinearBarText
+                              difficulty="3"
+                              totalAC={statistics.totalHardAC}
+                              totalProblem={allAC.totalHard}
+                              percent={hardpercent}
+                              changepercent={changeHardpercent}
+                            />
+                            <LinearBar
+                              clr="235, 109, 55"
+                              totalAC={statistics.totalHardAC}
+                              totalProblem={allAC.totalHard}
+                            />
+                          </Stack>
                         </Stack>
                       </Stack>
-                    </Stack>
-                  </>
-                  // </Stack>
-                )}
-                {/* totalHardAC,
-      totalMediumAC: totalMediumAC,
-      totalEasyAC: totalEasyAC*/}
-              </Paper>
+                    </>
+                    // </Stack>
+                  )}
+                </Paper>
 
-              {/* </Paper> */}
-              {/* </Grid> */}
+                {/* </Paper> */}
+                {/* </Grid> */}
+              </Grid>
             </Paper>
           </Grid>
         </Grid>

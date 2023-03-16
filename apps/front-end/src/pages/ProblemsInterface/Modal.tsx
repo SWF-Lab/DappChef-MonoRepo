@@ -53,8 +53,10 @@ export const MintModal = ({ mintfunction, minting }) => {
               <Box sx={{ width: "30%", my: 3 }}>
                 <LinearProgress
                   sx={{
+                    borderRadius: 5,
                     backgroundColor: `rgb(255, 255, 255,0.4)`,
                     "& .MuiLinearProgress-bar": {
+                      borderRadius: 5,
                       backgroundColor: `rgb(255, 255, 255)`
                     }
                   }}

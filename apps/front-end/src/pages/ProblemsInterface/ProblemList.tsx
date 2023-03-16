@@ -62,7 +62,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     fontSize: { lg: "24px", sm: "16px" }
   },
   "&.MuiTableRow-root:hover": {
-    backgroundColor: "#2D5798"
+    backgroundColor: "#2D5798",
+    cursor: "pointer"
   }
 }))
 const HideRow = styled(TableRow)(({ theme }) => ({
@@ -628,25 +629,30 @@ export const ProblemList = () => {
                             direction="row"
                             justifyContent="center"
                             alignItems="center"
-                            // sx={{ height: "3.5vh"}}
+                            sx={{ height: "3.5vh" }}
                           >
                             {account === "" ? (
                               <img
                                 width="80%"
-                                // height="3.5vh"
+                                height="100%"
                                 src={lock}
                                 alt="solved"
                               />
                             ) : row.solved ? (
                               <img
                                 width="80%"
-                                height="50%"
+                                height="100%"
                                 src={solved}
                                 alt="solved"
                               />
                             ) : (
                               // <img src={lock} alt="Question" />
-                              <img width="80%" src={trytry} alt="Try" />
+                              <img
+                                width="80%"
+                                height="100%"
+                                src={trytry}
+                                alt="Try"
+                              />
                             )}
                           </Stack>
                         </TableCell>

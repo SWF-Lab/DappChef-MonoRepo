@@ -363,7 +363,7 @@ export const JudgeInterface = (judgeObject: any) => {
             border: "3px solid white",
             borderRadius: "15px",
             width: "83%",
-            height: "20vh",
+            height: "40vh",
             resize: "none",
             padding: "5px"
           }}

@@ -265,7 +265,7 @@ export const CodeEditor = ({
             border: "3px solid white",
             borderRadius: "15px",
             width: "83%",
-            height: "15vh",
+            height: "30vh",
             resize: "none",
             padding: "5px"
           }}

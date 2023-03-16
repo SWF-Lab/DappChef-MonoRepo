@@ -186,11 +186,13 @@ export const ProblemsInterface = () => {
                     >
                       Loading...
                     </Typography>
-                    <Box sx={{ width: "30%", my: 3 }}>
+                    <Box sx={{ width: "20%", my: 3 }}>
                       <LinearProgress
                         sx={{
+                          borderRadius: 5,
                           backgroundColor: `rgb(255, 255, 255,0.4)`,
                           "& .MuiLinearProgress-bar": {
+                            borderRadius: 5,
                             backgroundColor: `rgb(255, 255, 255)`
                           }
                         }}
@@ -228,7 +230,7 @@ export const ProblemsInterface = () => {
                             direction="row"
                             justifyContent="flex-start"
                             alignItems="center"
-                            spacing={5}
+                            spacing={{ lg: 5, md: 3, sm: 1 }}
                             // sx={{ width: "50%" }}
                           >
                             <Typography
@@ -247,9 +249,13 @@ export const ProblemsInterface = () => {
                                 },
                                 color: "white",
                                 width: "10vw",
-                                height: "3.5vh",
+                                height: "23px",
                                 textTransform: "none",
-                                fontSize: { lg: "20px", sm: "14px" },
+                                fontSize: {
+                                  lg: "20px",
+                                  md: "14px",
+                                  sm: "12px"
+                                },
                                 borderRadius: "20px",
                                 // Type A
                                 background:
@@ -315,62 +321,90 @@ export const ProblemsInterface = () => {
                                 : problemsInfo.attributes[1].value}
                               {/* {problemsInfo.attributes[1].value} */}
                             </Button>
-                            {problemsInfo.attributes[0].value === 1 && (
-                              <img
-                                src={star}
-                                alt="star"
-                                width={45}
-                                height={45}
-                              />
-                            )}
-                            {problemsInfo.attributes[0].value === 2 && (
-                              <>
+
+                            <Stack
+                              direction="row"
+                              justifyContent="space-evenly"
+                              alignItems="flex-start"
+                              // sx={{ width: largeWidth >= 1300 ? '9vw' : '7vw' }}
+                              sx={{
+                                width: { lg: "6vw", md: "6vw", sm: "6vw" },
+                                // display:{sm:"none", md:"inline-block"}
+                                flexWrap: "nowrap",
+                                display: {
+                                  xs: "none",
+                                  sm: "none",
+                                  md: "inline-block",
+                                  lg: "inline-block"
+                                }
+                              }}
+                            >
+                              {problemsInfo.attributes[0].value === 1 && (
                                 <img
                                   src={star}
                                   alt="star"
-                                  width={45}
-                                  height={45}
+                                  width="45%"
+                                  height="45%"
                                 />
-                                <img
-                                  src={star}
-                                  alt="star"
-                                  width={45}
-                                  height={45}
-                                />
-                              </>
-                            )}
-                            {problemsInfo.attributes[0].value === 3 && (
-                              <>
-                                <img
-                                  src={star}
-                                  alt="star"
-                                  width={45}
-                                  height={45}
-                                />
-                                <img
-                                  src={star}
-                                  alt="star"
-                                  width={45}
-                                  height={45}
-                                />
-                                <img
-                                  src={star}
-                                  alt="star"
-                                  width={45}
-                                  height={45}
-                                />
-                              </>
-                            )}
+                              )}
+                              {problemsInfo.attributes[0].value === 2 && (
+                                <>
+                                  <img
+                                    src={star}
+                                    alt="star"
+                                    width="45%"
+                                    height="45%"
+                                    // width={45}
+                                    // height={45}
+                                  />
+                                  <img
+                                    src={star}
+                                    alt="star"
+                                    // width={45}
+                                    // height={45}
+                                    width="45%"
+                                    height="45%"
+                                  />
+                                </>
+                              )}
+                              {problemsInfo.attributes[0].value === 3 && (
+                                <>
+                                  <img
+                                    src={star}
+                                    alt="star"
+                                    width="45%"
+                                    height="45%"
+                                  />
+                                  <img
+                                    src={star}
+                                    alt="star"
+                                    width="45%"
+                                    height="45%"
+                                  />
+                                  <img
+                                    src={star}
+                                    alt="star"
+                                    width="45%"
+                                    height="45%"
+                                  />
+                                </>
+                              )}
+                            </Stack>
                             <Button
                               sx={{
                                 "&:hover": {
-                                  cursor: "default"
+                                  cursor: "pointer",
+                                  color: "black"
                                 },
                                 color: "white",
                                 width: "12vw",
-                                height: "3.5vh",
+                                height: "23px",
                                 textTransform: "none",
-                                fontSize: { lg: "20px", sm: "14px" },
+                                fontSize: {
+                                  lg: "20px",
+                                  md: "14px",
+                                  sm: "12px"
+                                },
                                 borderRadius: "20px",
                                 // Type A
                                 background:
@@ -399,26 +433,7 @@ export const ProblemsInterface = () => {
                           alignItems="center"
                           spacing={5}
                           // sx={{ width: "50%" }}
-                        >
-                          {/* <Button
-                              sx={{
-                                "&:hover": {
-                                  cursor: "default"
-                                },
-                                color: "white",
-                                width: "12vw",
-                                height: "3.5vh",
-                                textTransform: "none",
-                                fontSize: { lg: "20px", sm: "14px" },
-                                borderRadius: "20px",
-                                // Type A
-                                background: "linear-gradient(90deg, #16D9E3 0%, #30C7EC 56.25%, #46AEF7 100%)",
-                                
-                              }}
-                              target="_blank"
-                              href="https://github.com/SWF-Lab/DappChef/discussions"
-                            > Discussion</Button> */}
-                        </Stack>
+                        ></Stack>
                         <img
                           alt="acdf"
                           style={{ borderRadius: "50%" }}
@@ -432,7 +447,6 @@ export const ProblemsInterface = () => {
                     <Paper
                       style={{ backgroundColor: "#1C1B29" }}
                       sx={{
-                        pt: 2,
                         m: 1,
                         mb: 2,
                         width: "100%",
@@ -440,15 +454,9 @@ export const ProblemsInterface = () => {
                         border: "3px solid white"
                       }}
                     >
-                      <Typography
-                        variant="h4"
-                        align="center"
-                        color="white"
-                        component="p"
-                        sx={{ typography: { lg: "h4", sm: "body1" } }}
-                      >
+                      <div style={{ borderRadius: "15px", overflow: "hidden" }}>
                         <Ads />
-                      </Typography>
+                      </div>
                     </Paper>
                     <CodeEditor {...{ code, problemsInfo, solved }} />
                   </>

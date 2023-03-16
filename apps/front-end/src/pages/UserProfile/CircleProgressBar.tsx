@@ -4,10 +4,13 @@ import CircularProgress, {
 } from "@mui/material/CircularProgress"
 import Typography from "@mui/material/Typography"
 import Box from "@mui/material/Box"
-import { useState } from "react"
+import { useTheme } from "@mui/material/styles"
+import { useState, useEffect } from "react"
+import useMediaQuery from "@mui/material/useMediaQuery"
 
 export const CircularStatic = ({ totalAC, totalProblem }) => {
   console.log(totalAC, totalProblem)
+  const theme = useTheme()
 
   const [totalACpercent, setTotalACpercent] = useState(true)
   const changeTotalpercent = () => {
@@ -18,14 +21,23 @@ export const CircularStatic = ({ totalAC, totalProblem }) => {
     }
     // console.log(totalACpercent)
   }
+  const [largeWidth, setLargeWidth] = useState(window.innerWidth)
+  useEffect(() => {
+    const handleResize = () => setLargeWidth(window.innerWidth)
+    window.addEventListener("resize", handleResize)
 
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
+  console.log(totalAC, totalProblem, largeWidth)
   return (
     <Box sx={{ position: "relative", display: "inline-flex", pt: 1.5 }}>
       <CircularProgress
         // value={100}
         value={(totalAC / totalProblem) * 100}
         variant="determinate"
-        size={90}
+        size={largeWidth > 2000 ? 120 : largeWidth > 1250 ? 90 : 60}
         thickness={2}
         sx={{
           color: "#7CC5FA",
@@ -36,6 +48,7 @@ export const CircularStatic = ({ totalAC, totalProblem }) => {
           borderRadius: "50%"
         }}
       />
+
       <Box
         sx={{
           pt: 1.5,
