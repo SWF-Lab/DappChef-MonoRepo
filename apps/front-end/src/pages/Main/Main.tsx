@@ -155,7 +155,8 @@ export const Main = () => {
         <Grid
         // sx={{mt:2}}
         >
-          <ProblemList />
+          {account ? <ProblemList /> : <></>}
+          
         </Grid>
         <TotalMarquee />
       </main>
