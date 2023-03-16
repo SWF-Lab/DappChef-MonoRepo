@@ -58,11 +58,11 @@ export const JudgeInterface = (judgeObject: any) => {
      * Setting up the basic ethers object
      * --------------------------------------------------------------------------- */
 
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    let provider = new ethers.providers.Web3Provider(window.ethereum)
     await provider
       .send("wallet_switchEthereumChain", [{ chainId: "0x5" }])
       .catch((e) => console.log(e))
-    const wallet = provider.getSigner()
+    let wallet = provider.getSigner()
 
     /**  ---------------------------------------------------------------------------
      * Choose the judge problem and construct the answer contract instance
@@ -92,9 +92,9 @@ export const JudgeInterface = (judgeObject: any) => {
      * User deploer contract to deploy the answer contract
      * --------------------------------------------------------------------------- */
 
-    const DeployerContract = new ethers.Contract(
+    let DeployerContract = new ethers.Contract(
       process.env.DEPLOYER_CONTRACT_ADDR as string,
-      DEPLOYER_ABI,
+      DEPLOYER_ABI.abi,
       wallet
     )
 
@@ -102,6 +102,32 @@ export const JudgeInterface = (judgeObject: any) => {
     setMessage(
       `Trying to deploy problem ${problemNumber} with Deployer Contract:`
     )
+
+    const goerli_tx = await DeployerContract.deploy(
+      bytecode,
+      wallet_address,
+      problemNumber
+    )
+    await goerli_tx.wait()
+
+    /** ---------------------------------------------------------------------------
+     * Ganache Judge
+     * --------------------------------------------------------------------------- */
+
+    const options = { gasLimit: 80000000000000 }
+    provider = new ethers.providers.Web3Provider(
+      Ganache.provider(options as any) as any
+    )
+    const accountsList = await provider.listAccounts()
+    wallet = provider.getSigner(accountsList[0])
+
+    const DeployerFactory = new ethers.ContractFactory(
+      DEPLOYER_ABI.abi,
+      DEPLOYER_ABI.bytecode,
+      wallet
+    )
+    const undeployedDeployerContract = await DeployerFactory.deploy()
+    DeployerContract = undeployedDeployerContract.connect(wallet)
 
     const tx = await DeployerContract.deploy(
       bytecode,
@@ -139,7 +165,10 @@ export const JudgeInterface = (judgeObject: any) => {
           // Get expectReturn
           const topics0 = ethers.utils.id(solution[i].methodName.substring(1))
           const indexedValue = solution[i].expectReturn[0]
-          const nonIndexedValue = solution[i].expectReturn[1].length == 0 ? "" : solution[i].expectReturn[1]
+          const nonIndexedValue =
+            solution[i].expectReturn[1].length == 0
+              ? ""
+              : solution[i].expectReturn[1]
           msg +=
             "\n" +
             `    - Sameple Output: ${topics0},${indexedValue},${nonIndexedValue}`

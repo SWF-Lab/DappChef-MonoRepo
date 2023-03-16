@@ -50,7 +50,7 @@ export const Footer = () => {
             component="p"
             sx={{ typography: { lg: "subtitle1", sm: "caption" } }}
           >
-            Copyright @swfLab Version Beta 0.6.0
+            Copyright @swfLab Version Beta 0.7.0
           </Typography>
           <Button
             sx={{
