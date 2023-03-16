@@ -146,7 +146,7 @@ export const CodeEditor = ({
     let temp_array: string[] = []
     let temp = value.split("\n")
     temp.forEach((element) => {
-      if (!element.includes("//") && !element.includes("pragma")) {
+      if (!element.includes("pragma solidity") && !element.includes("// SPDX-License-Identifier")) {
         temp_array.push(element)
       }
     })

@@ -123,7 +123,7 @@ export const ProblemsInterface = () => {
 
   useEffect(() => {
     const setLockImage = async () => {
-      const lock = await fetch("https://i.imgur.com/nQhWIQHs.png").then((r) =>
+      const lock = await fetch("https://i.imgur.com/JewedFK.jpg").then((r) =>
         r.blob()
       )
       setNFTImage(lock)

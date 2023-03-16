@@ -152,7 +152,6 @@ export const UserProfile = () => {
     const TargetAccountBalance = await RewardNFTContract.getSolvingStatus(
       signerAddress
     )
-    console.log(TargetAccountBalance)
     const nSolvingProb = TargetAccountBalance[0]
     const solvingProb = TargetAccountBalance[1]
 
@@ -240,7 +239,6 @@ export const UserProfile = () => {
       }
     })
     setProblemList(pList)
-    // console.log(pList)
 
     /**  --------------------------------------------------------
      * Get User Statistics
@@ -288,7 +286,6 @@ export const UserProfile = () => {
    * -------------------------------------------------------- */
   const classes = useStyles()
   const largeWidth = window.innerWidth
-  console.log(largeWidth)
 
   /* Fake Data */
 
@@ -518,7 +515,6 @@ export const UserProfile = () => {
                     >
                       <TableBody>
                         {problemList.map((row) => {
-                          // console.log(row)
                           return (
                             <>
                               <StyledTableRow

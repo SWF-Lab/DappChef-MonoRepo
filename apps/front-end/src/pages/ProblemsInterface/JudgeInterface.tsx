@@ -139,7 +139,7 @@ export const JudgeInterface = (judgeObject: any) => {
           // Get expectReturn
           const topics0 = ethers.utils.id(solution[i].methodName.substring(1))
           const indexedValue = solution[i].expectReturn[0]
-          const nonIndexedValue = solution[i].expectReturn[1]
+          const nonIndexedValue = solution[i].expectReturn[1].length == 0 ? "" : solution[i].expectReturn[1]
           msg +=
             "\n" +
             `    - Sameple Output: ${topics0},${indexedValue},${nonIndexedValue}`
@@ -158,7 +158,7 @@ export const JudgeInterface = (judgeObject: any) => {
                     indexedValue.length + nonIndexedValue.length
                   )
                   .toString()
-              : []
+              : ""
           msg += "\n" + `    - Your Output: ${id},${eventTopics},${eventData}`
           setMessage(msg)
 
