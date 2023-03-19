@@ -9,7 +9,7 @@ import { useState, useEffect } from "react"
 import useMediaQuery from "@mui/material/useMediaQuery"
 
 export const CircularStatic = ({ totalAC, totalProblem }) => {
-  console.log(totalAC, totalProblem)
+  // console.log(totalAC, totalProblem)
   const theme = useTheme()
 
   const [totalACpercent, setTotalACpercent] = useState(true)
@@ -30,7 +30,7 @@ export const CircularStatic = ({ totalAC, totalProblem }) => {
       window.removeEventListener("resize", handleResize)
     }
   }, [])
-  console.log(totalAC, totalProblem, largeWidth)
+  // console.log(totalAC, totalProblem, largeWidth)
   return (
     <Box sx={{ position: "relative", display: "inline-flex", pt: 1.5 }}>
       <CircularProgress

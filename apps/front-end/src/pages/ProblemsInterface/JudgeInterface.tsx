@@ -329,7 +329,7 @@ export const JudgeInterface = (judgeObject: any) => {
         requestParams.difficulty,
         requestParams.class
       )
-      console.log(result)
+      console.log("Get the Token Metadata.")
 
       /** ---------------------------------------------------------------------------
        * Setting up the basic ethers object
@@ -354,7 +354,7 @@ export const JudgeInterface = (judgeObject: any) => {
         requestParams.difficulty,
         requestParams.class
       )
-      console.log(cid)
+      console.log("Uploaded to the IPFS.")
 
       const _return = await RewardContract.mint(
         requestParams.problemSolverAddr,

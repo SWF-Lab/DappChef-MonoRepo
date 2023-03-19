@@ -172,7 +172,7 @@ export const UserProfile = () => {
           "https://nftstorage.link/ipfs/" + TargetAccount_TargetProblem_TokenURI
         )
         const data = await problemsResponse.json()
-        console.log(data)
+        // console.log(data)
         const imageCID = data.image.toString()
 
         const gateway = [
