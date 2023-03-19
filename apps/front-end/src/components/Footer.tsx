@@ -50,7 +50,7 @@ export const Footer = () => {
             component="p"
             sx={{ typography: { lg: "subtitle1", sm: "caption" } }}
           >
-            Copyright @swfLab Version Beta 0.7.0
+            Copyright @swfLab Version Beta 0.8.0
           </Typography>
           <Button
             sx={{
@@ -85,7 +85,8 @@ export const Footer = () => {
                 color: "black"
               }
             }}
-            // target="_blank" href="https://hackmd.io/AzWycmkkT3Wn7ZkPtVQyQg"
+            target="_blank"
+            href="https://testnets.opensea.io/collection/dappchef-badges"
           >
             OpenSea
           </Button>

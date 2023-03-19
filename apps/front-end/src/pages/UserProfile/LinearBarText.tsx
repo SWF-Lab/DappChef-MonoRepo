@@ -30,7 +30,7 @@ export const LinearBarText = ({
           display: { xs: "none", md: "block" }
         }}
       >
-        Star {difficulty}
+        Level {difficulty}
       </Typography>
       <Typography
         align="center"

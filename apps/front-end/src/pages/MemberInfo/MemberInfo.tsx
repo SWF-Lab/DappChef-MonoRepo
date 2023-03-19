@@ -59,7 +59,7 @@ const cards = [
   {
     name: "theyhw",
     title: "Restaurant Manager",
-    link: "https://www.linkedin.com/in/theyhw//"
+    link: "https://www.linkedin.com/in/theyhw/"
   },
   { name: "qqai", title: "Pastry Cook", link: "https://medium.com/@qqai" },
   {

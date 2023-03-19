@@ -1,15 +1,9 @@
-import { useState, useEffect, useRef } from "react"
-import { TextExample } from "src/components/TextExample/TextExample"
-import { useNavigate } from "react-router-dom"
-import { ethers } from "ethers"
-import { Container } from "./styles"
 import { ProblemList } from "../ProblemsInterface/ProblemList"
 import { ResponsiveAppBar } from "../../components/Appbar"
 import { useHook } from "../useHooks"
 import { TotalMarquee } from "../../components/Murquee"
 import { Footer } from "../../components/Footer"
 import Grid from "@mui/material/Grid"
-import styled from "styled-components"
 import Box from "@material-ui/core/Box"
 import ReactPlayer from "react-player"
 import BeforeLoginVideo from "../../components/Img/DappChef_v3_BeforeLogin.mp4"
@@ -156,7 +150,6 @@ export const Main = () => {
         // sx={{mt:2}}
         >
           {account ? <ProblemList /> : <></>}
-          
         </Grid>
         <TotalMarquee />
       </main>
