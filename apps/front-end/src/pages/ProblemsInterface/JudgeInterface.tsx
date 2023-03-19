@@ -63,21 +63,13 @@ export const JudgeInterface = (judgeObject: any) => {
       .send("wallet_switchEthereumChain", [{ chainId: "0x5" }])
       .catch((e) => console.log(e))
     let wallet = provider.getSigner()
+    let wallet_address = await wallet.getAddress()
 
     /**  ---------------------------------------------------------------------------
      * Choose the judge problem and construct the answer contract instance
      * --------------------------------------------------------------------------- */
 
     const problemNumber = JudgeInfo.problemNumber
-
-    // Replace the MSG_SENDER
-    const wallet_address = await wallet.getAddress()
-    const originalSolution = JudgeInfo.problemSolution
-    const stringified = JSON.stringify(originalSolution)
-    const replaced = stringified.replace(/"MSG_SENDER"/g, `"${wallet_address}"`)
-
-    const solution = JSON.parse(replaced)
-
     const constructorCode = ethers.utils.defaultAbiCoder.encode(
       JudgeInfo.constructorCallData.map((e: any) => e[0]),
       JudgeInfo.constructorCallData.map((e: any) => e[1])
@@ -120,6 +112,11 @@ export const JudgeInterface = (judgeObject: any) => {
     )
     const accountsList = await provider.listAccounts()
     wallet = provider.getSigner(accountsList[0])
+    wallet_address = await wallet.getAddress()
+    const originalSolution = JudgeInfo.problemSolution
+    const stringified = JSON.stringify(originalSolution)
+    const replaced = stringified.replace(/"MSG_SENDER"/g, `"${wallet_address}"`)
+    const solution = JSON.parse(replaced)
 
     const DeployerFactory = new ethers.ContractFactory(
       DEPLOYER_ABI.abi,
