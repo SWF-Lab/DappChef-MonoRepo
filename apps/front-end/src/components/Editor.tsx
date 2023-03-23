@@ -1,24 +1,24 @@
 import CodeMirror from "@uiw/react-codemirror"
 import { solidity } from "@replit/codemirror-lang-solidity"
 import { FC } from "react"
-import { historyField } from '@codemirror/commands';
+import { historyField } from "@codemirror/commands"
 
 interface IProps {
   value: string
   onChange: (value: string) => void
 }
-const stateFields = { history: historyField };
+const stateFields = { history: historyField }
 export const Editor: FC<IProps> = ({ value, onChange }) => {
-  const serializedState = localStorage.getItem('myEditorState');
+  const serializedState = localStorage.getItem("myEditorState")
   return (
     <>
       <CodeMirror
         initialState={
           serializedState
             ? {
-              json: JSON.parse(serializedState || ''),
-              fields: stateFields,
-            }
+                json: JSON.parse(serializedState || ""),
+                fields: stateFields
+              }
             : undefined
         }
         value={value}

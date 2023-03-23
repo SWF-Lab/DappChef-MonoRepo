@@ -4,7 +4,7 @@ import styled from "styled-components"
 import { Editor } from "../../components/Editor"
 import { solidityCompiler } from "../../api/compiler"
 import { JudgeInterface } from "./JudgeInterface"
-import { historyField } from '@codemirror/commands';
+import { historyField } from "@codemirror/commands"
 //front-end
 import Button from "@mui/material/Button"
 import Grid from "@mui/material/Grid"
@@ -97,12 +97,12 @@ export const CodeEditor = ({
   /** ---------------------------------------------------
    * Editor Status
    * --------------------------------------------------- */
-  const stateFields = { history: historyField };
-  const [value, setValue] = useState(localStorage.getItem('myValue')  || code)
+  const stateFields = { history: historyField }
+  const [value, setValue] = useState(localStorage.getItem("myValue") || code)
   const onChange = useCallback((_value: string, viewUpdate: any) => {
-    localStorage.setItem('myValue', _value);
-    const state = viewUpdate.state.toJSON(stateFields);
-    localStorage.setItem('myEditorState', JSON.stringify(state))
+    localStorage.setItem("myValue", _value)
+    const state = viewUpdate.state.toJSON(stateFields)
+    localStorage.setItem("myEditorState", JSON.stringify(state))
     setValue(_value)
   }, [])
 
@@ -281,7 +281,6 @@ export const CodeEditor = ({
         >
           Meow
         </textarea>
-
         <Button
           sx={{
             color: "white",
