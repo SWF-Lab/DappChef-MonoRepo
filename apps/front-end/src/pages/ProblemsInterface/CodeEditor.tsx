@@ -249,7 +249,6 @@ export const CodeEditor = ({
           <Editor
             value={value}
             onChange={onChange}
-            problemNum={problemsInfo?.problemNumber}
           />
         </div>
       </EditorContainer>
