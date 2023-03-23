@@ -155,7 +155,7 @@ export const ProblemList = () => {
       .send("wallet_switchEthereumChain", [{ chainId: "0x5" }])
       .catch((e) => console.log(e))
 
-    provider
+    await provider
       .send("eth_requestAccounts", [])
       .then((accounts) => {
         if (accounts.length > 0) setAccount(accounts[0])

@@ -155,11 +155,11 @@ export const MemberInfo = () => {
                       }
                     }}
                   >
-                    Hello, we are SWF Lab, a Blockchain DApp Development &
+                    Hello, we are SWF Lab, a DApp Development & Blockchain
                     Solution Team from Taiwan!
                     <br />
-                    We are researching Web3 by researching everthing about
-                    Blockchain and developing DApp on Ethereum.
+                    We are researching everthing about Blockchain and developing
+                    DApp on EVM-based chains.
                   </Typography>
                 </Stack>
               </Stack>

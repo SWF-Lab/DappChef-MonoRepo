@@ -154,7 +154,7 @@ export const JudgeInterface = (judgeObject: any) => {
     for (let i = 0; i < solution.length; i++) {
       msg += "\n" + `    \nTesting ${i}: ${solution[i].methodName}`
       setMessage(msg)
-      msg += "\n" + `    - Sameple Input: ${solution[i].callData}`
+      msg += "\n" + `    - Sample Input: ${solution[i].callData}`
       setMessage(msg)
 
       try {
@@ -169,7 +169,7 @@ export const JudgeInterface = (judgeObject: any) => {
               : solution[i].expectReturn[1]
           msg +=
             "\n" +
-            `    - Sameple Output: ${topics0},${indexedValue},${nonIndexedValue}`
+            `    - Sample Output: ${topics0},${indexedValue},${nonIndexedValue}`
           setMessage(msg)
 
           // Get the Transaction Log
@@ -268,7 +268,7 @@ export const JudgeInterface = (judgeObject: any) => {
             continue
           }
 
-          msg += "\n" + `    - Sameple Output: ${solution[i].expectReturn}`
+          msg += "\n" + `    - Sample Output: ${solution[i].expectReturn}`
           setMessage(msg)
           msg += "\n" + `    - Your Output: ${_return}`
           setMessage(msg)

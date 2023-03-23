@@ -17,14 +17,14 @@ const HookProvider = (props) => {
   const onboarding: any = useRef()
 
   useEffect(() => {
-    if (window.ethereum) {
+    if (window.ethereum && account) {
       window.ethereum.on("accountsChanged", function (accounts: any) {
         if (accounts.length > 0) setAccount(accounts[0])
       })
     }
   }, [])
 
-  const onClickConnect = () => {
+  const onClickConnect = async () => {
     //client side code
     if (!window.ethereum) {
       console.log("please install MetaMask")
@@ -34,16 +34,15 @@ const HookProvider = (props) => {
     }
 
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any")
+    await provider
+      .send("wallet_switchEthereumChain", [{ chainId: "0x5" }])
+      .catch((e) => console.log(e))
 
-    provider
+    await provider
       .send("eth_requestAccounts", [])
       .then((accounts) => {
         if (accounts.length > 0) setAccount(accounts[0])
       })
-      .catch((e) => console.log(e))
-
-    provider
-      .send("wallet_switchEthereumChain", [{ chainId: "0x5" }])
       .catch((e) => console.log(e))
   }
 
