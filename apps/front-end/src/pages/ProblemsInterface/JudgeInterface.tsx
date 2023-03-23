@@ -64,6 +64,7 @@ export const JudgeInterface = (judgeObject: any) => {
       .catch((e) => console.log(e))
     let wallet = provider.getSigner()
     let wallet_address = await wallet.getAddress()
+    const true_address = wallet_address
 
     /**  ---------------------------------------------------------------------------
      * Choose the judge problem and construct the answer contract instance
@@ -307,7 +308,7 @@ export const JudgeInterface = (judgeObject: any) => {
     }
 
     setRequestParams({
-      problemSolverAddr: wallet_address,
+      problemSolverAddr: true_address,
       problemNumber: problemNumber,
       problemSolvedTimestamp: Date.now(),
       difficulty: problemDifficulty,
