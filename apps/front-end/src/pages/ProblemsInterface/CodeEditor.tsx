@@ -246,10 +246,7 @@ export const CodeEditor = ({
       <EditorTop />
       <EditorContainer>
         <div className="cm-scroller">
-          <Editor
-            value={value}
-            onChange={onChange}
-          />
+          <Editor value={value} onChange={onChange} />
         </div>
       </EditorContainer>
       <EditorBottom />

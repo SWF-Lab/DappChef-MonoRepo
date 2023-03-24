@@ -134,17 +134,26 @@ export const JudgeInterface = (judgeObject: any) => {
     )
     const receipt = await tx.wait()
     const event = receipt.events.find((e: any) => e.event === "Deploy")
-    const [_deployAddr, _solver, _problemNum] = event.args
+    const [deployAddr, _solver, _problemNum] = event.args
     msg += "\n" + `    Tx successful with hash: ${receipt.transactionHash}`
     setMessage(msg)
-    msg += "\n" + `    Deployed contract address is ${_deployAddr}`
+    msg += "\n" + `    Deployed contract address is ${deployAddr}`
     setMessage(msg)
 
     /** ---------------------------------------------------------------------------
      * Judge the answer contract with the "problemSolution" in the problem json
      * --------------------------------------------------------------------------- */
 
-    const AnswerContract = new ethers.Contract(_deployAddr, AnswerABI, wallet)
+    const AnswerContractFactory = new ethers.ContractFactory(
+      AnswerABI,
+      bytecode,
+      wallet
+    )
+    const AnswerContractContract = await AnswerContractFactory.deploy(
+      ...JudgeInfo.constructorCallData.map((e: any) => e[1])
+    )
+    const AnswerContract = AnswerContractContract.connect(wallet)
+    const _deployAddr = AnswerContract.address
     msg += "\n" + `\nBegin the Judging...`
     setMessage(msg)
 
